@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { X, Trash2, CreditCard, Lock, CheckCircle, Landmark, Loader2, Mail, User, ShieldCheck, Users, Briefcase } from 'lucide-react';
+import { X, Trash2, CreditCard, Lock, CheckCircle, Landmark, Loader2, User, Users, Briefcase } from 'lucide-react';
 import { CartItem } from '../types';
-import { generateOrderEmails, SimulationResult } from '../utils/emailService';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -32,8 +31,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
   const [step, setStep] = useState<'cart' | 'checkout' | 'success'>('cart');
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'bank'>('card');
-  const [sentEmails, setSentEmails] = useState<SimulationResult | null>(null);
-  const [activeEmailTab, setActiveEmailTab] = useState<'customer' | 'admin'>('customer');
   
   // Upsell State
   const [includeDebrief, setIncludeDebrief] = useState(false);
@@ -108,39 +105,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
     setIsProcessing(true);
     
-    const orderId = `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
-    
-    // Prepare final participant list
-    let finalParticipants = [];
-    if (needsParticipantInfo) {
-      finalParticipants = participants;
-    } else {
-      // Single item, buyer is participant
-      finalParticipants = [{
-        assessmentName: cart[0].name,
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email
-      }];
-    }
-
-    // Generate the emails
-    const emails = generateOrderEmails({
-        customer: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email
-        },
-        cart: cart,
-        participants: finalParticipants,
-        total: total,
-        paymentMethod: paymentMethod,
-        orderId: orderId,
-        debriefHours: includeDebrief ? 1 : 0
-    });
-
-    // Simulate Network Delay
+    // Simulate Network Request to Cloud Backend
     setTimeout(() => {
-        setSentEmails(emails);
         setStep('success');
         onClearCart();
         setIsProcessing(false);
@@ -454,67 +420,37 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
               </form>
             )}
 
-            {/* Step 3: Success with Email Simulation */}
-            {step === 'success' && sentEmails && (
-              <div className="h-full flex flex-col items-center animate-in fade-in duration-500">
-                <div className="text-center space-y-4 mb-8">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto">
-                        <CheckCircle size={32} />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Order Placed Successfully!</h3>
-                    <p className="text-gray-500 text-sm">
-                        Since this is a demo, we can't send real emails. <br/>
-                        Below is a <span className="font-bold text-[#0C3963]">Live Preview</span> of the notifications sent.
-                    </p>
-                </div>
+            {/* Step 3: Success Confirmation */}
+            {step === 'success' && (
+              <div className="h-full flex flex-col items-center justify-center animate-in fade-in duration-500 text-center p-4">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-6 shadow-sm animate-in zoom-in duration-300">
+                      <CheckCircle size={40} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Order Placed Successfully!</h3>
+                  <p className="text-gray-600 mb-8 max-w-sm mx-auto leading-relaxed">
+                      Thank you for your purchase. A confirmation email has been sent to <span className="font-bold text-[#0C3963]">{formData.email}</span> with your order details and assessment access codes.
+                  </p>
+                  
+                  <div className="w-full bg-blue-50 border border-blue-100 rounded-lg p-4 mb-8 text-left">
+                     <h4 className="font-bold text-[#0C3963] text-sm mb-1">What happens next?</h4>
+                     <ul className="text-sm text-gray-600 space-y-2 list-disc pl-4">
+                        <li>Check your inbox for the receipt.</li>
+                        <li>Participants will receive individual access links.</li>
+                        {includeDebrief && <li>A consultant will contact you to schedule your debrief.</li>}
+                     </ul>
+                  </div>
 
-                {/* Email Simulator UI */}
-                <div className="w-full bg-gray-100 rounded-lg border border-gray-300 overflow-hidden flex flex-col flex-1 max-h-[400px]">
-                    <div className="flex bg-gray-200 border-b border-gray-300">
-                        <button 
-                            onClick={() => setActiveEmailTab('customer')}
-                            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase transition-colors ${activeEmailTab === 'customer' ? 'bg-white text-[#0C3963] border-t-2 border-[#0C3963]' : 'text-gray-500 hover:text-gray-700'}`}
-                        >
-                            <User size={14} /> Customer Email
-                        </button>
-                        <button 
-                            onClick={() => setActiveEmailTab('admin')}
-                            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase transition-colors ${activeEmailTab === 'admin' ? 'bg-white text-[#C7593A] border-t-2 border-[#C7593A]' : 'text-gray-500 hover:text-gray-700'}`}
-                        >
-                            <ShieldCheck size={14} /> Admin Email
-                        </button>
-                    </div>
-                    
-                    <div className="flex-1 overflow-y-auto bg-white p-4">
-                        <div className="border-b border-gray-100 pb-3 mb-3">
-                            <div className="flex gap-2 text-xs mb-1">
-                                <span className="font-bold text-gray-500 w-12">To:</span> 
-                                <span>{activeEmailTab === 'customer' ? sentEmails.customerEmail.to : sentEmails.adminEmail.to}</span>
-                            </div>
-                            <div className="flex gap-2 text-xs">
-                                <span className="font-bold text-gray-500 w-12">Subject:</span> 
-                                <span className="font-medium text-gray-900">{activeEmailTab === 'customer' ? sentEmails.customerEmail.subject : sentEmails.adminEmail.subject}</span>
-                            </div>
-                        </div>
-                        <div 
-                            className="prose prose-sm prose-p:text-xs prose-h2:text-lg prose-h3:text-sm max-w-none text-gray-700"
-                            dangerouslySetInnerHTML={{ __html: activeEmailTab === 'customer' ? sentEmails.customerEmail.body : sentEmails.adminEmail.body }}
-                        />
-                    </div>
-                </div>
-
-                <button 
-                  onClick={() => {
-                    setStep('cart');
-                    onClose();
-                    setFormData({ firstName: '', lastName: '', email: '', cardNumber: '', expiry: '', cvc: '' });
-                    setSentEmails(null);
-                    setIncludeDebrief(false);
-                  }}
-                  className="mt-6 bg-[#0C3963] text-white px-8 py-3 rounded font-bold hover:bg-[#2C4D81] transition-colors w-full"
-                >
-                  Close & Continue Browsing
-                </button>
+                  <button 
+                    onClick={() => {
+                      setStep('cart');
+                      onClose();
+                      setFormData({ firstName: '', lastName: '', email: '', cardNumber: '', expiry: '', cvc: '' });
+                      setIncludeDebrief(false);
+                    }}
+                    className="w-full bg-[#0C3963] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#2C4D81] transition-colors shadow-lg"
+                  >
+                    Continue Browsing
+                  </button>
               </div>
             )}
           </div>
