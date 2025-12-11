@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Trash2, CreditCard, Lock, CheckCircle, Landmark, Loader2, User, Users, Briefcase } from 'lucide-react';
 import { CartItem } from '../types';
+import { supabase } from '../utils/supabaseClient';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -105,12 +106,40 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
     setIsProcessing(true);
     
-    // Simulate Network Request to Cloud Backend
-    setTimeout(() => {
-        setStep('success');
-        onClearCart();
-        setIsProcessing(false);
-    }, 1500);
+    try {
+      // Prepare the order payload
+      // Note: Ensure your Supabase 'orders' table has these columns or matches this JSON structure
+      const orderData = {
+        customer_name: `${formData.firstName} ${formData.lastName}`,
+        customer_email: formData.email,
+        total_amount: total,
+        payment_method: paymentMethod,
+        items: cart, // Stores the cart array as JSON
+        participants: participants, // Stores participant details as JSON
+        include_debrief: includeDebrief,
+        status: paymentMethod === 'card' ? 'paid' : 'pending_transfer',
+        created_at: new Date().toISOString()
+      };
+
+      const { error } = await supabase
+        .from('orders')
+        .insert([orderData]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      // Success Flow
+      setStep('success');
+      onClearCart();
+      
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('There was a problem saving your order. Please check your connection and try again.');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (!isOpen) return null;
