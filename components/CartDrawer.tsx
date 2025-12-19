@@ -126,25 +126,22 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
         throw error;
       }
 
-      // 3. Gửi sang Zoho Flow (Link của bạn đã được điền sẵn ở đây)
+      // 3. Gửi thông báo (Qua Vercel API để tránh lỗi CORS)
       try {
-        const ZOHO_WEBHOOK_URL = 'https://flow.zoho.com/813301204/flow/webhook/incoming?zapikey=1001.33699b799b8a093aa0b15c063af753dd.d24c93d18cd16cccfe0f4f60a217f96d&isdebug=false'; 
-        
-        const zohoPayload = {
-            ...orderData,
-            order_date: new Date().toLocaleString(),
-            order_id_ref: `ORD-${Date.now()}`
-        };
-
-        await fetch(ZOHO_WEBHOOK_URL, {
+        await fetch('/api/notify-zoho', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(zohoPayload)
+            body: JSON.stringify({
+                ...orderData,
+                order_date: new Date().toLocaleString('vi-VN'), // Giờ Việt Nam
+                order_id_ref: `ORD-${Date.now()}`
+            })
         });
-        console.log("Đã gửi Zoho Flow thành công");
+        console.log("--> Đã gửi yêu cầu sang Vercel API thành công");
 
-      } catch (zohoError) {
-        console.error('Lỗi gửi Zoho (Đơn hàng vẫn thành công):', zohoError);
+      } catch (apiError) {
+        // Chỉ log lỗi, không chặn quy trình
+        console.error('Lỗi gửi API thông báo:', apiError);
       }
 
       // Success Flow
