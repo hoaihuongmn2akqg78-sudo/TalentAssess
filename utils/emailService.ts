@@ -1,5 +1,3 @@
-
-
 import { CartItem } from '../types';
 
 interface OrderDetails {
@@ -15,7 +13,7 @@ interface OrderDetails {
     email: string;
   }>;
   total: number;
-  paymentMethod: 'card' | 'bank';
+  paymentMethod: 'paypal' | 'bank';
   orderId: string;
   debriefHours?: number;
 }
@@ -71,7 +69,7 @@ export const generateOrderEmails = (order: OrderDetails): SimulationResult => {
   // 1. Generate Admin Email
   const adminEmail: EmailData = {
     to: 'info@lhh.com.vn',
-    subject: `[New Order] #${order.orderId} - $${order.total.toFixed(2)} (${order.paymentMethod === 'card' ? 'Paid' : 'Pending'})`,
+    subject: `[New Order] #${order.orderId} - $${order.total.toFixed(2)} (${order.paymentMethod === 'paypal' ? 'Paid via PayPal' : 'Pending Transfer'})`,
     type: 'admin',
     body: `
       <div style="font-family: sans-serif; color: #333;">
@@ -109,11 +107,11 @@ export const generateOrderEmails = (order: OrderDetails): SimulationResult => {
           </tbody>
         </table>
         <p><strong>Total Value: $${order.total.toFixed(2)}</strong></p>
-        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'card' ? 'Credit Card' : 'Bank Transfer'}</p>
+        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'paypal' ? 'PayPal' : 'Bank Transfer'}</p>
         <div style="background: #eee; padding: 10px; margin-top: 20px;">
           <strong>Action Required:</strong> 
-          ${order.paymentMethod === 'card' 
-            ? 'None. Payment captured automatically. Ensure participants receive codes.' 
+          ${order.paymentMethod === 'paypal' 
+            ? 'None. Payment captured automatically via PayPal. Ensure participants receive codes.' 
             : 'Verify bank transfer receipt before releasing codes to participants.'}
           ${order.debriefHours ? '<br/><br/><strong style="color:#C7593A;">NOTE: Customer purchased Expert Debriefing. Assign consultant ASAP.</strong>' : ''}
         </div>
@@ -168,7 +166,7 @@ export const generateOrderEmails = (order: OrderDetails): SimulationResult => {
       <div style="font-family: sans-serif; color: #333;">
         <h2 style="color: #0C3963;">Order Confirmed!</h2>
         <p>Dear ${order.customer.firstName},</p>
-        <p>Thank you for your purchase. We have received your payment of <strong>$${order.total.toFixed(2)}</strong>.</p>
+        <p>Thank you for your purchase via PayPal. We have received your payment of <strong>$${order.total.toFixed(2)}</strong>.</p>
         
         <h3>Participant Assignments</h3>
         ${order.participants.length > 0 ? participantTable : '<p>Self-registration confirmed.</p>'}
