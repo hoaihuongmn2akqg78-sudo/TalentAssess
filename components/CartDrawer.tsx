@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { X, Trash2, CreditCard, Lock, CheckCircle, Landmark, Loader2, User, Users, Briefcase } from 'lucide-react';
 import { CartItem } from '../types';
@@ -14,7 +13,7 @@ interface CartDrawerProps {
 }
 
 interface ParticipantDetails {
-  key: string; // Unique key combining assessment ID and index
+  key: string;
   assessmentId: string;
   assessmentName: string;
   name: string;
@@ -55,13 +54,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const total = subtotal + (includeDebrief ? DEBRIEF_PRICE : 0);
 
-  // Initialize participants structure when cart changes or entering checkout
+  // Initialize participants structure
   useEffect(() => {
     if (step === 'checkout') {
       const newParticipants: ParticipantDetails[] = [];
       cart.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
-          // Try to preserve existing data if re-rendering
           const key = `${item.id}-${i}`;
           const existing = participants.find(p => p.key === key);
           newParticipants.push({
@@ -74,9 +72,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
         }
       });
       setParticipants(newParticipants);
-      
-      // If multiple items, force "isBuyerParticipant" to false (meaning show fields) conceptually
-      // We will control the UI based on totalItems > 1
     }
   }, [cart, step]);
 
@@ -91,10 +86,11 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
     ));
   };
 
+  // --- HÀM XỬ LÝ THANH TOÁN (ĐÃ TÍCH HỢP ZOHO) ---
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate participants if required
+    // Validate participants
     const needsParticipantInfo = !isBuyerParticipant || totalItems > 1;
     if (needsParticipantInfo) {
        const incomplete = participants.some(p => !p.name.trim() || !p.email.trim());
@@ -107,20 +103,20 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
     setIsProcessing(true);
     
     try {
-      // Prepare the order payload
-      // Note: Ensure your Supabase 'orders' table has these columns or matches this JSON structure
+      // 1. Chuẩn bị dữ liệu
       const orderData = {
         customer_name: `${formData.firstName} ${formData.lastName}`,
         customer_email: formData.email,
         total_amount: total,
         payment_method: paymentMethod,
-        items: cart, // Stores the cart array as JSON
-        participants: participants, // Stores participant details as JSON
+        items: cart, 
+        participants: participants, 
         include_debrief: includeDebrief,
         status: paymentMethod === 'card' ? 'paid' : 'pending_transfer',
         created_at: new Date().toISOString()
       };
 
+      // 2. Lưu vào Supabase
       const { error } = await supabase
         .from('orders')
         .insert([orderData]);
@@ -130,13 +126,34 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
         throw error;
       }
 
+      // 3. Gửi sang Zoho Flow (Link của bạn đã được điền sẵn ở đây)
+      try {
+        const ZOHO_WEBHOOK_URL = 'https://flow.zoho.com/813301204/flow/webhook/incoming?zapikey=1001.33699b799b8a093aa0b15c063af753dd.d24c93d18cd16cccfe0f4f60a217f96d&isdebug=false'; 
+        
+        const zohoPayload = {
+            ...orderData,
+            order_date: new Date().toLocaleString(),
+            order_id_ref: `ORD-${Date.now()}`
+        };
+
+        await fetch(ZOHO_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(zohoPayload)
+        });
+        console.log("Đã gửi Zoho Flow thành công");
+
+      } catch (zohoError) {
+        console.error('Lỗi gửi Zoho (Đơn hàng vẫn thành công):', zohoError);
+      }
+
       // Success Flow
       setStep('success');
       onClearCart();
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error placing order:', error);
-      alert('There was a problem saving your order. Please check your connection and try again.');
+      alert('There was a problem saving your order: ' + (error.message || 'Unknown error'));
     } finally {
       setIsProcessing(false);
     }
@@ -362,10 +379,10 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
                             <span className="bg-[#0C3963] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Recommended</span>
                          </div>
                          <p className="text-sm text-gray-600 mb-2 leading-snug">
-                            Includes a 1-hour private consultation with a senior consultant to interpret your results and create a development plan.
+                           Includes a 1-hour private consultation with a senior consultant to interpret your results and create a development plan.
                          </p>
                          <div className="font-bold text-[#0C3963] text-sm">
-                            +${DEBRIEF_PRICE.toFixed(2)} / hr
+                           +${DEBRIEF_PRICE.toFixed(2)} / hr
                          </div>
                       </div>
                    </label>
@@ -417,26 +434,26 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
                    <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
                      <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-4">
                          <div className="flex items-center gap-2 border-b border-gray-200 pb-2 mb-2">
-                             <Landmark size={20} className="text-[#0C3963]" />
-                             <h4 className="font-bold text-[#0C3963]">Bank Account Details</h4>
+                            <Landmark size={20} className="text-[#0C3963]" />
+                            <h4 className="font-bold text-[#0C3963]">Bank Account Details</h4>
                          </div>
                          <div className="space-y-4 text-sm">
                              <div>
                                  <span className="block text-xs font-bold text-gray-500 uppercase tracking-wide">Account Name</span>
                                  <div className="font-mono text-gray-900 bg-white p-3 border border-gray-300 rounded mt-1 select-all font-bold">
-                                    LEE HECHT HARRISON INDOCHINE
+                                   LEE HECHT HARRISON INDOCHINE
                                  </div>
                              </div>
                              <div>
                                  <span className="block text-xs font-bold text-gray-500 uppercase tracking-wide">Account Number (USD)</span>
                                  <div className="font-mono text-gray-900 bg-white p-3 border border-gray-300 rounded mt-1 select-all font-bold">
-                                    503 527 574 301
+                                   503 527 574 301
                                  </div>
                              </div>
                              <div>
                                  <span className="block text-xs font-bold text-gray-500 uppercase tracking-wide">SWIFT Code</span>
                                  <div className="font-mono text-gray-900 bg-white p-3 border border-gray-300 rounded mt-1 select-all font-bold">
-                                    OCBCSGSG
+                                   OCBCSGSG
                                  </div>
                              </div>
                          </div>
@@ -463,9 +480,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
                   <div className="w-full bg-blue-50 border border-blue-100 rounded-lg p-4 mb-8 text-left">
                      <h4 className="font-bold text-[#0C3963] text-sm mb-1">What happens next?</h4>
                      <ul className="text-sm text-gray-600 space-y-2 list-disc pl-4">
-                        <li>Check your inbox for the receipt.</li>
-                        <li>Participants will receive individual access links.</li>
-                        {includeDebrief && <li>A consultant will contact you to schedule your debrief.</li>}
+                       <li>Check your inbox for the receipt.</li>
+                       <li>Participants will receive individual access links.</li>
+                       {includeDebrief && <li>A consultant will contact you to schedule your debrief.</li>}
                      </ul>
                   </div>
 
