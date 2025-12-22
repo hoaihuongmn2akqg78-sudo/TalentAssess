@@ -1,6 +1,5 @@
 // File: api/trigger-paid.js
 
-// 1. CẤU HÌNH SẢN PHẨM (Y HỆT FILE CŨ)
 const PRODUCT_CONFIG = {
   'APOLLO Profile': {
     type: 'apollo', 
@@ -29,23 +28,40 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Dữ liệu Supabase gửi sang có dạng { type: 'UPDATE', record: {...}, old_record: {...} }
   const { record, old_record } = req.body;
-
-  // Link Webhook Zoho (Flow Participant)
   const ZOHO_PARTICIPANT_URL = 'https://flow.zoho.com/813301204/flow/webhook/incoming?zapikey=1001.8163fa52665237b419766ca404df383f.8970f705219ee2a8ab6a2045a3a831c7&isdebug=false';
 
   try {
-    // KIỂM TRA ĐIỀU KIỆN QUAN TRỌNG:
-    // 1. Chỉ chạy khi trạng thái MỚI là 'paid'
-    // 2. VÀ trạng thái CŨ KHÁC 'paid' (tránh gửi trùng khi update cái khác)
+    // 1. Kiểm tra điều kiện status chuyển sang PAID
     if (record.status === 'paid' && old_record.status !== 'paid') {
       
-      const participants = record.participants || [];
-      
+      console.log('Status changed to PAID. Processing...');
+
+      // --- [FIX QUAN TRỌNG] Xử lý lỗi data dạng String ---
+      let participants = record.participants;
+
+      // Nếu participants là chuỗi (do sửa tay hoặc lỗi DB), hãy parse nó ra JSON
+      if (typeof participants === 'string') {
+        try {
+          participants = JSON.parse(participants);
+        } catch (e) {
+          console.error('Lỗi parse JSON participants:', e);
+          participants = []; // Nếu lỗi thì trả về rỗng để không crash app
+        }
+      }
+
+      // Đảm bảo nó là mảng trước khi map
+      if (!Array.isArray(participants)) {
+         participants = [];
+      }
+      // ----------------------------------------------------
+
       const promises = participants.map(async (person) => {
         const config = PRODUCT_CONFIG[person.assessmentName];
-        if (!config) return null;
+        if (!config) {
+            console.log('Không tìm thấy config cho:', person.assessmentName);
+            return null;
+        }
 
         const payload = {
           participant_name: person.name,
@@ -53,9 +69,10 @@ export default async function handler(req, res) {
           product_name: person.assessmentName,
           type: config.type,
           link: config.link,
-          order_ref: record.order_id_ref || `ORD-${Date.now()}` // Lưu ý: Supabase trả về record nên lấy record.order_id_ref
+          order_ref: record.order_id_ref || `ORD-${Date.now()}`
         };
 
+        // Gửi sang Zoho
         return fetch(ZOHO_PARTICIPANT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -67,7 +84,6 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Triggered Paid Sequence Successfully' });
     } 
     
-    // Nếu không phải chuyển sang Paid thì bỏ qua
     return res.status(200).json({ message: 'Ignored: Status not changed to PAID' });
 
   } catch (error) {
