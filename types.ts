@@ -22,6 +22,7 @@ export interface Assessment {
   level: ('Individual' | 'Team' | 'Organization')[];
   guidance: string; // New field for post-payment instructions
   faq: FAQ[]; // New field for product specific FAQs
+  sampleReportUrl?: string; // New field for sample report links
 }
 
 export interface CartItem extends Assessment {

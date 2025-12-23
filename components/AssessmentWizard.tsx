@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronRight, Circle, CheckCircle, Loader2 } from 'lucide-react';
+import { X, ChevronRight, Circle, CheckCircle, Loader2, FileText } from 'lucide-react';
 import { Assessment } from '../types';
 
 interface Props {
@@ -63,7 +63,7 @@ const AssessmentWizard: React.FC<Props> = ({
 
   const handleFindMatch = () => {
     setIsAnalyzing(true);
-    // Simulate AI delay
+    // Simulate delay
     setTimeout(() => {
         setIsAnalyzing(false);
         setStep(4);
@@ -71,7 +71,6 @@ const AssessmentWizard: React.FC<Props> = ({
   };
 
   const getRecommendations = () => {
-    // Simple logic map, could be enhanced with actual search on contextText later
     let results: Assessment[] = [];
 
     if (userType === 'individual') {
@@ -87,14 +86,12 @@ const AssessmentWizard: React.FC<Props> = ({
       else results = assessments.filter(a => a.category === 'Leadership');
     }
     
-    // Ensure we always return something
     if (results.length === 0) return assessments.slice(0, 3);
-    return results.slice(0, 3); // Top 3
+    return results.slice(0, 3);
   };
 
   const recommendations = getRecommendations();
   
-  // Format goal text for display
   const getGoalLabel = (key: string) => {
      const map: Record<string, string> = {
          'growth': 'Self-Discovery & Growth',
@@ -122,21 +119,21 @@ const AssessmentWizard: React.FC<Props> = ({
             <div className="text-3xl font-extrabold tracking-tight text-[#0C3963] font-serif">
                 TALENT<span className="text-gray-400 font-sans font-light text-2xl">ASSESS</span>
             </div>
-            <div className="flex items-center gap-6 text-sm font-medium">
+            <div className="flex items-center gap-6 text-sm font-medium text-gray-600">
                <button 
                   onClick={() => { onNavigateToHome(); onClose(); }} 
-                  className="hover:text-[#0C3963]"
+                  className="hover:text-[#0C3963] transition-colors"
                >
                  Home
                </button>
                <button className="text-[#0C3963] font-bold">Find Your Path</button>
                <button 
                   onClick={() => { onNavigateToBrowse(); onClose(); }} 
-                  className="hover:text-[#0C3963]"
+                  className="hover:text-[#0C3963] transition-colors"
                >
                  Browse All
                </button>
-               <button onClick={onClose} className="flex items-center gap-1 hover:text-[#0C3963]">Log In</button>
+               <button onClick={onClose} className="flex items-center gap-1 hover:text-[#0C3963] transition-colors">Log In</button>
             </div>
         </div>
 
@@ -150,7 +147,6 @@ const AssessmentWizard: React.FC<Props> = ({
                 <span className={step >= 3 ? "text-[#0C3963] font-bold" : ""}>Context</span>
             </div>
             
-            {/* Progress Line */}
             <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-[#5B21B6] transition-all duration-500 ease-out"
@@ -161,7 +157,6 @@ const AssessmentWizard: React.FC<Props> = ({
 
         {/* Main Content */}
         <div className="min-h-[400px]">
-            {/* Step 1: User Type */}
             {step === 1 && (
                 <div className="animate-in slide-in-from-right duration-300">
                     <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-8">Are you looking for yourself or your organization?</h2>
@@ -198,7 +193,6 @@ const AssessmentWizard: React.FC<Props> = ({
                 </div>
             )}
 
-            {/* Step 2: Goal */}
             {step === 2 && (
                  <div className="animate-in slide-in-from-right duration-300 max-w-3xl">
                     <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-8">What is your primary objective?</h2>
@@ -221,7 +215,6 @@ const AssessmentWizard: React.FC<Props> = ({
                 </div>
             )}
 
-            {/* Step 3: Context (Text Input) */}
             {step === 3 && (
                 <div className="animate-in slide-in-from-right duration-300">
                     <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-4">Tell us a bit more about your situation.</h2>
@@ -243,7 +236,6 @@ const AssessmentWizard: React.FC<Props> = ({
                 </div>
             )}
 
-             {/* Step 4: Results */}
             {step === 4 && (
                  <div className="animate-in slide-in-from-right duration-300">
                     <div className="text-center mb-10">
@@ -278,7 +270,7 @@ const AssessmentWizard: React.FC<Props> = ({
                                         {item.description}
                                     </p>
                                     
-                                    <div className="flex items-center justify-between mt-auto">
+                                    <div className="flex items-center justify-between mt-auto mb-4">
                                         <span className="text-xl font-bold text-[#0C3963]">${item.price}</span>
                                         <button 
                                             onClick={() => {
@@ -290,7 +282,19 @@ const AssessmentWizard: React.FC<Props> = ({
                                             Add
                                         </button>
                                     </div>
-                                    <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
+
+                                    {item.sampleReportUrl && (
+                                      <a 
+                                        href={item.sampleReportUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-1.5 w-full py-2 mb-4 text-xs font-bold rounded bg-gray-50 border border-gray-200 text-[#0C3963] hover:bg-gray-100 transition-colors"
+                                      >
+                                        <FileText size={14} /> Sample Report
+                                      </a>
+                                    )}
+
+                                    <div className="pt-4 border-t border-gray-100 flex justify-center">
                                         <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-500 hover:text-gray-800">
                                             <input type="checkbox" className="rounded border-gray-300" />
                                             Compare
@@ -308,10 +312,8 @@ const AssessmentWizard: React.FC<Props> = ({
                     </div>
                 </div>
             )}
-
         </div>
 
-        {/* Footer Actions (Steps 1-3) */}
         {step < 4 && (
             <div className="mt-12 flex justify-between items-center">
                 <button 
@@ -325,13 +327,12 @@ const AssessmentWizard: React.FC<Props> = ({
                     onClick={handleNextStep}
                     disabled={(step === 1 && !userType) || (step === 2 && !goal) || (step === 3 && contextText.trim().length === 0)}
                     className="px-8 py-3 bg-[#7E5296] text-white rounded font-bold hover:bg-[#6b4580] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    style={{ backgroundColor: '#7E5296' }} // Light purple button from screenshot
+                    style={{ backgroundColor: '#7E5296' }} 
                 >
                     {step === 3 ? 'Find Best Match' : 'Next Step'}
                 </button>
             </div>
         )}
-
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Assessment } from '../types';
-import { ListChecks, Search } from 'lucide-react';
+import { ListChecks, Search, FileText } from 'lucide-react';
 
 interface BrowsePageProps {
   assessments: Assessment[];
@@ -137,15 +137,15 @@ const BrowsePage: React.FC<BrowsePageProps> = ({
 
         {/* Results Table */}
         {filteredAssessments.length > 0 ? (
-          <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-white">
-              <table className="w-full text-left">
+          <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-white overflow-x-auto">
+              <table className="w-full text-left min-w-[900px]">
                   <thead>
                       <tr className="bg-gray-50 border-b border-gray-200">
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider w-16 text-center">Compare</th>
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Assessment</th>
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider hidden md:table-cell">Category</th>
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Duration</th>
-                          <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider hidden lg:table-cell w-1/4">Best For</th>
+                          <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Sample</th>
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Price</th>
                           <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider w-32"></th>
                       </tr>
@@ -178,8 +178,18 @@ const BrowsePage: React.FC<BrowsePageProps> = ({
                               <td className="py-5 px-6 text-sm text-gray-600 hidden lg:table-cell">
                                   {item.duration || 'Varies'}
                               </td>
-                              <td className="py-5 px-6 text-sm text-gray-600 leading-snug hidden lg:table-cell">
-                                  {item.bestFor}
+                              <td className="py-5 px-6">
+                                  {item.sampleReportUrl && (
+                                    <a 
+                                      href={item.sampleReportUrl} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="text-[#0C3963] hover:text-[#2C4D81] transition-colors flex items-center gap-1.5 text-sm font-medium"
+                                    >
+                                      <FileText size={16} />
+                                      <span className="hidden sm:inline">Report</span>
+                                    </a>
+                                  )}
                               </td>
                               <td className="py-5 px-6 font-bold text-gray-900">
                                   ${item.price.toFixed(2)}

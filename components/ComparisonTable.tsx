@@ -1,6 +1,6 @@
 import React from 'react';
 import { Assessment } from '../types';
-import { X, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { X, CheckCircle2, ArrowLeft, FileText } from 'lucide-react';
 
 interface Props {
   assessments: Assessment[];
@@ -57,6 +57,25 @@ const ComparisonTable: React.FC<Props> = ({ assessments, onRemove, onClose }) =>
                       <span className="bg-[#E0E9F4] text-[#0C3963] px-2 py-1 rounded text-xs font-bold uppercase">
                         {item.category}
                       </span>
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="py-4 font-semibold text-gray-700">Sample Report</td>
+                  {assessments.map(item => (
+                    <td key={item.id} className="px-4 py-4 text-gray-600">
+                      {item.sampleReportUrl ? (
+                        <a 
+                          href={item.sampleReportUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-[#0C3963] hover:underline font-bold text-sm"
+                        >
+                          <FileText size={16} /> View Report
+                        </a>
+                      ) : (
+                        <span className="text-gray-400 text-xs italic">Not available</span>
+                      )}
                     </td>
                   ))}
                 </tr>

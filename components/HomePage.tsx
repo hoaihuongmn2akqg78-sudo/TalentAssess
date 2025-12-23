@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from './Hero';
 import { Assessment } from '../types';
-import { ArrowRight, User, Users, Briefcase, Zap, Brain, Layers, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, User, Users, Briefcase, Zap, Brain, Layers, CheckCircle2, FileText } from 'lucide-react';
 
 interface HomePageProps {
   onStartWizard: (type: 'individual' | 'organization' | null) => void;
@@ -155,12 +155,24 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
                          </li>
                        ))}
                     </ul>
-                    <button 
-                      onClick={() => onNavigateToBrowse(item.category)} // In a real app, go to detail page
-                      className="w-full py-3 border border-[#0C3963] text-[#0C3963] font-bold rounded hover:bg-[#0C3963] hover:text-white transition-colors"
-                    >
-                      Learn More
-                    </button>
+                    <div className="flex flex-col gap-3 mt-auto">
+                      <button 
+                        onClick={() => onNavigateToBrowse(item.category)} // In a real app, go to detail page
+                        className="w-full py-3 bg-[#0C3963] text-white font-bold rounded hover:bg-[#2C4D81] transition-colors"
+                      >
+                        Learn More
+                      </button>
+                      {item.sampleReportUrl && (
+                        <a 
+                          href={item.sampleReportUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-1.5 w-full py-2.5 text-xs font-bold text-[#0C3963] hover:bg-gray-50 border border-transparent rounded transition-colors"
+                        >
+                          <FileText size={16} /> Sample Report
+                        </a>
+                      )}
+                    </div>
                   </div>
                </div>
              ))}

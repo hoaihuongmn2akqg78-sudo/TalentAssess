@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Assessment } from '../types';
-import { X, Check, ShoppingCart, Copy, ClipboardCheck, HelpCircle } from 'lucide-react';
+import { X, Check, ShoppingCart, Copy, ClipboardCheck, HelpCircle, FileText } from 'lucide-react';
 
 interface Props {
   assessment: Assessment;
@@ -171,8 +170,20 @@ const ProductDetailModal: React.FC<Props> = ({ assessment, onClose, onAddToCart 
                   Add to Cart
                 </button>
                 
+                {assessment.sampleReportUrl && (
+                  <a 
+                    href={assessment.sampleReportUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-white text-[#0C3963] py-3 rounded-lg font-bold border border-[#0C3963] hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 mb-3 shadow-sm"
+                  >
+                    <FileText size={18} />
+                    View Sample Report
+                  </a>
+                )}
+
                 <button 
-                  className="w-full bg-white text-[#0C3963] py-3 rounded-lg font-bold border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-white text-gray-600 py-3 rounded-lg font-bold border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
                 >
                   <Copy size={18} />
                   Add to Compare

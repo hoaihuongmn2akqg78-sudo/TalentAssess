@@ -1,19 +1,21 @@
 import React from 'react';
 import { Assessment } from '../types';
-import { Check, Info, Plus } from 'lucide-react';
+import { Check, Info, Plus, FileText } from 'lucide-react';
 
 interface Props {
   assessment: Assessment;
   isSelectedForComparison: boolean;
   onToggleCompare: (id: string) => void;
   onAddToCart: (assessment: Assessment) => void;
+  onViewDetails: (assessment: Assessment) => void;
 }
 
 const AssessmentCard: React.FC<Props> = ({ 
   assessment, 
   isSelectedForComparison, 
   onToggleCompare,
-  onAddToCart 
+  onAddToCart,
+  onViewDetails
 }) => {
   return (
     <div className="group flex flex-col bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
@@ -42,7 +44,7 @@ const AssessmentCard: React.FC<Props> = ({
         </p>
         
         <div className="space-y-3 mt-auto pt-4 border-t border-gray-100">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <span className="text-xl font-bold text-[#0C3963]">${assessment.price}</span>
             <button 
               onClick={() => onAddToCart(assessment)}
@@ -65,10 +67,24 @@ const AssessmentCard: React.FC<Props> = ({
                {isSelectedForComparison ? <Check size={14} /> : <Plus size={14} />}
                {isSelectedForComparison ? 'Selected' : 'Compare'}
             </button>
-            <button className="flex items-center justify-center gap-1.5 px-2 py-2 text-xs font-bold rounded border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+            <button 
+              onClick={() => onViewDetails(assessment)}
+              className="flex items-center justify-center gap-1.5 px-2 py-2 text-xs font-bold rounded border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+            >
               <Info size={14} /> Details
             </button>
           </div>
+          
+          {assessment.sampleReportUrl && (
+            <a 
+              href={assessment.sampleReportUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 w-full py-2 text-xs font-bold rounded bg-gray-50 border border-gray-200 text-[#0C3963] hover:bg-gray-100 transition-colors"
+            >
+              <FileText size={14} /> Sample Report
+            </a>
+          )}
         </div>
       </div>
     </div>

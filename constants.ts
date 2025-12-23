@@ -1,4 +1,3 @@
-
 import { Assessment, BlogPost } from './types';
 
 const GUIDANCE_NOTE = " Note: If you are not the assessment taker, please enter the taker’s information in the checkout field.";
@@ -6,6 +5,9 @@ const GUIDANCE_NOTE = " Note: If you are not the assessment taker, please enter 
 const GUIDANCE_MBTI = "After payment is completed, the user will immediately receive a credential link to begin the questionnaire. Once the survey is completed, the report will be released within 2 working days." + GUIDANCE_NOTE;
 const GUIDANCE_APOLLO = "After payment is completed, the user will receive an Apollo access link with a username and password within 2 working days. The report will be released once the assessment is completed." + GUIDANCE_NOTE;
 const GUIDANCE_OTHER = "After payment is completed, the user will receive the assessment link within 2 working days. The report will be released immediately upon completing the survey." + GUIDANCE_NOTE;
+
+// Placeholder sample report link
+const SAMPLE_URL = "https://www.lhh.com/en-sg/our-knowledge/sample-reports/";
 
 // Helper FAQ sets
 const FAQ_MBTI = [
@@ -51,7 +53,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
     guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI
+    faq: FAQ_MBTI,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'mbti-step1-iro',
@@ -73,7 +76,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
       ...FAQ_MBTI,
       { question: "How is this different from the Profile Report?", answer: "The IRO is much more detailed (approx. 10 pages vs 2 pages) and specifically focuses on how your personality plays out in a work environment, including leadership and conflict styles." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'mbti-step2-profile',
@@ -96,7 +100,8 @@ export const ASSESSMENTS: Assessment[] = [
       ...FAQ_MBTI,
       { question: "Do I need to take Step I first?", answer: "No, the Step II questionnaire covers both Step I and Step II items in a single sitting." },
       { question: "Why take Step II?", answer: "Step II explains why two people with the same 4-letter type can behave very differently. It reveals the unique 'fingerprint' of your personality." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'mbti-step2-interpretive',
@@ -115,7 +120,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
     guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI
+    faq: FAQ_MBTI,
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- APOLLO ---
@@ -139,7 +145,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
       { question: "Is Apollo suitable for all job levels?", answer: "Yes, Apollo compares candidates against different norm groups (e.g., Managers, Sales, Grads) to ensure relevance across all organizational levels." },
       { question: "Does it detect faking?", answer: "Yes, Apollo has built-in social desirability scales to identify if a candidate is trying to present an overly positive image." }
-    ]
+    ],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/de054c6aeba0148688b8692e740e5108df64e768b69ac0205b35a9915adf65f8"
   },
 
   // --- LHH / HOGAN ---
@@ -160,7 +167,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'lhh-change-behavior',
@@ -179,7 +187,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual', 'Organization'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'lhh-leadership-contract',
@@ -198,7 +207,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'lhh-women-leadership',
@@ -217,7 +227,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- HOGAN CORE ---
@@ -241,7 +252,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
         ...FAQ_HOGAN,
         { question: "Why is there no text?", answer: "The Flash report is designed for certified practitioners who can interpret the raw scale scores without needing generic narrative descriptions." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'hogan-high-potential',
@@ -260,7 +272,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development', 'Selection'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'hogan-insight-series',
@@ -279,7 +292,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'hogan-eq',
@@ -298,7 +312,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development', 'Hiring'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'hogan-leader-focus',
@@ -317,7 +332,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN
+    faq: FAQ_HOGAN,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'hogan-team-report',
@@ -339,7 +355,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
       { question: "Do all team members need to take the assessments?", answer: "Yes, for the most accurate team profile, we recommend 100% participation. The price covers aggregation for up to 30 people." },
       { question: "Is individual data kept confidential?", answer: "Yes, the team report only shows aggregated data and roles. It does not reveal individual scores to the group." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- PROFILOR ---
@@ -360,7 +377,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_360
+    faq: FAQ_360,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'profilor-progress',
@@ -379,7 +397,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_360
+    faq: FAQ_360,
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- SAVILLE ---
@@ -400,7 +419,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Hiring'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_APTITUDE
+    faq: FAQ_APTITUDE,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'saville-swift-analysis',
@@ -419,7 +439,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Hiring', 'Selection'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_APTITUDE
+    faq: FAQ_APTITUDE,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'saville-wave-expert',
@@ -441,7 +462,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
       { question: "Is this report good for hiring?", answer: "Yes, the Expert Report gives a prediction of 'Competency Potential' and 'Culture Fit', making it ideal for selection decisions." },
       { question: "How does Wave differ from MBTI?", answer: "Wave is trait-based and predicts performance, whereas MBTI is type-based and describes preferences. Wave is generally preferred for recruitment." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'saville-wave-leadership-impact',
@@ -462,7 +484,8 @@ export const ASSESSMENTS: Assessment[] = [
     guidance: GUIDANCE_OTHER,
     faq: [
       { question: "Do I need to manage people to take this?", answer: "While designed for leaders, high-potential individual contributors can also benefit from understanding their potential leadership impact." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'saville-swift-exec',
@@ -481,7 +504,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Hiring', 'Selection'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_APTITUDE
+    faq: FAQ_APTITUDE,
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- TALENTLENS ---
@@ -502,7 +526,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Hiring', 'Selection'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_APTITUDE
+    faq: FAQ_APTITUDE,
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'ravens-matrices',
@@ -524,7 +549,8 @@ export const ASSESSMENTS: Assessment[] = [
     faq: [
       ...FAQ_APTITUDE,
       { question: "Is this suitable for non-English speakers?", answer: "Yes, the Raven's Matrices are entirely non-verbal and require no reading ability, making it ideal for international candidates." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   },
   {
     id: 'talentlens-ndit',
@@ -543,7 +569,8 @@ export const ASSESSMENTS: Assessment[] = [
     useCase: ['Hiring'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_APTITUDE
+    faq: FAQ_APTITUDE,
+    sampleReportUrl: SAMPLE_URL
   },
 
   // --- TALENTx7 ---
@@ -565,9 +592,10 @@ export const ASSESSMENTS: Assessment[] = [
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
     faq: [
-      { question: "What is Learning Agility?", answer: "Learning Agility is the willingness and ability to learn from experience and apply that learning to new and first-time conditions. It is the #1 predictor of executive success." },
+      { question: "What is Learning Agility?", answer: "Learning Agility is the willingness and ability to learn from experience and apply that learning to new and first-time situations. It is the #1 predictor of executive success." },
       { question: "How does this differ from IQ?", answer: "IQ measures your ability to solve known problems. Learning Agility measures your ability to solve unknown problems where you have no prior experience." }
-    ]
+    ],
+    sampleReportUrl: SAMPLE_URL
   }
 ];
 
