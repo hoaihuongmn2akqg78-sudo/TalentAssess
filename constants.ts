@@ -16,6 +16,12 @@ const FAQ_MBTI = [
   { question: "How long is the report valid?", answer: "Personality preferences tend to be stable over time. However, we recommend re-taking the assessment if you undergo significant life changes or haven't taken it in 3+ years." }
 ];
 
+const FAQ_FIRO = [
+  { question: "What does FIRO stand for?", answer: "FIRO stands for Fundamental Interpersonal Relations Orientation. It measures your interpersonal needs and how they influence your communication style." },
+  { question: "How is FIRO-Business different from the MBTI?", answer: "While MBTI focuses on how you perceive information and make decisions, FIRO-Business focuses specifically on how you interact with others and your needs for inclusion, control, and affection in a workplace context." },
+  { question: "Is this assessment good for teams?", answer: "Yes, it is one of the most powerful tools for team building, as it reveals the underlying 'interpersonal gaps' that often cause friction and misunderstanding in groups." }
+];
+
 const FAQ_HOGAN = [
   { question: "Is this assessment suitable for hiring?", answer: "Yes, Hogan assessments are scientifically validated to predict workplace performance and are widely used for high-stakes selection and promotion decisions." },
   { question: "What if I get interrupted while taking it?", answer: "The system saves your progress automatically. You can log back in and resume exactly where you left off." },
@@ -32,6 +38,17 @@ const FAQ_360 = [
   { question: "Are my raters anonymous?", answer: "Yes. Ratings are aggregated by group (e.g., Peers, Direct Reports) to protect anonymity, with the exception of the Manager category." },
   { question: "How many raters should I invite?", answer: "We recommend inviting 6-10 raters across different categories to ensure a representative and reliable view of your performance." },
   { question: "How long does the process take?", answer: "While the survey takes 20 minutes, the full 360 process usually spans 2-3 weeks to allow all raters enough time to provide thoughtful feedback." }
+];
+
+const FAQ_ISTARTSTRONG = [
+  { question: "What is iStartStrong?", answer: "iStartStrong is a personalized career report based on the Strong Interest Inventory. It helps you identify your interests and matches them with potential career paths and educational opportunities." },
+  { question: "Who is it for?", answer: "It is ideal for high school and college students, as well as adults looking to pivot careers or find more fulfillment in their current field." },
+  { question: "How long does it take?", answer: "The assessment typically takes about 15-20 minutes to complete." }
+];
+
+const FAQ_STRONG = [
+  { question: "How accurate is the Strong Interest Inventory?", answer: "The Strong Interest Inventory is one of the most widely used and respected career planning tools in the world, with over 80 years of research backing its validity." },
+  { question: "Does it tell me what I should be when I grow up?", answer: "It provides a clear picture of your interests and suggests careers that people with similar interests find satisfying. It is a guide for exploration, not a definitive command." }
 ];
 
 export const ASSESSMENTS: Assessment[] = [
@@ -149,7 +166,196 @@ export const ASSESSMENTS: Assessment[] = [
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/de054c6aeba0148688b8692e740e5108df64e768b69ac0205b35a9915adf65f8"
   },
 
-  // --- LHH / HOGAN ---
+  // --- MYERS-BRIGGS FIRO ---
+  {
+    id: 'firo-b-profile',
+    name: 'FIRO-B® Profile Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 85.00,
+    description: 'The classic FIRO-B assessment providing deep insights into how your interpersonal needs influence your communication and relationships.',
+    whatItMeasures: 'The three interpersonal needs (Inclusion, Control, Affection) across two dimensions: Expressed and Wanted behaviors.',
+    features: [
+      'Total Need score overview',
+      'Need for Inclusion, Control, and Affection',
+      'Expressed vs. Wanted behavior scores',
+      'Interaction pattern analysis'
+    ],
+    benefits: [
+      'Understand your social and relational needs',
+      'Improve interpersonal communication',
+      'Build stronger, more collaborative relationships',
+      'Identify potential blind spots in social interactions'
+    ],
+    bestFor: 'Individual Coaching, Relationship Building, Self-Awareness',
+    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15-20 mins',
+    methodology: 'Self-report questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_FIRO,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/8524af5bc08af61eb20acd2e8ac785d76539b79adb72b298f09e2370c32a8f32"
+  },
+  {
+    id: 'firo-b-iro',
+    name: 'FIRO-B® Interpretive Report for Organizations',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 120.00,
+    description: 'A comprehensive report that applies the FIRO-B framework to the workplace, focusing on how interpersonal needs impact professional relationships, leadership style, and organizational culture.',
+    whatItMeasures: 'Interpersonal needs in a workplace context: Inclusion, Control, and Affection across Expressed and Wanted behaviors.',
+    features: [
+      'Detailed organizational application',
+      'Team dynamic analysis',
+      'Leadership behavior insights',
+      'Relationship development strategies'
+    ],
+    benefits: [
+      'Enhance organizational communication',
+      'Identify and resolve team friction points',
+      'Develop more effective management styles',
+      'Improve culture through behavioral awareness'
+    ],
+    bestFor: 'Managers, Teams, Organizational Development',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '20 mins',
+    methodology: 'Self-report questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: [
+      ...FAQ_FIRO,
+      { question: "How does this differ from the basic Profile Report?", answer: "While the Profile Report gives you your scores, the Interpretive Report for Organizations explains exactly how those scores manifest in professional environments and team settings." }
+    ],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/45a20c40df0e4a005580f1c0b6ccecb9d6f448dbab774ea288a131880633b773"
+  },
+  {
+    id: 'firo-business-profile',
+    name: 'FIRO-Business® Profile',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 95.00,
+    description: 'Measures interpersonal needs in the workplace, helping individuals understand how their needs for inclusion, control, and affection influence their work style.',
+    whatItMeasures: '3 areas of interpersonal need: Inclusion, Control, and Affection (both Expressed and Wanted behaviors).',
+    features: [
+      'Interpersonal needs analysis',
+      'Communication style breakdown',
+      'Team compatibility insights',
+      'Actionable development advice'
+    ],
+    benefits: [
+      'Improve team performance and synergy',
+      'Resolve interpersonal conflict effectively',
+      'Increase self-awareness of social behavior',
+      'Enhance leadership influence and impact'
+    ],
+    bestFor: 'Team Building, Conflict Management, Leadership Development',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15-20 mins',
+    methodology: 'Self-report questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_FIRO,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/8a4771523474442ff7ae28bebbf96ce37038712b7a3c6e8946cb78aeb090af2d"
+  },
+  {
+    id: 'firo-business-leadership',
+    name: 'FIRO-Business® Leadership Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Leadership',
+    price: 115.00,
+    description: 'Designed specifically for leaders, this report provides actionable insights into a leader’s interpersonal needs and their impact on leadership style and performance.',
+    whatItMeasures: 'Leadership interpersonal needs: Inclusion, Control, and Affection within a high-stakes management context.',
+    features: [
+      'Leadership behavioral summary',
+      'Influence and delegation styles',
+      'Communication and feedback strategies',
+      'Conflict management in leadership'
+    ],
+    benefits: [
+      'Enhance leadership self-awareness',
+      'Identify potential leadership interpersonal gaps',
+      'Improve executive presence and team influence',
+      'Provide targeted executive coaching roadmaps'
+    ],
+    bestFor: 'Executive Leaders, Senior Managers, Leadership Coaching',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '20 mins',
+    methodology: 'Self-report questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_FIRO,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ec76cc2c9f916f8da7136b22c418865c5a5d79806439f6b2b8f4cd8c197e832f"
+  },
+
+  // --- ISTARTSTRONG ---
+  {
+    id: 'istartstrong',
+    name: 'iStartStrong',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 40.00,
+    description: 'A dynamic career interest report that provides a starting point for career exploration. It maps your interests to career paths and educational fields.',
+    whatItMeasures: 'Career interests based on Holland Codes (RIASEC themes) and specific interest areas.',
+    features: [
+      'Personalized interest profile',
+      'Top career recommendations',
+      'Educational and major suggestions',
+      'Direct links to career data'
+    ],
+    benefits: [
+      'Find clarity in career direction',
+      'Discover educational paths that match your passions',
+      'Validate your career choices with scientific data',
+      'Start your professional journey with confidence'
+    ],
+    bestFor: 'Students, Career Changers, Career Counseling',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15-20 mins',
+    methodology: 'Strong Interest Inventory based questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_ISTARTSTRONG,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/0bde01cc0584f68656d9d48882c74102c1d47c6ff1de3e6ac38be00f28e0b167"
+  },
+
+  // --- STRONG INTEREST INVENTORY ---
+  {
+    id: 'strong-interest-inventory-profile',
+    name: 'Strong Interest Inventory® Profile Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 55.00,
+    description: 'A comprehensive report that measures your interests in a wide range of occupations, work activities, leisure activities, and school subjects to help guide your career path.',
+    whatItMeasures: 'General Occupational Themes (RIASEC), Basic Interest Scales, Occupational Scales, and Personal Style Scales.',
+    features: [
+      'Detailed RIASEC interest code',
+      'Top 10 occupational matches',
+      'Extensive work style analysis',
+      'Leisure and education recommendations'
+    ],
+    benefits: [
+      'Gain deep insight into professional motivators',
+      'Broaden career exploration options',
+      'Align education and training with interests',
+      'Increase career satisfaction through alignment'
+    ],
+    bestFor: 'Career Exploration, Adult Career Transition, Students',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '25-30 mins',
+    methodology: 'Normative interest inventory',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_STRONG,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/81fcc9cdda36723ba792dc59aaded493338954533761af43cc6ce1ed1abe3c77"
+  },
+
+  // --- LHH / OTHER ---
   {
     id: 'lhh-resilience',
     name: 'LHH Accelerate Change - Your Resilience Profile',

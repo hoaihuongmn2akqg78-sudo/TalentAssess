@@ -21,6 +21,30 @@ const PRODUCT_CONFIG = {
     type: 'mbti_step2_interpretive',
     link: 'https://online.cpp.com/en/index.aspx?R=STEP2_INTERPRETIVE_TEST',
   },
+  'FIRO-B® Profile Report': {
+    type: 'firo_b_profile',
+    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_PROFILE_TEST',
+  },
+  'FIRO-B® Interpretive Report for Organizations': {
+    type: 'firo_b_iro',
+    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_IRO_TEST',
+  },
+  'FIRO-Business® Profile': {
+    type: 'firo_business',
+    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_PROFILE_TEST',
+  },
+  'FIRO-Business® Leadership Report': {
+    type: 'firo_business_leadership',
+    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_LEADERSHIP_TEST',
+  },
+  'iStartStrong': {
+    type: 'istartstrong',
+    link: 'https://online.cpp.com/en/index.aspx?R=ISTARTSTRONG_TEST',
+  },
+  'Strong Interest Inventory® Profile Report': {
+    type: 'strong_profile',
+    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_PROFILE_TEST',
+  }
 };
 
 export default async function handler(req, res) {
