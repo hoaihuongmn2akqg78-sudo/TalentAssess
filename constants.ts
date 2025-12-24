@@ -51,6 +51,26 @@ const FAQ_STRONG = [
   { question: "Does it tell me what I should be when I grow up?", answer: "It provides a clear picture of your interests and suggests careers that people with similar interests find satisfying. It is a guide for exploration, not a definitive command." }
 ];
 
+const FAQ_CPI260 = [
+  { question: "What does CPI 260 stand for?", answer: "CPI stands for California Psychological Inventory. The '260' refers to the 260 items in this condensed version of the original assessment." },
+  { question: "How does it compare to other leadership tools?", answer: "Unlike many tools that rely on self-perception, the CPI 260 compares your answers to a large database of high-performing leaders, providing a more objective benchmark of your leadership potential." }
+];
+
+const FAQ_CPI434 = [
+  { question: "What is the CPI 434™?", answer: "The CPI 434 is the full, 434-item version of the California Psychological Inventory. It provides the most detailed and comprehensive personality profile available in the CPI family." },
+  { question: "Why choose 434 over 260?", answer: "The 434-item version provides additional data on specialized scales and a more nuanced 'Configural Analysis' of how different traits interact, which is not as granular in the condensed 260 version." }
+];
+
+const FAQ_TKI = [
+  { question: "What are the five conflict modes?", answer: "The TKI measures five modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating. Each mode is a combination of assertiveness and cooperativeness." },
+  { question: "Is one mode better than the others?", answer: "No. The most effective mode depends on the situation and the individuals involved. The TKI helps you expand your toolkit so you can choose the best approach for any given conflict." }
+];
+
+const FAQ_WEP = [
+  { question: "What is work engagement?", answer: "Work engagement is a positive, fulfilling, work-related state of mind. It's about being passionate, energetic, and committed to your role." },
+  { question: "How can this profile help me?", answer: "By identifying which intrinsic rewards (Meaningfulness, Choice, Competence, Progress) are low, you can work with your manager to redesign aspects of your role to increase your energy and satisfaction." }
+];
+
 export const ASSESSMENTS: Assessment[] = [
   // --- MBTI ---
   {
@@ -354,6 +374,284 @@ export const ASSESSMENTS: Assessment[] = [
     faq: FAQ_STRONG,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/81fcc9cdda36723ba792dc59aaded493338954533761af43cc6ce1ed1abe3c77"
   },
+  {
+    id: 'strong-profile-interpretive',
+    name: 'Strong Profile and Interpretive Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 90.00,
+    description: 'The most comprehensive version of the Strong Interest Inventory, combining the detailed Profile with an expanded Interpretive Report for in-depth career analysis and guidance.',
+    whatItMeasures: 'RIASEC themes, 30 Basic Interest Scales, 130 Occupational Scales, and 5 Personal Style Scales with deep narrative interpretation.',
+    features: [
+      'Full Profile Report included',
+      'Extended Interpretive narrative',
+      'Specific career path exploration',
+      'Education and training alignment'
+    ],
+    benefits: [
+      'Maximum depth for career decision making',
+      'Nuanced understanding of work-life balance',
+      'Comprehensive roadmap for professional growth',
+      'Scientifically backed career matching'
+    ],
+    bestFor: 'Executive Career Coaching, Senior Professionals in Transition, Comprehensive Student Counseling',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30-35 mins',
+    methodology: 'Extended Normative interest inventory',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_STRONG,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/921c4f38d56df6d1abd42547b8bc8709c34be6b0d31df49fccd39cae5491f3e2"
+  },
+
+  // --- CPI 260 ---
+  {
+    id: 'cpi-260-client-feedback',
+    name: 'CPI 260® Client Feedback Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Leadership',
+    price: 130.00,
+    description: 'A comprehensive leadership assessment that compares an individual\'s results with those of top-performing managers and executives, providing actionable feedback for development.',
+    whatItMeasures: '26 scales covering interpersonal style, self-management, motivation, and thinking style.',
+    features: [
+      'Comparison with top leaders',
+      '26 personality scales',
+      'Action-oriented feedback',
+      'Managerial potential analysis'
+    ],
+    benefits: [
+      'Enhance leadership effectiveness',
+      'Identify high-potential talent',
+      'Facilitate executive coaching',
+      'Improve management performance'
+    ],
+    bestFor: 'Executives, Managers, Leadership Development',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30-45 mins',
+    methodology: 'Normative personality assessment',
+    useCase: ['Development', 'Coaching', 'Selection'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI260,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/67bfb7742e3125dacc01b1a19df32d57b56740f4789d3794865882653229f3f7"
+  },
+  {
+    id: 'cpi-260-coaching-leaders',
+    name: 'CPI 260® Coaching Report for Leaders',
+    provider: 'The Myers-Briggs Company',
+    category: 'Leadership',
+    price: 170.00,
+    description: 'An advanced leadership development tool that provides a detailed analysis of an individual\'s leadership strengths and areas for development, specifically designed for executive coaching and high-level leadership programs.',
+    whatItMeasures: 'Leadership competencies, interpersonal effectiveness, and self-management through the lens of the California Psychological Inventory.',
+    features: [
+      'Executive coaching framework',
+      'Comparison to top executive benchmarks',
+      'Actionable development planning',
+      'Deep behavioral insights'
+    ],
+    benefits: [
+      'Accelerate executive development',
+      'Improve leadership impact',
+      'Facilitate high-level coaching',
+      'Identify strategic leadership gaps'
+    ],
+    bestFor: 'Executive Coaching, High-Potential Programs, C-Suite Development',
+    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30-45 mins',
+    methodology: 'Normative personality assessment (CPI)',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI260,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/7bc3cd315c7939a2b6f70610039134c1b547694681a0fc6649db2c2280dfb6de"
+  },
+  {
+    id: 'cpi-260-combined',
+    name: 'CPI 260® Combined Client/Coaching Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Leadership',
+    price: 235.00,
+    description: 'The most comprehensive CPI 260 option, providing both the Client Feedback Report and the Coaching Report for Leaders in a single package. Ideal for deep-dive executive development.',
+     whatItMeasures: '26 personality scales mapped to leadership competencies and managerial potential.',
+    features: [
+      'Client Feedback Report included',
+      'Coaching Report for Leaders included',
+      'Comprehensive 26-scale analysis',
+      'Executive benchmark comparison'
+    ],
+    benefits: [
+      'Maximum depth of insight',
+      'Dual-perspective reporting',
+      'Integrated development roadmap',
+      'Optimal for high-stakes coaching'
+    ],
+    bestFor: 'Executive Coaching, C-Suite Development, High-Potential Programs',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30-45 mins',
+    methodology: 'Normative personality assessment (CPI)',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI260,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ea76df7a8fef8938156c6fd2680cd644dc19c17105eec0c5dca15f079b3c434e"
+  },
+
+  // --- CPI 434 ---
+  {
+    id: 'cpi-434-profile',
+    name: 'CPI 434™ Profile Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 92.00,
+    description: 'A fundamental personality profile using the full 434-item California Psychological Inventory. It provides scores on 20 folk scales that predict how people will behave in social and work environments.',
+    whatItMeasures: '20 Folk Scales across 4 classes: Interpersonal Effectiveness, Intrapersonal Values, Intellectual/Academic efficiency, and Personal Style.',
+    features: [
+      'Full 434-item validity',
+      '20 Folk Scale scores',
+      'Graphic profile visualization',
+      'Benchmark data included'
+    ],
+    benefits: [
+      'High-resolution behavioral data',
+      'Standardized personality metrics',
+      'Facilitate selection screening',
+      'Identify work-style tendencies'
+    ],
+    bestFor: 'Recruitment screening, Individual development, HR Professionals',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '45-60 mins',
+    methodology: 'Comprehensive personality inventory',
+    useCase: ['Selection', 'Development'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI434,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/a00925c6e227f4653766202d5569891bc218186652b2bccf052ac8c461aeb0c1"
+  },
+  {
+    id: 'cpi-434-narrative',
+    name: 'CPI 434™ Narrative Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 170.00,
+    description: 'Includes the full Profile Report plus a detailed narrative interpretation of the scores, providing deeper insights into the individual\'s behavior, motivation, and social interaction.',
+    whatItMeasures: 'Full CPI 434 metrics with accompanying behavioral descriptions and qualitative analysis.',
+    features: [
+      'Interpretive text descriptions',
+      'Social and work behavioral analysis',
+      'Strengths and blind spots',
+      'Academic and vocational predictors'
+    ],
+    benefits: [
+      'Clearer understanding of data',
+      'Actionable behavioral feedback',
+      'Support coaching conversations',
+      'Reduce interpretation bias'
+    ],
+    bestFor: 'Management Development, Executive Coaching, Talent Strategy',
+    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '45-60 mins',
+    methodology: 'Interpretive personality inventory',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI434,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6e7c51b23b935a793f052741d13f3060f532b4449154bc2b783512fecbd22fb9"
+  },
+  {
+    id: 'cpi-434-configural',
+    name: 'CPI 434™ Configural Analysis Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 185.00,
+    description: 'The most advanced report for the CPI 434. It analyzes how different scale scores interact (configural analysis), offering highly nuanced predictions about complex social and organizational behavior.',
+    whatItMeasures: 'Pattern analysis of Folk Scales, specialized indices, and interaction effects of personality variables.',
+    features: [
+      'Deep pattern analysis',
+      'Complex behavior prediction',
+      'Leadership and social maturity data',
+      'Expert-level interpretation'
+    ],
+    benefits: [
+      'Unmatched depth of insight',
+      'Identifies subtle behavioral risks',
+      'Precision selection data',
+      'High-level strategic talent data'
+    ],
+    bestFor: 'C-Suite selection, Specialized high-risk roles, Advanced clinical/HR use',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '45-60 mins',
+    methodology: 'Pattern-based configural analysis',
+    useCase: ['Selection', 'Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_CPI434,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/088f8af5f300607e500f847e02864fe529ead194456ec08db0e4766100782b8d"
+  },
+
+  // --- TKI ---
+  {
+    id: 'tki-profile-interpretive',
+    name: 'TKI Profile and Interpretive Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Effectiveness',
+    price: 90.00,
+    description: 'The world\'s best-selling conflict management tool. It identifies an individual\'s preferred conflict-handling style and provides guidance for more effective resolution.',
+    whatItMeasures: 'Five conflict-handling modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating.',
+    features: [
+      'Personal conflict style profile',
+      'Interpretive guidance for each mode',
+      'Situational appropriateness analysis',
+      'Conflict resolution strategies'
+    ],
+    benefits: [
+      'Improve team communication',
+      'Reduce workplace friction',
+      'Navigate difficult conversations effectively',
+      'Increase personal and team productivity'
+    ],
+    bestFor: 'Conflict Management, Team Building, Management Development',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15-20 mins',
+    methodology: 'Self-report forced-choice questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_TKI,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ff5217c6155864cc055e37ded7d955e12608baa6c0fb83fafd71fdd6fc9a65a2"
+  },
+
+  // --- WORK ENGAGEMENT PROFILE ---
+  {
+    id: 'work-engagement-profile-interpretive',
+    name: 'Work Engagement Profile Interpretive Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Personality',
+    price: 85.00,
+    description: 'Measures the intrinsic rewards that drive employee engagement. This report helps individuals and managers understand how to boost energy, passion, and commitment at work.',
+    whatItMeasures: 'Four intrinsic rewards: Meaningfulness, Choice, Competence, and Progress.',
+    features: [
+      'Intrinsic reward scoring',
+      'Current engagement level analysis',
+      'Personalized development tips',
+      'Engagement improvement roadmap'
+    ],
+    benefits: [
+      'Increase employee retention',
+      'Identify and address burnout risk',
+      'Empower individuals to manage their own engagement',
+      'Drive high-performance culture'
+    ],
+    bestFor: 'Employee Retention, Engagement Surveys, Career Development',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '10-15 mins',
+    methodology: 'Self-report engagement assessment',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_WEP,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/c68c3cd19af1a6f863ec6bae70d1b8975d0b65760ffb9eec838eb604e979a0f3"
+  },
 
   // --- LHH / OTHER ---
   {
@@ -363,7 +661,7 @@ export const ASSESSMENTS: Assessment[] = [
     category: 'Leadership',
     price: 60.00,
     description: 'Includes standard HPI and HDS with the Your Resilience Report.',
-    whatItMeasures: 'Personality traits related to handling stress and change.',
+     whatItMeasures: 'Personality traits related to handling stress and change.',
     features: ['HPI & HDS insights', 'Resilience score', 'Coping strategies'],
     benefits: ['Build personal resilience', 'Navigate organizational change'],
     bestFor: 'Employees undergoing change',
@@ -704,7 +1002,7 @@ export const ASSESSMENTS: Assessment[] = [
     features: ['High difficulty ceiling', 'Executive norms'],
     benefits: ['Screen top-tier talent', 'Ensure cognitive capability'],
     bestFor: 'C-Suite, Directors',
-    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '18 mins',
     methodology: 'Timed aptitude',
     useCase: ['Hiring', 'Selection'],
@@ -961,7 +1259,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt: 'Stop guessing who is ready for the C-Suite. Use objective assessment data to build a robust pipeline of future-ready leaders.',
     category: 'Succession Planning',
     date: 'Jul 22, 2024',
-    image: 'https://images.unsplash.com/photo-1507537297725-24a1c434c4b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1507537297725-24a1c434c4b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
     author: 'David Thorne',
     readTime: '6 min read',
     content: `

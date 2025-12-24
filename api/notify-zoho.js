@@ -66,6 +66,60 @@ const PRODUCT_CONFIG = {
   'Strong Interest Inventory® Profile Report': {
     type: 'strong_profile',
     link: 'https://online.cpp.com/en/index.aspx?R=STRONG_PROFILE_TEST',
+  },
+
+  // 12. Strong Profile and Interpretive Report
+  'Strong Profile and Interpretive Report': {
+    type: 'strong_profile_interpretive',
+    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_INTERPRETIVE_TEST',
+  },
+
+  // 13. CPI 260® Client Feedback Report
+  'CPI 260® Client Feedback Report': {
+    type: 'cpi_260_client',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_CLIENT_FEEDBACK_TEST',
+  },
+
+  // 14. CPI 260® Coaching Report for Leaders
+  'CPI 260® Coaching Report for Leaders': {
+    type: 'cpi_260_coaching',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COACHING_REPORT_TEST',
+  },
+
+  // 15. CPI 260® Combined Client/Coaching Report
+  'CPI 260® Combined Client/Coaching Report': {
+    type: 'cpi_260_combined',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COMBINED_TEST',
+  },
+
+  // 16. CPI 434™ Profile Report
+  'CPI 434™ Profile Report': {
+    type: 'cpi_434_profile',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_PROFILE_TEST',
+  },
+
+  // 17. CPI 434™ Narrative Report
+  'CPI 434™ Narrative Report': {
+    type: 'cpi_434_narrative',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_NARRATIVE_TEST',
+  },
+
+  // 18. CPI 434™ Configural Analysis Report
+  'CPI 434™ Configural Analysis Report': {
+    type: 'cpi_434_configural',
+    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_CONFIGURAL_TEST',
+  },
+
+  // 19. TKI Profile and Interpretive Report
+  'TKI Profile and Interpretive Report': {
+    type: 'tki_profile',
+    link: 'https://online.cpp.com/en/index.aspx?R=TKI_PROFILE_TEST',
+  },
+
+  // 20. Work Engagement Profile Interpretive Report
+  'Work Engagement Profile Interpretive Report': {
+    type: 'work_engagement',
+    link: 'https://online.cpp.com/en/index.aspx?R=WORK_ENGAGEMENT_PROFILE_TEST',
   }
 };
 
