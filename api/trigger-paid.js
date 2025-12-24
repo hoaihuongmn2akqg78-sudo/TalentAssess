@@ -80,6 +80,34 @@ const PRODUCT_CONFIG = {
   'Work Engagement Profile Interpretive Report': {
     type: 'work_engagement',
     link: 'https://online.cpp.com/en/index.aspx?R=WORK_ENGAGEMENT_PROFILE_TEST',
+  },
+  'MBTI® Step I™ - Interpretive Report': {
+    type: 'mbti_step1_interpretive',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_INTERPRETIVE_TEST',
+  },
+  'MBTI® Step I™ - Career Report': {
+    type: 'mbti_step1_career',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CAREER_TEST',
+  },
+  'MBTI® Step I™ - Conflict Style Report': {
+    type: 'mbti_step1_conflict',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CONFLICT_TEST',
+  },
+  'MBTI® Step I™ - Communication Style Report': {
+    type: 'mbti_step1_communication',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_COMMUNICATION_TEST',
+  },
+  'MBTI® Step I™ - Decision-Making Style Report': {
+    type: 'mbti_step1_decision',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_DECISION_TEST',
+  },
+  'MBTI® Step I™ - Stress Management Report': {
+    type: 'mbti_step1_stress',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_STRESS_TEST',
+  },
+  'MBTI® Step I™ - Healthcare Professionals Report': {
+    type: 'mbti_step1_healthcare',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_HEALTHCARE_TEST',
   }
 };
 

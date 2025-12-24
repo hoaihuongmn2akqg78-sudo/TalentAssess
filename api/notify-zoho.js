@@ -120,6 +120,48 @@ const PRODUCT_CONFIG = {
   'Work Engagement Profile Interpretive Report': {
     type: 'work_engagement',
     link: 'https://online.cpp.com/en/index.aspx?R=WORK_ENGAGEMENT_PROFILE_TEST',
+  },
+
+  // 21. MBTI® Step I™ - Interpretive Report
+  'MBTI® Step I™ - Interpretive Report': {
+    type: 'mbti_step1_interpretive',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_INTERPRETIVE_TEST',
+  },
+
+  // 22. MBTI® Step I™ - Career Report
+  'MBTI® Step I™ - Career Report': {
+    type: 'mbti_step1_career',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CAREER_TEST',
+  },
+
+  // 23. MBTI® Step I™ - Conflict Style Report
+  'MBTI® Step I™ - Conflict Style Report': {
+    type: 'mbti_step1_conflict',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CONFLICT_TEST',
+  },
+
+  // 24. MBTI® Step I™ - Communication Style Report
+  'MBTI® Step I™ - Communication Style Report': {
+    type: 'mbti_step1_communication',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_COMMUNICATION_TEST',
+  },
+
+  // 25. MBTI® Step I™ - Decision-Making Style Report
+  'MBTI® Step I™ - Decision-Making Style Report': {
+    type: 'mbti_step1_decision',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_DECISION_TEST',
+  },
+
+  // 26. MBTI® Step I™ - Stress Management Report
+  'MBTI® Step I™ - Stress Management Report': {
+    type: 'mbti_step1_stress',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_STRESS_TEST',
+  },
+
+  // 27. MBTI® Step I™ - Healthcare Professionals Report
+  'MBTI® Step I™ - Healthcare Professionals Report': {
+    type: 'mbti_step1_healthcare',
+    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_HEALTHCARE_TEST',
   }
 };
 
