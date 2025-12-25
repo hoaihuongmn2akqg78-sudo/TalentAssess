@@ -52,7 +52,8 @@ const InfoPage: React.FC<InfoPageProps> = ({ pageType, onBack, onNavigate }) => 
                   <p className="bg-amber-50 p-4 border-l-4 border-amber-400 text-sm italic">
                     Note: Please check your Junk/Spam folders if you do not see an email from "The Myers-Briggs Company", "Hogan Assessments", or "LHH Indochine".
                   </p>
-                </div> section>
+                </div>
+              </section>
 
               <section>
                 <div className="flex items-center gap-4 mb-4">
@@ -74,7 +75,7 @@ const InfoPage: React.FC<InfoPageProps> = ({ pageType, onBack, onNavigate }) => 
                   <p>Once you complete the survey, your results are processed. Depending on the product, your report will be emailed to you as a PDF within 1-2 working days.</p>
                   <p>If you purchased an <strong>Expert Debriefing</strong>, one of our consultants will contact you to schedule a 60-minute feedback session to help you interpret the results and build an action plan.</p>
                 </div>
-              </section> section>
+              </section>
             </div>
           </div>
         );
