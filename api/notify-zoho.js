@@ -11,13 +11,13 @@ const PRODUCT_CONFIG = {
   // 2. MBTI® Step I - Profile Report
   'MBTI® Step I - Profile Report': {
     type: 'mbti_step1_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_PROFILE_TEST', 
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=3291889b-a3e0-f011-8d4d-000d3a5d14c2', 
   },
 
   // 3. MBTI® Step I - Interpretive Report for Organizations
   'MBTI® Step I - Interpretive Report for Organizations': {
     type: 'mbti_step1_iro',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_IRO_TEST', 
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
   },
 
   // 4. MBTI® Step II - Profile Report
@@ -59,7 +59,7 @@ const PRODUCT_CONFIG = {
   // 10. iStartStrong
   'iStartStrong': {
     type: 'istartstrong',
-    link: 'https://online.cpp.com/en/index.aspx?R=ISTARTSTRONG_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=7793da18-60e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 11. Strong Interest Inventory® Profile Report
@@ -113,55 +113,55 @@ const PRODUCT_CONFIG = {
   // 19. TKI Profile and Interpretive Report
   'TKI Profile and Interpretive Report': {
     type: 'tki_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=TKI_PROFILE_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=c4d6d2b5-64e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 20. Work Engagement Profile Interpretive Report
   'Work Engagement Profile Interpretive Report': {
     type: 'work_engagement',
-    link: 'https://online.cpp.com/en/index.aspx?R=WORK_ENGAGEMENT_PROFILE_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=60ec724b-65e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 21. MBTI® Step I™ - Interpretive Report
   'MBTI® Step I™ - Interpretive Report': {
     type: 'mbti_step1_interpretive',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_INTERPRETIVE_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=3f453449-a2e0-f011-8d4d-000d3a5d14c2',
   },
 
   // 22. MBTI® Step I™ - Career Report
   'MBTI® Step I™ - Career Report': {
     type: 'mbti_step1_career',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CAREER_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59a3f272-aae0-f011-8d4d-000d3a5d14c2',
   },
 
   // 23. MBTI® Step I™ - Conflict Style Report
   'MBTI® Step I™ - Conflict Style Report': {
     type: 'mbti_step1_conflict',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_CONFLICT_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=e2c5e162-ace0-f011-8d4d-000d3a5d14c2',
   },
 
   // 24. MBTI® Step I™ - Communication Style Report
   'MBTI® Step I™ - Communication Style Report': {
     type: 'mbti_step1_communication',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_COMMUNICATION_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=15be56b4-41e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 25. MBTI® Step I™ - Decision-Making Style Report
   'MBTI® Step I™ - Decision-Making Style Report': {
     type: 'mbti_step1_decision',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_DECISION_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=9c9741ea-47e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 26. MBTI® Step I™ - Stress Management Report
   'MBTI® Step I™ - Stress Management Report': {
     type: 'mbti_step1_stress',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_STRESS_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=d4b1c7dc-48e1-f011-8d4d-000d3a5d14c2',
   },
 
   // 27. MBTI® Step I™ - Healthcare Professionals Report
   'MBTI® Step I™ - Healthcare Professionals Report': {
     type: 'mbti_step1_healthcare',
-    link: 'https://online.cpp.com/en/index.aspx?R=MBTI_STEP1_HEALTHCARE_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=35227ea9-5ee1-f011-8d4d-000d3a5d14c2',
   }
 };
 
