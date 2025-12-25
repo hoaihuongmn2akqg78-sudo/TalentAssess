@@ -8,13 +8,15 @@ import ProductDetailModal from './components/ProductDetailModal';
 import HomePage from './components/HomePage';
 import BrowsePage from './components/BrowsePage';
 import InsightsPage from './components/InsightsPage';
+import InfoPage, { InfoPageType } from './components/InfoPage';
 import { ASSESSMENTS, BLOG_POSTS } from './constants';
 import { Assessment, CartItem } from './types';
 import { CheckCircle2 } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'browse' | 'insights'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'browse' | 'insights' | 'info'>('home');
   const [browseCategory, setBrowseCategory] = useState<string | undefined>(undefined);
+  const [infoPageType, setInfoPageType] = useState<InfoPageType>('guide');
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [comparisonList, setComparisonList] = useState<string[]>([]);
@@ -103,6 +105,12 @@ const App: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToInfo = (type: InfoPageType) => {
+      setInfoPageType(type);
+      setCurrentView('info');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const selectedAssessments = ASSESSMENTS.filter(a => comparisonList.includes(a.id));
 
   return (
@@ -147,6 +155,14 @@ const App: React.FC = () => {
             />
         )}
 
+        {currentView === 'info' && (
+            <InfoPage 
+                pageType={infoPageType} 
+                onBack={handleNavigateToHome} 
+                onNavigate={setInfoPageType}
+            />
+        )}
+
         {/* Comparison Sticky Bar (Global) */}
         {comparisonList.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#BCCADE] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] py-4 px-6 md:px-12 flex justify-between items-center animate-in slide-in-from-bottom duration-300">
@@ -184,7 +200,7 @@ const App: React.FC = () => {
               Looking for volume licensing or custom integration? Our consultants are ready to design a tailored solution for your organization.
             </p>
             <a 
-              href="https://forms.zohopublic.com/info3752/form/ClientDetails1/formperma/D3uj-aWM_H8MKjcxh60Uif-3EOdQNmVe9aIw1-vb6IU"
+              href="https://forms.zohopublic.com/info3752/form/AssessmentConsultationRequest/formperma/7Y_c_uumlzL0_oSbyj5TXg1IO9P1JEI0R0aiAsu5-u0"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-[#0C3963] text-white px-10 py-4 rounded font-bold hover:bg-[#2C4D81] transition-colors shadow-lg uppercase tracking-wide text-sm"
@@ -208,19 +224,19 @@ const App: React.FC = () => {
           <div>
             <h4 className="font-bold mb-6 text-[#E0E9F4] uppercase tracking-wider text-xs">Solutions</h4>
             <ul className="space-y-3 text-sm text-[#BCCADE]">
-              <li><a href="#" className="hover:text-white transition-colors">Talent Acquisition</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Leadership Development</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Team Effectiveness</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Career Transition</a></li>
+              <li><button onClick={() => handleNavigateToBrowse('Aptitude')} className="hover:text-white transition-colors">Talent Acquisition</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Leadership')} className="hover:text-white transition-colors">Leadership Development</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Team Effectiveness')} className="hover:text-white transition-colors">Team Effectiveness</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Personality')} className="hover:text-white transition-colors">Career Transition</button></li>
             </ul>
           </div>
            <div>
             <h4 className="font-bold mb-6 text-[#E0E9F4] uppercase tracking-wider text-xs">Support</h4>
             <ul className="space-y-3 text-sm text-[#BCCADE]">
-              <li><a href="#" className="hover:text-white transition-colors">Assessment Guide</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Technical Support</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><button onClick={() => handleNavigateToInfo('guide')} className="hover:text-white transition-colors">Assessment Guide</button></li>
+              <li><button onClick={() => handleNavigateToInfo('support')} className="hover:text-white transition-colors">Technical Support</button></li>
+              <li><button onClick={() => handleNavigateToInfo('privacy')} className="hover:text-white transition-colors">Privacy Policy</button></li>
+              <li><button onClick={() => handleNavigateToInfo('terms')} className="hover:text-white transition-colors">Terms of Service</button></li>
             </ul>
           </div>
            <div>
