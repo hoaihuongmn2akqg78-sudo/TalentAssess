@@ -6,10 +6,11 @@ import { ArrowRight, User, Users, Briefcase, Zap, Brain, Layers, CheckCircle2, F
 interface HomePageProps {
   onStartWizard: (type: 'individual' | 'organization' | null) => void;
   onNavigateToBrowse: (category?: string) => void;
+  onViewDetails: (assessment: Assessment) => void;
   heroAssessments: Assessment[];
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, heroAssessments }) => {
+const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, onViewDetails, heroAssessments }) => {
   
   const categories = [
     { 
@@ -157,7 +158,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
                     </ul>
                     <div className="flex flex-col gap-3 mt-auto">
                       <button 
-                        onClick={() => onNavigateToBrowse(item.category)} // In a real app, go to detail page
+                        onClick={() => onViewDetails(item)}
                         className="w-full py-3 bg-[#0C3963] text-white font-bold rounded hover:bg-[#2C4D81] transition-colors"
                       >
                         Learn More

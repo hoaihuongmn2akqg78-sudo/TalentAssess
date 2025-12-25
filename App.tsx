@@ -122,6 +122,7 @@ const App: React.FC = () => {
             <HomePage 
                 onStartWizard={openWizard}
                 onNavigateToBrowse={handleNavigateToBrowse}
+                onViewDetails={(item) => setSelectedProduct(item)}
                 heroAssessments={heroAssessments}
             />
         )}
