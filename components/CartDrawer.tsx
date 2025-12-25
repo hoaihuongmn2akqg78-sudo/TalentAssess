@@ -87,7 +87,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
   // Hàm kiểm tra form (Validate)
   const validateOrder = () => {
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim()) {
       alert("Please fill in all buyer information fields.");
       return false;
     }
@@ -106,13 +106,23 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
   const processOrderFinal = async (status: string, extraData: any = {}) => {
     setIsProcessing(true);
     try {
+      // FIX: If buyer is the sole participant, populate participant info from buyer data
+      let finalParticipants = [...participants];
+      if (isBuyerParticipant && totalItems === 1 && finalParticipants.length === 1) {
+          finalParticipants[0] = {
+            ...finalParticipants[0],
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+            email: formData.email.trim()
+          };
+      }
+
       const orderData = {
-        customer_name: `${formData.firstName} ${formData.lastName}`,
-        customer_email: formData.email,
+        customer_name: `${formData.firstName} ${formData.lastName}`.trim(),
+        customer_email: formData.email.trim(),
         total_amount: total,
         payment_method: paymentMethod,
         items: cart, 
-        participants: participants, 
+        participants: finalParticipants, 
         include_debrief: includeDebrief,
         status: status,
         payment_details: extraData,
