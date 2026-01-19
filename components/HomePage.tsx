@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from './Hero';
 import { Assessment } from '../types';
-import { ArrowRight, User, Users, Briefcase, Zap, Brain, Layers, CheckCircle2, FileText } from 'lucide-react';
+import { ArrowRight, User, Users, Briefcase, Brain, CheckCircle2, FileText } from 'lucide-react';
 
 interface HomePageProps {
   onStartWizard: (type: 'individual' | 'organization' | null) => void;
@@ -37,18 +37,6 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
       desc: 'Measure reasoning ability',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
-    { 
-      name: 'Learning Agility', 
-      icon: Zap, 
-      desc: 'Predict future potential',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    { 
-      name: '360 Feedback', 
-      icon: Layers, 
-      desc: 'Gather multi-rater insights',
-      image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
   ];
 
   return (
@@ -69,7 +57,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {categories.map((cat) => (
             <button 
               key={cat.name}

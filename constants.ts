@@ -16,12 +16,6 @@ const FAQ_MBTI = [
   { question: "How long is the report valid?", answer: "Personality preferences tend to be stable over time. However, we recommend re-taking the assessment if you undergo significant life changes or haven't taken it in 3+ years." }
 ];
 
-const FAQ_FIRO = [
-  { question: "What does FIRO stand for?", answer: "FIRO stands for Fundamental Interpersonal Relations Orientation. It measures your interpersonal needs and how they influence your communication style." },
-  { question: "How is FIRO-Business different from the MBTI?", answer: "While MBTI focuses on how you perceive information and make decisions, FIRO-Business focuses specifically on how you interact with others and your needs for inclusion, control, and affection in a workplace context." },
-  { question: "Is this assessment good for teams?", answer: "Yes, it is one of the most powerful tools for team building, as it reveals the underlying 'interpersonal gaps' that often cause friction and misunderstanding in groups." }
-];
-
 const FAQ_HOGAN = [
   { question: "Is this assessment suitable for hiring?", answer: "Yes, Hogan assessments are scientifically validated to predict workplace performance and are widely used for high-stakes selection and promotion decisions." },
   { question: "What if I get interrupted while taking it?", answer: "The system saves your progress automatically. You can log back in and resume exactly where you left off." },
@@ -34,31 +28,10 @@ const FAQ_APTITUDE = [
   { question: "What happens if my internet disconnects?", answer: "The system is designed to handle interruptions. If you lose connection, close the browser and click the link again to resume once your connection is stable." }
 ];
 
-const FAQ_360 = [
-  { question: "Are my raters anonymous?", answer: "Yes. Ratings are aggregated by group (e.g., Peers, Direct Reports) to protect anonymity, with the exception of the Manager category." },
-  { question: "How many raters should I invite?", answer: "We recommend inviting 6-10 raters across different categories to ensure a representative and reliable view of your performance." },
-  { question: "How long does the process take?", answer: "While the survey takes 20 minutes, the full 360 process usually spans 2-3 weeks to allow all raters enough time to provide thoughtful feedback." }
-];
-
 const FAQ_ISTARTSTRONG = [
   { question: "What is iStartStrong?", answer: "iStartStrong is a personalized career report based on the Strong Interest Inventory. It helps you identify your interests and matches them with potential career paths and educational opportunities." },
   { question: "Who is it for?", answer: "It is ideal for high school and college students, as well as adults looking to pivot careers or find more fulfillment in their current field." },
   { question: "How long does it take?", answer: "The assessment typically takes about 15-20 minutes to complete." }
-];
-
-const FAQ_STRONG = [
-  { question: "How accurate is the Strong Interest Inventory?", answer: "The Strong Interest Inventory is one of the most widely used and respected career planning tools in the world, with over 80 years of research backing its validity." },
-  { question: "Does it tell me what I should be when I grow up?", answer: "It provides a clear picture of your interests and suggests careers that people with similar interests find satisfying. It is a guide for exploration, not a definitive command." }
-];
-
-const FAQ_CPI260 = [
-  { question: "What does CPI 260 stand for?", answer: "CPI stands for California Psychological Inventory. The '260' refers to the 260 items in this condensed version of the original assessment." },
-  { question: "How does it compare to other leadership tools?", answer: "Unlike many tools that rely on self-perception, the CPI 260 compares your answers to a large database of high-performing leaders, providing a more objective benchmark of your leadership potential." }
-];
-
-const FAQ_CPI434 = [
-  { question: "What is the CPI 434™?", answer: "The CPI 434 is the full, 434-item version of the California Psychological Inventory. It provides the most detailed and comprehensive personality profile available in the CPI family." },
-  { question: "Why choose 434 over 260?", answer: "The 434-item version provides additional data on specialized scales and a more nuanced 'Configural Analysis' of how different traits interact, which is not as granular in the condensed 260 version." }
 ];
 
 const FAQ_TKI = [
@@ -257,30 +230,6 @@ export const ASSESSMENTS: Assessment[] = [
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb5e3b25d9460e296dae330045e8d72e17f949bc12eee84272f098b1a61f8a97"
   },
   {
-    id: 'mbti-step2-profile',
-    name: 'MBTI® Step II - Profile Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 110.00,
-    description: 'Delves deeper into the 20 facets of the MBTI preferences for a granular view of personality.',
-    whatItMeasures: '20 Facets (5 per preference pair).',
-    features: ['Facet-level scoring', 'Personalized graphic layout', 'Nuanced type description'],
-    benefits: ['Explain unique individual differences', 'Deepen coaching conversations'],
-    bestFor: 'Coaching, Leadership',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '45 mins',
-    methodology: 'Extended questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: [
-      ...FAQ_MBTI,
-      { question: "Do I need to take Step I first?", answer: "No, the Step II questionnaire covers both Step I and Step II items in a single sitting." },
-      { question: "Why take Step II?", answer: "Step II explains why two people with the same 4-letter type can behave very differently. It reveals the unique 'fingerprint' of your personality." }
-    ],
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/5fc5c42715c72b3f07a468ee3acc7f78068dbd3489afd4665b736479fd04c21a"
-  },
-  {
     id: 'mbti-step2-interpretive',
     name: 'MBTI® Step II - Interpretive Report',
     provider: 'The Myers-Briggs Company',
@@ -321,134 +270,9 @@ export const ASSESSMENTS: Assessment[] = [
     guidance: GUIDANCE_APOLLO,
     faq: [
       { question: "Is Apollo suitable for all job levels?", answer: "Yes, Apollo compares candidates against different norm groups (e.g., Managers, Sales, Grads) to ensure relevance across all organizational levels." },
-      { question: "Does it detect faking?", answer: "Yes, Apollo has built-in social desirability scales to identify if a candidate is trying to present an overly positive image." }
+      { question: "Does it detect faking?", answer: "Yes, Apollo has built-in social desirability scales to identify if a candidate is trying to present an over-positive image." }
     ],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/de054c6aeba0148688b8692e740e5108df64e768b69ac0205b35a9915adf65f8"
-  },
-
-  // --- MYERS-BRIGGS FIRO ---
-  {
-    id: 'firo-b-profile',
-    name: 'FIRO-B® Profile Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 85.00,
-    description: 'The classic FIRO-B assessment providing deep insights into how your interpersonal needs influence your communication and relationships.',
-    whatItMeasures: 'The three interpersonal needs (Inclusion, Control, Affection) across two dimensions: Expressed and Wanted behaviors.',
-    features: [
-      'Total Need score overview',
-      'Need for Inclusion, Control, and Affection',
-      'Expressed vs. Wanted behavior scores',
-      'Interaction pattern analysis'
-    ],
-    benefits: [
-      'Understand your social and relational needs',
-      'Improve interpersonal communication',
-      'Build stronger, more collaborative relationships',
-      'Identify potential blind spots in social interactions'
-    ],
-    bestFor: 'Individual Coaching, Relationship Building, Self-Awareness',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '15-20 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_FIRO,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/8524af5bc08af61eb20acd2e8ac785d76539b79adb72b298f09e2370c32a8f32"
-  },
-  {
-    id: 'firo-b-iro',
-    name: 'FIRO-B® Interpretive Report for Organizations',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 120.00,
-    description: 'A comprehensive report that applies the FIRO-B framework to the workplace, focusing on how interpersonal needs impact professional relationships, leadership style, and organizational culture.',
-    whatItMeasures: 'Interpersonal needs in a workplace context: Inclusion, Control, and Affection across Expressed and Wanted behaviors.',
-    features: [
-      'Detailed organizational application',
-      'Team dynamic analysis',
-      'Leadership behavior insights',
-      'Relationship development strategies'
-    ],
-    benefits: [
-      'Enhance organizational communication',
-      'Identify and resolve team friction points',
-      'Develop more effective management styles',
-      'Improve culture through behavioral awareness'
-    ],
-    bestFor: 'Managers, Teams, Organizational Development',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '20 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: [
-      ...FAQ_FIRO,
-      { question: "How does this differ from the basic Profile Report?", answer: "While the Profile Report gives you your scores, the Interpretive Report for Organizations explains exactly how those scores manifest in professional environments and team settings." }
-    ],
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/45a20c40df0e4a005580f1c0b6ccecb9d6f448dbab774ea288a131880633b773"
-  },
-  {
-    id: 'firo-business-profile',
-    name: 'FIRO-Business® Profile',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 95.00,
-    description: 'Measures interpersonal needs in the workplace, helping individuals understand how their needs for inclusion, control, and affection influence their work style.',
-    whatItMeasures: '3 areas of interpersonal need: Inclusion, Control, and Affection (both Expressed and Wanted behaviors).',
-    features: [
-      'Interpersonal needs analysis',
-      'Communication style breakdown',
-      'Team compatibility insights',
-      'Actionable development advice'
-    ],
-    benefits: [
-      'Improve team performance and synergy',
-      'Resolve interpersonal conflict effectively',
-      'Increase self-awareness of social behavior',
-      'Enhance leadership influence and impact'
-    ],
-    bestFor: 'Team Building, Conflict Management, Leadership Development',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '15-20 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_FIRO,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/8a4771523474442ff7ae28bebbf96ce37038712b7a3c6e8946cb78aeb090af2d"
-  },
-  {
-    id: 'firo-business-leadership',
-    name: 'FIRO-Business® Leadership Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Leadership',
-    price: 115.00,
-    description: 'Designed specifically for leaders, this report provides actionable insights into a leader’s interpersonal needs and their impact on leadership style and performance.',
-    whatItMeasures: 'Leadership interpersonal needs: Inclusion, Control, and Affection within a high-stakes management context.',
-    features: [
-      'Leadership behavioral summary',
-      'Influence and delegation styles',
-      'Communication and feedback strategies',
-      'Conflict management in leadership'
-    ],
-    benefits: [
-      'Enhance leadership self-awareness',
-      'Identify potential leadership interpersonal gaps',
-      'Improve executive presence and team influence',
-      'Provide targeted executive coaching roadmaps'
-    ],
-    bestFor: 'Executive Leaders, Senior Managers, Leadership Coaching',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '20 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_FIRO,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ec76cc2c9f916f8da7136b22c418865c5a5d79806439f6b2b8f4cd8c197e832f"
   },
 
   // --- ISTARTSTRONG ---
@@ -481,252 +305,6 @@ export const ASSESSMENTS: Assessment[] = [
     guidance: GUIDANCE_MBTI,
     faq: FAQ_ISTARTSTRONG,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/0bde01cc0584f68656d9d48882c74102c1d47c6ff1de3e6ac38be00f28e0b167"
-  },
-
-  // --- STRONG INTEREST INVENTORY ---
-  {
-    id: 'strong-interest-inventory-profile',
-    name: 'Strong Interest Inventory® Profile Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 55.00,
-    description: 'A comprehensive report that measures your interests in a wide range of occupations, work activities, leisure activities, and school subjects to help guide your career path.',
-    whatItMeasures: 'General Occupational Themes (RIASEC), Basic Interest Scales, Occupational Scales, and Personal Style Scales.',
-    features: [
-      'Detailed RIASEC interest code',
-      'Top 10 occupational matches',
-      'Extensive work style analysis',
-      'Leisure and education recommendations'
-    ],
-    benefits: [
-      'Gain deep insight into professional motivators',
-      'Broaden career exploration options',
-      'Align education and training with interests',
-      'Increase career satisfaction through alignment'
-    ],
-    bestFor: 'Career Exploration, Adult Career Transition, Students',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '25-30 mins',
-    methodology: 'Normative interest inventory',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_STRONG,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/81fcc9cdda36723ba792dc59aaded493338954533761af43cc6ce1ed1abe3c77"
-  },
-  {
-    id: 'strong-profile-interpretive',
-    name: 'Strong Profile and Interpretive Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 90.00,
-    description: 'The most comprehensive version of the Strong Interest Inventory, combining the detailed Profile with an expanded Interpretive Report for in-depth career analysis and guidance.',
-    whatItMeasures: 'RIASEC themes, 30 Basic Interest Scales, 130 Occupational Scales, and 5 Personal Style Scales with deep narrative interpretation.',
-    features: [
-      'Full Profile Report included',
-      'Extended Interpretive narrative',
-      'Specific career path exploration',
-      'Education and training alignment'
-    ],
-    benefits: [
-      'Maximum depth for career decision making',
-      'Nuanced understanding of work-life balance',
-      'Comprehensive roadmap for professional growth',
-      'Scientifically backed career matching'
-    ],
-    bestFor: 'Executive Career Coaching, Senior Professionals in Transition, Comprehensive Student Counseling',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30-35 mins',
-    methodology: 'Extended Normative interest inventory',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_STRONG,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/921c4f38d56df6d1abd42547b8bc8709c34be6b0d31df49fccd39cae5491f3e2"
-  },
-
-  // --- CPI 260 ---
-  {
-    id: 'cpi-260-client-feedback',
-    name: 'CPI 260® Client Feedback Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Leadership',
-    price: 130.00,
-    description: 'A comprehensive leadership assessment that compares an individual\'s results with those of top-performing managers and executives, providing actionable feedback for development.',
-    whatItMeasures: '26 scales covering interpersonal style, self-management, motivation, and thinking style.',
-    features: [
-      'Comparison with top leaders',
-      '26 personality scales',
-      'Action-oriented feedback',
-      'Managerial potential analysis'
-    ],
-    benefits: [
-      'Enhance leadership effectiveness',
-      'Identify high-potential talent',
-      'Facilitate executive coaching',
-      'Improve management performance'
-    ],
-    bestFor: 'Executives, Managers, Leadership Development',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30-45 mins',
-    methodology: 'Normative personality assessment',
-    useCase: ['Development', 'Coaching', 'Selection'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI260,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/67bfb7742e3125dacc01b1a19df32d57b56740f4789d3794865882653229f3f7"
-  },
-  {
-    id: 'cpi-260-coaching-leaders',
-    name: 'CPI 260® Coaching Report for Leaders',
-    provider: 'The Myers-Briggs Company',
-    category: 'Leadership',
-    price: 170.00,
-    description: 'An advanced leadership development tool that provides a detailed analysis of an individual\'s leadership strengths and areas for development, specifically designed for executive coaching and high-level leadership programs.',
-    whatItMeasures: 'Leadership competencies, interpersonal effectiveness, and self-management through the lens of the California Psychological Inventory.',
-    features: [
-      'Executive coaching framework',
-      'Comparison to top executive benchmarks',
-      'Actionable development planning',
-      'Deep behavioral insights'
-    ],
-    benefits: [
-      'Accelerate executive development',
-      'Improve leadership impact',
-      'Facilitate high-level coaching',
-      'Identify strategic leadership gaps'
-    ],
-    bestFor: 'Executive Coaching, High-Potential Programs, C-Suite Development',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30-45 mins',
-    methodology: 'Normative personality assessment (CPI)',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI260,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/7bc3cd315c7939a2b6f70610039134c1b547694681a0fc6649db2c2280dfb6de"
-  },
-  {
-    id: 'cpi-260-combined',
-    name: 'CPI 260® Combined Client/Coaching Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Leadership',
-    price: 235.00,
-    description: 'The most comprehensive CPI 260 option, providing both the Client Feedback Report and the Coaching Report for Leaders in a single package. Ideal for deep-dive executive development.',
-     whatItMeasures: '26 personality scales mapped to leadership competencies and managerial potential.',
-    features: [
-      'Client Feedback Report included',
-      'Coaching Report for Leaders included',
-      'Comprehensive 26-scale analysis',
-      'Executive benchmark comparison'
-    ],
-    benefits: [
-      'Maximum depth of insight',
-      'Dual-perspective reporting',
-      'Integrated development roadmap',
-      'Optimal for high-stakes coaching'
-    ],
-    bestFor: 'Executive Coaching, C-Suite Development, High-Potential Programs',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30-45 mins',
-    methodology: 'Normative personality assessment (CPI)',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI260,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ea76df7a8fef8938156c6fd2680cd644dc19c17105eec0c5dca15f079b3c434e"
-  },
-
-  // --- CPI 434 ---
-  {
-    id: 'cpi-434-profile',
-    name: 'CPI 434™ Profile Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 92.00,
-    description: 'A fundamental personality profile using the full 434-item California Psychological Inventory. It provides scores on 20 folk scales that predict how people will behave in social and work environments.',
-    whatItMeasures: '20 Folk Scales across 4 classes: Interpersonal Effectiveness, Intrapersonal Values, Intellectual/Academic efficiency, and Personal Style.',
-    features: [
-      'Full 434-item validity',
-      '20 Folk Scale scores',
-      'Graphic profile visualization',
-      'Benchmark data included'
-    ],
-    benefits: [
-      'High-resolution behavioral data',
-      'Standardized personality metrics',
-      'Facilitate selection screening',
-      'Identify work-style tendencies'
-    ],
-    bestFor: 'Recruitment screening, Individual development, HR Professionals',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '45-60 mins',
-    methodology: 'Comprehensive personality inventory',
-    useCase: ['Selection', 'Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI434,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/a00925c6e227f4653766202d5569891bc218186652b2bccf052ac8c461aeb0c1"
-  },
-  {
-    id: 'cpi-434-narrative',
-    name: 'CPI 434™ Narrative Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 170.00,
-    description: 'Includes the full Profile Report plus a detailed narrative interpretation of the scores, providing deeper insights into the individual\'s behavior, motivation, and social interaction.',
-    whatItMeasures: 'Full CPI 434 metrics with accompanying behavioral descriptions and qualitative analysis.',
-    features: [
-      'Interpretive text descriptions',
-      'Social and work behavioral analysis',
-      'Strengths and blind spots',
-      'Academic and vocational predictors'
-    ],
-    benefits: [
-      'Clearer understanding of data',
-      'Actionable behavioral feedback',
-      'Support coaching conversations',
-      'Reduce interpretation bias'
-    ],
-    bestFor: 'Management Development, Executive Coaching, Talent Strategy',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '45-60 mins',
-    methodology: 'Interpretive personality inventory',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI434,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6e7c51b23b935a793f052741d13f3060f532b4449154bc2b783512fecbd22fb9"
-  },
-  {
-    id: 'cpi-434-configural',
-    name: 'CPI 434™ Configural Analysis Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 185.00,
-    description: 'The most advanced report for the CPI 434. It analyzes how different scale scores interact (configural analysis), offering highly nuanced predictions about complex social and organizational behavior.',
-    whatItMeasures: 'Pattern analysis of Folk Scales, specialized indices, and interaction effects of personality variables.',
-    features: [
-      'Deep pattern analysis',
-      'Complex behavior prediction',
-      'Leadership and social maturity data',
-      'Expert-level interpretation'
-    ],
-    benefits: [
-      'Unmatched depth of insight',
-      'Identifies subtle behavioral risks',
-      'Precision selection data',
-      'High-level strategic talent data'
-    ],
-    bestFor: 'C-Suite selection, Specialized high-risk roles, Advanced clinical/HR use',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '45-60 mins',
-    methodology: 'Pattern-based configural analysis',
-    useCase: ['Selection', 'Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_CPI434,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/088f8af5f300607e500f847e02864fe529ead194456ec08db0e4766100782b8d"
   },
 
   // --- TKI ---
@@ -793,88 +371,6 @@ export const ASSESSMENTS: Assessment[] = [
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/c68c3cd19af1a6f863ec6bae70d1b8975d0b65760ffb9eec838eb604e979a0f3"
   },
 
-  // --- LHH / OTHER ---
-  {
-    id: 'lhh-resilience',
-    name: 'LHH Accelerate Change - Your Resilience Profile',
-    provider: 'LHH / Hogan',
-    category: 'Leadership',
-    price: 60.00,
-    description: 'Includes standard HPI and HDS with the Your Resilience Report.',
-     whatItMeasures: 'Personality traits related to handling stress and change.',
-    features: ['HPI & HDS insights', 'Resilience score', 'Coping strategies'],
-    benefits: ['Build personal resilience', 'Navigate organizational change'],
-    bestFor: 'Employees undergoing change',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'HPI + HDS',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'lhh-change-behavior',
-    name: 'LHH Change Behavior Assessment',
-    provider: 'LHH / Hogan',
-    category: 'Leadership',
-    price: 60.00,
-    description: 'Includes standard HPI and HDS with the Change Behavior Assessment Report.',
-    whatItMeasures: 'Behavioral tendencies during change initiatives.',
-    features: ['Change readiness', 'Resistance factors'],
-    benefits: ['Accelerate adoption', 'Reduce friction'],
-    bestFor: 'Change agents, Managers',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'HPI + HDS',
-    useCase: ['Development'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'lhh-leadership-contract',
-    name: 'LHH The Leadership Contract Report',
-    provider: 'LHH / Hogan',
-    category: 'Leadership',
-    price: 220.00,
-    description: 'Includes standard HPI, HDS, and MVPI with TLC Report.',
-    whatItMeasures: 'Full personality profile against leadership accountabilities.',
-    features: ['Comprehensive 3-assessment view', 'Accountability index'],
-    benefits: ['Deepen leadership commitment', 'Align values with action'],
-    bestFor: 'Senior Leaders',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '60 mins',
-    methodology: 'HPI + HDS + MVPI',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'lhh-women-leadership',
-    name: 'LHH Elevating Women in Leadership Report',
-    provider: 'LHH / Hogan',
-    category: 'Leadership',
-    price: 220.00,
-    description: 'Includes standard HPI and MVPI with the EWIL Report.',
-    whatItMeasures: 'Key strengths and values for women in leadership.',
-    features: ['Gender-neutral benchmarking', 'Strengths focus', 'Values alignment'],
-    benefits: ['Empower female leaders', 'Address specific career hurdles'],
-    bestFor: 'High-potential women',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '45 mins',
-    methodology: 'HPI + MVPI',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
-  },
-
   // --- HOGAN CORE ---
   {
     id: 'hogan-flash',
@@ -897,47 +393,7 @@ export const ASSESSMENTS: Assessment[] = [
         ...FAQ_HOGAN,
         { question: "Why is there no text?", answer: "The Flash report is designed for certified practitioners who can interpret the raw scale scores without needing generic narrative descriptions." }
     ],
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'hogan-high-potential',
-    name: 'Hogan High Potential Talent Report',
-    provider: 'Hogan Assessments',
-    category: 'Leadership',
-    price: 390.00,
-    description: 'The gold standard for identifying and developing future leaders. Identifies strengths, derailers, and drivers.',
-    whatItMeasures: 'Leadership potential across Bright Side, Dark Side, and Inside.',
-    features: ['Executive summary', 'Career development tips', 'Prioritized action plan'],
-    benefits: ['Identify top talent', 'Reduce promotion risk'],
-    bestFor: 'HiPo Programs, Succession',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '60 mins',
-    methodology: 'HPI + HDS + MVPI',
-    useCase: ['Development', 'Selection'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'hogan-insight-series',
-    name: 'Hogan Insight Series',
-    provider: 'Hogan Assessments',
-    category: 'Leadership',
-    price: 230.00,
-    description: 'Includes HPI, HDS, and MVPI reports with the Insight Series narratives.',
-    whatItMeasures: 'Self-awareness across three domains.',
-    features: ['Insight HPI', 'Insight HDS', 'Insight MVPI'],
-    benefits: ['Comprehensive self-awareness', 'Middle management development'],
-    bestFor: 'Middle Managers',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '60 mins',
-    methodology: 'HPI + HDS + MVPI',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6191208aa4352ca23b2560d96fb87eb7e2526def59b17f9baae0725a37ed03bf"
   },
   {
     id: 'hogan-eq',
@@ -957,7 +413,7 @@ export const ASSESSMENTS: Assessment[] = [
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/2632729437993b53b3dc604a7ddb7f1366445fbfaef98ddb38e18cd393762050"
   },
   {
     id: 'hogan-leader-focus',
@@ -977,72 +433,169 @@ export const ASSESSMENTS: Assessment[] = [
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN,
-    sampleReportUrl: SAMPLE_URL
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/1088c3cb777900c6f9da5abbb7ab3e24201b96eb0b1027c58b65abefc6e86856"
   },
   {
-    id: 'hogan-team-report',
-    name: 'Hogan Team Report (30 person max)',
+    id: 'hogan-career',
+    name: 'Hogan Career Report',
     provider: 'Hogan Assessments',
-    category: 'Team Effectiveness',
-    price: 1800.00,
-    description: 'Analyzes team composition, roles, and potential fracture lines.',
-    whatItMeasures: 'Team aggregate scores on HPI, HDS, MVPI.',
-    features: ['Team Roles', 'Derailment risks', 'Team culture values'],
-    benefits: ['Optimize team performance', 'Understand group dynamics'],
-    bestFor: 'Executive Teams, Project Teams',
+    category: 'Personality',
+    price: 100.00,
+    description: 'Provides insights into how an individual’s personality will impact their career success and workplace performance.',
+    whatItMeasures: 'Professional strengths, potential derailers, and career drivers.',
+    features: ['HPI Scale interpretation', 'Career development tips', 'Job fit indicators'],
+    benefits: ['Better career alignment', 'Personalized growth plan', 'Identify key strengths'],
+    bestFor: 'Job seekers, Early career professionals',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI based report',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/a1078325e0d09ca9a45fc14c5a756a16594db4bb5ca9f6a71aa83012a83e6dcd"
+  },
+  {
+    id: 'hogan-challenge',
+    name: 'Hogan Challenge Report',
+    provider: 'Hogan Assessments',
+    category: 'Leadership',
+    price: 240.00,
+    description: 'Explores the "dark side" of personality—tendencies that emerge under stress and can derail leadership effectiveness.',
+    whatItMeasures: '11 personality derailers including Arrogance, Volatility, and Caution.',
+    features: ['Dark side behavioral profile', 'Risk mitigation strategies', 'Strategic self-awareness'],
+    benefits: ['Prevent leadership failure', 'Improve team relations', 'Manage stress reactions'],
+    bestFor: 'Senior Leaders, High-potentials',
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HDS based report',
+    useCase: ['Development', 'Selection'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/d426b867f2015c65688a122825d7b6b9607cbf3eb3606dc135264e855c90ddd0"
+  },
+  {
+    id: 'hogan-coaching',
+    name: 'Hogan Coaching Report',
+    provider: 'Hogan Assessments',
+    category: 'Leadership',
+    price: 240.00,
+    description: 'A comprehensive development tool that integrates HPI, HDS, and MVPI results into an actionable executive coaching roadmap.',
+    whatItMeasures: 'Bright side traits, dark side derailers, and core values.',
+    features: ['Integrated 3-assessment view', 'Coaching focus areas', 'Developmental action items'],
+    benefits: ['Targeted executive growth', 'Strategic talent development', 'High-impact self-insight'],
+    bestFor: 'Executives, Senior Management',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '60 mins',
+    methodology: 'Integrated HPI/HDS/MVPI',
+    useCase: ['Coaching', 'Development'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/14ea35ec51a8b83fe1db0d50373e6a71b9e4515fee057646a7f6865e1db23edd"
+  },
+  {
+    id: 'hogan-compass',
+    name: 'Hogan Compass Report',
+    provider: 'Hogan Assessments',
+    category: 'Personality',
+    price: 100.00,
+    description: 'Unpacks an individual’s values, drivers, and interests to determine organizational fit and career direction.',
+    whatItMeasures: '10 Core values including Power, Security, and Hedonism.',
+    features: ['Value-based career mapping', 'Preferred work environments', 'Motivational profile'],
+    benefits: ['Improve employee engagement', 'Ensure culture fit', 'Identify intrinsic motivators'],
+    bestFor: 'Recruitment, Career pathing',
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: 'N/A (Aggregated)',
-    methodology: 'HPI + HDS + MVPI (Aggregated)',
-    useCase: ['Development'],
-    level: ['Team'],
+    duration: '30 mins',
+    methodology: 'MVPI based report',
+    useCase: ['Selection', 'Development'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6a8d7b8648c740a3382ac19362476e3b8d4976ca485aedb97cfad9cfe7f24dbe"
+  },
+  {
+    id: 'hogan-manage',
+    name: 'Hogan Manage Report',
+    provider: 'Hogan Assessments',
+    category: 'Leadership',
+    price: 100.00,
+    description: 'Focuses on the day-to-day managerial style of an individual and how they are likely to lead their teams.',
+    whatItMeasures: 'Managerial strengths, development needs, and leadership impact.',
+    features: ['Leadership style analysis', 'Employee engagement tips', 'Managing style profile'],
+    benefits: ['Upskill new managers', 'Optimize team management', 'Increase leadership awareness'],
+    bestFor: 'Middle Management, Emerging Leaders',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI based management view',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/5cb35833af1daa9f99f6cafb9e3a81332e9eec9657f8ffe223510c9fa9d3d796"
+  },
+  {
+    id: 'hogan-safety',
+    name: 'Hogan Safety Development Report',
+    provider: 'Hogan Assessments',
+    category: 'Sales & Safety',
+    price: 100.00,
+    description: 'Measures individual safety awareness and identifies potential safety risks in industrial and high-risk roles.',
+    whatItMeasures: '6 Safety-related traits: Defiant, Panicky, Irritable, Distractible, Reckless, Arrogant.',
+    features: ['Safety risk profile', 'Behavioral coaching for safety', 'Risk reduction tips'],
+    benefits: ['Reduce workplace accidents', 'Improve safety culture', 'Screen for safety-conscious talent'],
+    bestFor: 'Industrial roles, Transport, Healthcare',
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI safety-mapped scales',
+    useCase: ['Hiring', 'Selection'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/c4b8a83fd49252cb32cd555961f6de14321baa7619193a5c285d8d565f668139"
+  },
+  {
+    id: 'hogan-sales',
+    name: 'Hogan Sales Basis Report',
+    provider: 'Hogan Assessments',
+    category: 'Sales & Safety',
+    price: 210.00,
+    description: 'Evaluates personality in relation to sales performance, focusing on strengths and hurdles in the sales cycle.',
+    whatItMeasures: 'Sales potential, networking ability, and resilience to rejection.',
+    features: ['8 Sales competencies', 'Sales style breakdown', 'Coaching for sales performance'],
+    benefits: ['Hire top sales talent', 'Improve sales productivity', 'Targeted sales training'],
+    bestFor: 'Sales professionals, Account managers',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI/MVPI sales mapping',
+    useCase: ['Hiring', 'Development'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6c32b5f38b926e3e75d0d2278952dfbbf87e5b83ea187091fa7ee6c8f7046769"
+  },
+  {
+    id: 'lhh-unconscious-bias',
+    name: 'LHH Mitigating Unconscious Bias Report',
+    provider: 'LHH',
+    category: 'Leadership',
+    price: 110.00,
+    description: 'Helps leaders identify their blind spots and provides strategies to foster a more inclusive and equitable workplace culture.',
+    whatItMeasures: 'Inclusion tendencies, bias awareness, and behavioral openness.',
+    features: ['Bias awareness profile', 'Actionable inclusion strategies', 'Impact on decision making'],
+    benefits: ['Drive DE&I initiatives', 'Improve leadership fairness', 'Reduce organizational bias'],
+    bestFor: 'Managers, HR Leaders',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Custom behavioral assessment',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
     guidance: GUIDANCE_OTHER,
     faq: [
-      { question: "Do all team members need to take the assessments?", answer: "Yes, for the most accurate team profile, we recommend 100% participation. The price covers aggregation for up to 30 people." },
-      { question: "Is individual data kept confidential?", answer: "Yes, the team report only shows aggregated data and roles. It does not reveal individual scores to the group." }
+      { question: "What is the goal of this report?", answer: "The goal is to provide leaders with an objective view of their natural biases and offer concrete behavioral changes to support a diverse workforce." }
     ],
-    sampleReportUrl: SAMPLE_URL
-  },
-
-  // --- PROFILOR ---
-  {
-    id: 'profilor-standard',
-    name: 'PROFILOR® Standard',
-    provider: 'Korn Ferry',
-    category: '360 Feedback',
-    price: 220.00,
-    description: 'Standard PROFILOR content with Individual PDF Report.',
-    whatItMeasures: 'Competencies observed by others.',
-    features: ['Feedback summary', 'Gap analysis', 'Normative comparison'],
-    benefits: ['Validates self-perception', 'Identifies blind spots'],
-    bestFor: 'Leaders, Managers',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: 'Varies',
-    methodology: 'Multi-rater survey',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_360,
-    sampleReportUrl: SAMPLE_URL
-  },
-  {
-    id: 'profilor-progress',
-    name: 'PROFILOR® Time 1 + Progress Report',
-    provider: 'Korn Ferry',
-    category: '360 Feedback',
-    price: 280.00,
-    description: 'Standard report plus a progress check to measure development over time.',
-    whatItMeasures: 'Change in competency ratings over time.',
-    features: ['T1 & T2 comparison', 'Progress chart'],
-    benefits: ['Measure ROI of coaching', 'Track improvement'],
-    bestFor: 'Long-term development programs',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: 'Varies',
-    methodology: 'Multi-rater survey',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_360,
-    sampleReportUrl: SAMPLE_URL
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/59cdc45301548caa6a5d8cd2f8537404c01bd6a8ee9d07caf74b0f062f446b97"
   },
 
   // --- SAVILLE ---
@@ -1215,31 +768,6 @@ export const ASSESSMENTS: Assessment[] = [
     guidance: GUIDANCE_OTHER,
     faq: FAQ_APTITUDE,
     sampleReportUrl: SAMPLE_URL
-  },
-
-  // --- TALENTx7 ---
-  {
-    id: 'talentx7-indiv',
-    name: 'TALENTx7 Assessment w/ Individual Report',
-    provider: 'Talentx7',
-    category: 'Learning Agility',
-    price: 250.00,
-    description: 'Measures Learning Agility - the ability to learn from experience and apply it to new situations.',
-    whatItMeasures: '7 facets of Learning Agility.',
-    features: ['Individual Report', 'Coach Report'],
-    benefits: ['Predicts potential', 'Identify future leaders'],
-    bestFor: 'High Potentials',
-    image: 'https://images.unsplash.com/photo-11522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report',
-    useCase: ['Development', 'Selection'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: [
-      { question: "What is Learning Agility?", answer: "Learning Agility is the willingness and ability to learn from experience and apply that learning to new and first-time situations. It is the #1 predictor of executive success." },
-      { question: "How does this differ from IQ?", answer: "IQ measures your ability to solve known problems. Learning Agility measures your ability to solve unknown problems where you have no prior experience." }
-    ],
-    sampleReportUrl: SAMPLE_URL
   }
 ];
 
@@ -1272,37 +800,6 @@ export const BLOG_POSTS: BlogPost[] = [
       
       <h3>Conclusion</h3>
       <p>To build a future-proof organization, companies must look beyond the resume. Incorporating EQ assessments like the Hogan EQ Report or Saville Wave into the selection process isn't just a "soft skill" preference—it's a hard business necessity.</p>
-    `
-  },
-  {
-    id: '2',
-    title: 'Top 5 Assessments for Remote Team Cohesion',
-    excerpt: 'Building culture remotely is hard. Here are the scientifically validated tools that help distributed teams connect and collaborate.',
-    category: 'Team Effectiveness',
-    date: 'Sep 28, 2024',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    author: 'Marcus Johnson',
-    readTime: '5 min read',
-    content: `
-      <p>The shift to hybrid and remote work has permanently altered team dynamics. "Water cooler moments" are gone, replaced by scheduled Zoom calls. In this environment, trust doesn't happen organically; it must be engineered. Psychometric assessments provide the blueprint for this engineering.</p>
-      
-      <h3>1. MBTI® Step II</h3>
-      <p>While Step I gives the broad strokes, Step II breaks down the nuances of communication. For a remote team, understanding that a colleague isn't "ignoring" you but simply prefers "Written" over "Verbal" communication (a Facet of Extraversion/Introversion) can prevent months of misunderstanding.</p>
-      
-      <h3>2. Hogan Team Report</h3>
-      <p>This tool aggregates individual personality data to reveal the team's collective "persona." It highlights potential fracture lines—for example, if a team is composed entirely of high-ambition, low-prudence individuals, they may take reckless risks without a remote manager there to provide guardrails.</p>
-      
-      <h3>3. CliftonStrengths 34</h3>
-      <p>Focusing on strengths brings positive energy to virtual meetings. Knowing that a team member leads with "Restorative" means you can tag them when a remote project goes off the rails. It changes the narrative from "fixing weaknesses" to "deploying talent.</p>
-      
-      <h3>4. FIRO-B</h3>
-      <p>Fundamental Interpersonal Relations Orientation-Behavior (FIRO-B) measures the need for inclusion, control, and affection. In remote settings, individuals with a high need for inclusion may suffer silently. This tool helps managers identify who needs more frequent check-ins versus who prefers autonomy.</p>
-      
-      <h3>5. Thomas-Kilmann Conflict Mode Instrument (TKI)</h3>
-      <p>Conflict in remote teams is often invisible until it explodes. TKI helps teams agree on a "vocabulary" for conflict, making it safe to disagree on Slack or Teams without escalating into a flame war.</p>
-      
-      <h3>Implementing the Tools</h3>
-      <p>Don't just email the PDF reports. Host a virtual workshop where team members share their "User Manuals." The goal is to replace assumptions with data, creating a high-trust culture regardless of time zone.</p>
     `
   },
   {
@@ -1362,60 +859,6 @@ export const BLOG_POSTS: BlogPost[] = [
       
       <h3>Strategic Self-Awareness</h3>
       <p>The goal of the HDS is strategic self-awareness. It turns the unconscious reaction into a conscious choice, allowing leaders to maintain their effectiveness even in the stormiest of business climates.</p>
-    `
-  },
-  {
-    id: '5',
-    title: 'Learning Agility: The X-Factor of High Potentials',
-    excerpt: 'In a rapidly changing world, the ability to learn and apply new skills is the #1 predictor of executive success. What is your LQ?',
-    category: 'Talent Management',
-    date: 'Aug 14, 2024',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    author: 'Elena Rostova',
-    readTime: '5 min read',
-    content: `
-      <p>The shelf life of a technical skill is now less than 5 years. In this environment, hiring for current competency is a losing strategy. Companies must hire for <em>Learning Agility</em>: the willingness and ability to learn from experience and apply that learning to new and first-time situations.</p>
-      
-      <h3>Defining Learning Agility</h3>
-      <p>Korn Ferry and Columbia University have identified it as the primary predictor of executive success. It is composed of five facets:</p>
-      <ol>
-        <li><strong>Mental Agility:</strong> Comfort with complexity and ambiguity. These people find patterns in disparate data.</li>
-        <li><strong>People Agility:</strong> Knowing yourself and being able to work with diverse groups.</li>
-        <li><strong>Change Agility:</strong> Like to experiment and comfortable with change.</li>
-        <li><strong>Results Agility:</strong> Delivering results in first-time situations.</li>
-        <li><strong>Self-Awareness:</strong> Knowing one's strengths and weaknesses.</li>
-      </ol>
-      
-      <h3>The High Potential Trap</h3>
-      <p>Many organizations confuse "High Performance" with "High Potential." A high performer is great at their <em>current</em> job. A high potential has the agility to scale into a <em>future</em> job that might not even exist yet. Assessments like the TALENTx7 explicitly measure this agility.</p>
-      
-      <h3>Cultivating Agility</h3>
-      <p>Can it be taught? Yes, but it requires a growth mindset. Leaders must be placed in "stretch assignments"—roles that are slightly beyond their current capability—and given the coaching support to reflect on their failures. Without reflection, there is no learning, only experience.</p>
-    `
-  },
-  {
-    id: '6',
-    title: 'Creating a Data-Driven Succession Plan',
-    excerpt: 'Stop guessing who is ready for the C-Suite. Use objective assessment data to build a robust pipeline of future-ready leaders.',
-    category: 'Succession Planning',
-    date: 'Jul 22, 2024',
-    image: 'https://images.unsplash.com/photo-1507537297725-24a1c434c4b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-    author: 'David Thorne',
-    readTime: '6 min read',
-    content: `
-      <p>Succession planning is often an exercise in politics. Names are put in a 9-box grid based on who the current CEO likes, rather than who has the capability to lead the company forward. This subjective approach leads to the "Peter Principle," where people are promoted to their level of incompetence.</p>
-      
-      <h3>The 9-Box Grid 2.0</h3>
-      <p>To modernize succession, we must overlay the subjective manager review with objective data. Imagine a 9-box grid where the X-axis (Performance) is determined by KPIs, but the Y-axis (Potential) is determined by a validated assessment of Leadership Potential (like the Hogan High Potential Report).</p>
-      
-      <h3>Identifying "Hidden Gems"</h3>
-      <p>Objective data often reveals "Hidden Gems"—employees who are quiet, perhaps introverted, or from underrepresented groups, who don't self-promote but have immense strategic capacity. Without assessments, these individuals are often overlooked in favor of the loudest voice in the room.</p>
-      
-      <h3>Readiness vs. Potential</h3>
-      <p>Assessments also help distinguish between readiness (can do it now) and potential (can do it later). A "High Potential" leader might need a 2-year rotation in Finance to be "Ready." Data helps HR craft these personalized development plans.</p>
-      
-      <h3>Risk Mitigation</h3>
-      <p>Finally, data-driven succession creates a defendable audit trail. When the board asks why Candidate A was chosen over Candidate B, you have a dossier of objective evidence regarding their judgment, emotional intelligence, and strategic thinking, rather than just "a gut feeling."</p>
     `
   }
 ];

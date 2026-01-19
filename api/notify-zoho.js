@@ -20,148 +20,106 @@ const PRODUCT_CONFIG = {
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
   },
 
-  // 4. MBTI® Step II - Profile Report
-  'MBTI® Step II - Profile Report': {
-    type: 'mbti_step2_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=STEP2_PROFILE_TEST',
-  },
-
-  // 5. MBTI® Step II - Interpretive Report
+  // 4. MBTI® Step II - Interpretive Report
   'MBTI® Step II - Interpretive Report': {
     type: 'mbti_step2_interpretive',
     link: 'https://online.cpp.com/en/index.aspx?R=STEP2_INTERPRETIVE_TEST',
   },
 
-  // 6. FIRO-B® Profile Report
-  'FIRO-B® Profile Report': {
-    type: 'firo_b_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_PROFILE_TEST',
-  },
-
-  // 7. FIRO-B® Interpretive Report for Organizations
-  'FIRO-B® Interpretive Report for Organizations': {
-    type: 'firo_b_iro',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_IRO_TEST',
-  },
-
-  // 8. FIRO-Business® Profile
-  'FIRO-Business® Profile': {
-    type: 'firo_business',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_PROFILE_TEST',
-  },
-
-  // 9. FIRO-Business® Leadership Report
-  'FIRO-Business® Leadership Report': {
-    type: 'firo_business_leadership',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_LEADERSHIP_TEST',
-  },
-
-  // 10. iStartStrong
+  // 5. iStartStrong
   'iStartStrong': {
     type: 'istartstrong',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=7793da18-60e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 11. Strong Interest Inventory® Profile Report
-  'Strong Interest Inventory® Profile Report': {
-    type: 'strong_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_PROFILE_TEST',
-  },
-
-  // 12. Strong Profile and Interpretive Report
-  'Strong Profile and Interpretive Report': {
-    type: 'strong_profile_interpretive',
-    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_INTERPRETIVE_TEST',
-  },
-
-  // 13. CPI 260® Client Feedback Report
-  'CPI 260® Client Feedback Report': {
-    type: 'cpi_260_client',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_CLIENT_FEEDBACK_TEST',
-  },
-
-  // 14. CPI 260® Coaching Report for Leaders
-  'CPI 260® Coaching Report for Leaders': {
-    type: 'cpi_260_coaching',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COACHING_REPORT_TEST',
-  },
-
-  // 15. CPI 260® Combined Client/Coaching Report
-  'CPI 260® Combined Client/Coaching Report': {
-    type: 'cpi_260_combined',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COMBINED_TEST',
-  },
-
-  // 16. CPI 434™ Profile Report
-  'CPI 434™ Profile Report': {
-    type: 'cpi_434_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_PROFILE_TEST',
-  },
-
-  // 17. CPI 434™ Narrative Report
-  'CPI 434™ Narrative Report': {
-    type: 'cpi_434_narrative',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_NARRATIVE_TEST',
-  },
-
-  // 18. CPI 434™ Configural Analysis Report
-  'CPI 434™ Configural Analysis Report': {
-    type: 'cpi_434_configural',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_CONFIGURAL_TEST',
-  },
-
-  // 19. TKI Profile and Interpretive Report
+  // 6. TKI Profile and Interpretive Report
   'TKI Profile and Interpretive Report': {
     type: 'tki_profile',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=c4d6d2b5-64e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 20. Work Engagement Profile Interpretive Report
+  // 7. Work Engagement Profile Interpretive Report
   'Work Engagement Profile Interpretive Report': {
     type: 'work_engagement',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=60ec724b-65e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 21. MBTI® Step I™ - Interpretive Report
+  // 8. MBTI® Step I™ - Interpretive Report
   'MBTI® Step I™ - Interpretive Report': {
     type: 'mbti_step1_interpretive',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=3f453449-a2e0-f011-8d4d-000d3a5d14c2',
   },
 
-  // 22. MBTI® Step I™ - Career Report
+  // 9. MBTI® Step I™ - Career Report
   'MBTI® Step I™ - Career Report': {
     type: 'mbti_step1_career',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59a3f272-aae0-f011-8d4d-000d3a5d14c2',
   },
 
-  // 23. MBTI® Step I™ - Conflict Style Report
+  // 10. MBTI® Step I™ - Conflict Style Report
   'MBTI® Step I™ - Conflict Style Report': {
     type: 'mbti_step1_conflict',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=e2c5e162-ace0-f011-8d4d-000d3a5d14c2',
   },
 
-  // 24. MBTI® Step I™ - Communication Style Report
+  // 11. MBTI® Step I™ - Communication Style Report
   'MBTI® Step I™ - Communication Style Report': {
     type: 'mbti_step1_communication',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=15be56b4-41e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 25. MBTI® Step I™ - Decision-Making Style Report
+  // 12. MBTI® Step I™ - Decision-Making Style Report
   'MBTI® Step I™ - Decision-Making Style Report': {
     type: 'mbti_step1_decision',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=9c9741ea-47e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 26. MBTI® Step I™ - Stress Management Report
+  // 13. MBTI® Step I™ - Stress Management Report
   'MBTI® Step I™ - Stress Management Report': {
     type: 'mbti_step1_stress',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=d4b1c7dc-48e1-f011-8d4d-000d3a5d14c2',
   },
 
-  // 27. MBTI® Step I™ - Healthcare Professionals Report
+  // 14. MBTI® Step I™ - Healthcare Professionals Report
   'MBTI® Step I™ - Healthcare Professionals Report': {
     type: 'mbti_step1_healthcare',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=35227ea9-5ee1-f011-8d4d-000d3a5d14c2',
+  },
+
+  // --- NEW HOGAN REPORTS ---
+  'Hogan Career Report': {
+    type: 'hogan_career',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Challenge Report': {
+    type: 'hogan_challenge',
+    link: 'https://www.hoganassessments.com/assessment/hogan-development-survey/'
+  },
+  'Hogan Coaching Report': {
+    type: 'hogan_coaching',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Compass Report': {
+    type: 'hogan_compass',
+    link: 'https://www.hoganassessments.com/assessment/motives-values-preferences-inventory/'
+  },
+  'Hogan Manage Report': {
+    type: 'hogan_manage',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Safety Development Report': {
+    type: 'hogan_safety',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Sales Basis Report': {
+    type: 'hogan_sales',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+
+  // --- NEW LHH REPORTS ---
+  'LHH Mitigating Unconscious Bias Report': {
+    type: 'lhh_unconscious_bias',
+    link: 'https://www.lhh.com/'
   }
 };
 

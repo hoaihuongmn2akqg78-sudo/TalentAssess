@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
   const heroAssessments = useMemo(() => {
       // Return top 3 specific ones or just first 3
-      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-high-potential', 'saville-swift-analysis'].includes(a.id));
+      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'mbti-step1-iro', 'saville-swift-analysis'].includes(a.id));
   }, []);
 
   // Cart Logic

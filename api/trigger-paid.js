@@ -13,65 +13,13 @@ const PRODUCT_CONFIG = {
     type: 'mbti_step1_iro',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
   },
-  'MBTI® Step II - Profile Report': {
-    type: 'mbti_step2_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=STEP2_PROFILE_TEST',
-  },
   'MBTI® Step II - Interpretive Report': {
     type: 'mbti_step2_interpretive',
     link: 'https://online.cpp.com/en/index.aspx?R=STEP2_INTERPRETIVE_TEST',
   },
-  'FIRO-B® Profile Report': {
-    type: 'firo_b_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_PROFILE_TEST',
-  },
-  'FIRO-B® Interpretive Report for Organizations': {
-    type: 'firo_b_iro',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_B_IRO_TEST',
-  },
-  'FIRO-Business® Profile': {
-    type: 'firo_business',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_PROFILE_TEST',
-  },
-  'FIRO-Business® Leadership Report': {
-    type: 'firo_business_leadership',
-    link: 'https://online.cpp.com/en/index.aspx?R=FIRO_BUSINESS_LEADERSHIP_TEST',
-  },
   'iStartStrong': {
     type: 'istartstrong',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=7793da18-60e1-f011-8d4d-000d3a5d14c2',
-  },
-  'Strong Interest Inventory® Profile Report': {
-    type: 'strong_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_PROFILE_TEST',
-  },
-  'Strong Profile and Interpretive Report': {
-    type: 'strong_profile_interpretive',
-    link: 'https://online.cpp.com/en/index.aspx?R=STRONG_INTERPRETIVE_TEST',
-  },
-  'CPI 260® Client Feedback Report': {
-    type: 'cpi_260_client',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_CLIENT_FEEDBACK_TEST',
-  },
-  'CPI 260® Coaching Report for Leaders': {
-    type: 'cpi_260_coaching',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COACHING_REPORT_TEST',
-  },
-  'CPI 260® Combined Client/Coaching Report': {
-    type: 'cpi_260_combined',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_260_COMBINED_TEST',
-  },
-  'CPI 434™ Profile Report': {
-    type: 'cpi_434_profile',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_PROFILE_TEST',
-  },
-  'CPI 434™ Narrative Report': {
-    type: 'cpi_434_narrative',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_NARRATIVE_TEST',
-  },
-  'CPI 434™ Configural Analysis Report': {
-    type: 'cpi_434_configural',
-    link: 'https://online.cpp.com/en/index.aspx?R=CPI_434_CONFIGURAL_TEST',
   },
   'TKI Profile and Interpretive Report': {
     type: 'tki_profile',
@@ -108,6 +56,40 @@ const PRODUCT_CONFIG = {
   'MBTI® Step I™ - Healthcare Professionals Report': {
     type: 'mbti_step1_healthcare',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=35227ea9-5ee1-f011-8d4d-000d3a5d14c2',
+  },
+  // --- NEW HOGAN REPORTS ---
+  'Hogan Career Report': {
+    type: 'hogan_career',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Challenge Report': {
+    type: 'hogan_challenge',
+    link: 'https://www.hoganassessments.com/assessment/hogan-development-survey/'
+  },
+  'Hogan Coaching Report': {
+    type: 'hogan_coaching',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Compass Report': {
+    type: 'hogan_compass',
+    link: 'https://www.hoganassessments.com/assessment/motives-values-preferences-inventory/'
+  },
+  'Hogan Manage Report': {
+    type: 'hogan_manage',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Safety Development Report': {
+    type: 'hogan_safety',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  'Hogan Sales Basis Report': {
+    type: 'hogan_sales',
+    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+  },
+  // --- NEW LHH REPORTS ---
+  'LHH Mitigating Unconscious Bias Report': {
+    type: 'lhh_unconscious_bias',
+    link: 'https://www.lhh.com/'
   }
 };
 
