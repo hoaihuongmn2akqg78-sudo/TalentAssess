@@ -57,36 +57,48 @@ const PRODUCT_CONFIG = {
     type: 'mbti_step1_healthcare',
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=35227ea9-5ee1-f011-8d4d-000d3a5d14c2',
   },
-  // --- NEW HOGAN REPORTS ---
+  // --- HOGAN REPORTS ---
+  'Hogan Flash Report': {
+    type: 'hogan_flash',
+    link: 'https://www.hoganassessments.com/'
+  },
+  'Hogan EQ Report': {
+    type: 'hogan_eq',
+    link: 'https://www.hoganassessments.com/'
+  },
+  'Hogan Leader Focus Report': {
+    type: 'hogan_leader_focus',
+    link: 'https://www.hoganassessments.com/'
+  },
   'Hogan Career Report': {
     type: 'hogan_career',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Challenge Report': {
     type: 'hogan_challenge',
-    link: 'https://www.hoganassessments.com/assessment/hogan-development-survey/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Coaching Report': {
     type: 'hogan_coaching',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Compass Report': {
     type: 'hogan_compass',
-    link: 'https://www.hoganassessments.com/assessment/motives-values-preferences-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Manage Report': {
     type: 'hogan_manage',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Safety Development Report': {
     type: 'hogan_safety',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Sales Basis Report': {
     type: 'hogan_sales',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
-  // --- NEW LHH REPORTS ---
+  // --- LHH REPORTS ---
   'LHH Mitigating Unconscious Bias Report': {
     type: 'lhh_unconscious_bias',
     link: 'https://www.lhh.com/'
@@ -107,24 +119,20 @@ export default async function handler(req, res) {
       
       console.log('Status changed to PAID. Processing...');
 
-      // --- [FIX QUAN TRỌNG] Xử lý lỗi data dạng String ---
       let participants = record.participants;
 
-      // Nếu participants là chuỗi (do sửa tay hoặc lỗi DB), hãy parse nó ra JSON
       if (typeof participants === 'string') {
         try {
           participants = JSON.parse(participants);
         } catch (e) {
           console.error('Lỗi parse JSON participants:', e);
-          participants = []; // Nếu lỗi thì trả về rỗng để không crash app
+          participants = [];
         }
       }
 
-      // Đảm bảo nó là mảng trước khi map
       if (!Array.isArray(participants)) {
          participants = [];
       }
-      // ----------------------------------------------------
 
       const promises = participants.map(async (person) => {
         const config = PRODUCT_CONFIG[person.assessmentName];
@@ -142,7 +150,6 @@ export default async function handler(req, res) {
           order_ref: record.order_id_ref || `ORD-${Date.now()}`
         };
 
-        // Gửi sang Zoho
         return fetch(ZOHO_PARTICIPANT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

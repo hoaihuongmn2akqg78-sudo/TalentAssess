@@ -86,37 +86,49 @@ const PRODUCT_CONFIG = {
     link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=35227ea9-5ee1-f011-8d4d-000d3a5d14c2',
   },
 
-  // --- NEW HOGAN REPORTS ---
+  // --- HOGAN REPORTS ---
+  'Hogan Flash Report': {
+    type: 'hogan_flash',
+    link: 'https://www.hoganassessments.com/'
+  },
+  'Hogan EQ Report': {
+    type: 'hogan_eq',
+    link: 'https://www.hoganassessments.com/'
+  },
+  'Hogan Leader Focus Report': {
+    type: 'hogan_leader_focus',
+    link: 'https://www.hoganassessments.com/'
+  },
   'Hogan Career Report': {
     type: 'hogan_career',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Challenge Report': {
     type: 'hogan_challenge',
-    link: 'https://www.hoganassessments.com/assessment/hogan-development-survey/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Coaching Report': {
     type: 'hogan_coaching',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Compass Report': {
     type: 'hogan_compass',
-    link: 'https://www.hoganassessments.com/assessment/motives-values-preferences-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Manage Report': {
     type: 'hogan_manage',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Safety Development Report': {
     type: 'hogan_safety',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
   'Hogan Sales Basis Report': {
     type: 'hogan_sales',
-    link: 'https://www.hoganassessments.com/assessment/hogan-personality-inventory/'
+    link: 'https://www.hoganassessments.com/'
   },
 
-  // --- NEW LHH REPORTS ---
+  // --- LHH REPORTS ---
   'LHH Mitigating Unconscious Bias Report': {
     type: 'lhh_unconscious_bias',
     link: 'https://www.lhh.com/'
@@ -151,13 +163,12 @@ export default async function handler(req, res) {
     );
 
     // --- BƯỚC B: Gửi cho Participant (CHỈ KHI ĐÃ THANH TOÁN) ---
-    // [QUAN TRỌNG] Kiểm tra điều kiện status === 'paid'
     if (currentStatus === 'paid') {
       console.log('--> Đơn đã thanh toán. Tiến hành gửi mail cho Participant.');
       
       participants.forEach((person) => {
         const config = PRODUCT_CONFIG[person.assessmentName];
-        if (!config) return; // Bỏ qua nếu không tìm thấy config
+        if (!config) return; 
 
         const payload = {
           participant_name: person.name,
@@ -180,9 +191,7 @@ export default async function handler(req, res) {
       console.log('--> Đơn chưa thanh toán (Pending). Bỏ qua gửi mail Participant.');
     }
 
-    // Chờ tất cả lệnh gửi đi
     await Promise.all(promises);
-
     return res.status(200).json({ message: 'Processed successfully', status: currentStatus });
 
   } catch (error) {

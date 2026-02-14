@@ -1,14 +1,22 @@
 import React from 'react';
 import { Assessment } from '../types';
-import { X, Check, ShoppingCart, Copy, ClipboardCheck, HelpCircle, FileText } from 'lucide-react';
+import { X, Check, ShoppingCart, Copy, ClipboardCheck, HelpCircle, FileText, CheckCircle2 } from 'lucide-react';
 
 interface Props {
   assessment: Assessment;
   onClose: () => void;
   onAddToCart: (assessment: Assessment) => void;
+  onToggleCompare: (id: string) => void;
+  isSelectedForComparison: boolean;
 }
 
-const ProductDetailModal: React.FC<Props> = ({ assessment, onClose, onAddToCart }) => {
+const ProductDetailModal: React.FC<Props> = ({ 
+  assessment, 
+  onClose, 
+  onAddToCart, 
+  onToggleCompare, 
+  isSelectedForComparison 
+}) => {
   return (
     <div className="fixed inset-0 z-[70] overflow-y-auto">
       {/* Backdrop */}
@@ -142,7 +150,7 @@ const ProductDetailModal: React.FC<Props> = ({ assessment, onClose, onAddToCart 
                 </div>
               </div>
 
-               {/* Fulfillment Process (New) */}
+               {/* Fulfillment Process */}
               <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 mb-6">
                 <div className="flex items-center gap-2 mb-3">
                     <ClipboardCheck size={18} className="text-[#0C3963]" />
@@ -183,10 +191,24 @@ const ProductDetailModal: React.FC<Props> = ({ assessment, onClose, onAddToCart 
                 )}
 
                 <button 
-                  className="w-full bg-white text-gray-600 py-3 rounded-lg font-bold border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                  onClick={() => onToggleCompare(assessment.id)}
+                  className={`w-full py-3 rounded-lg font-bold border transition-colors flex items-center justify-center gap-2 ${
+                    isSelectedForComparison 
+                      ? 'bg-blue-100 border-blue-400 text-blue-700' 
+                      : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                  }`}
                 >
-                  <Copy size={18} />
-                  Add to Compare
+                  {isSelectedForComparison ? (
+                    <>
+                      <CheckCircle2 size={18} />
+                      Remove from Compare
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={18} />
+                      Add to Compare
+                    </>
+                  )}
                 </button>
               </div>
 

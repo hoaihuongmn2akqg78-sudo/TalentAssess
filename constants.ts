@@ -6,7 +6,7 @@ const GUIDANCE_MBTI = "After payment is completed, the user will immediately rec
 const GUIDANCE_APOLLO = "After payment is completed, the user will receive an Apollo access link with a username and password within 2 working days. The report will be released once the assessment is completed." + GUIDANCE_NOTE;
 const GUIDANCE_OTHER = "After payment is completed, the user will receive the assessment link within 2 working days. The report will be released immediately upon completing the survey." + GUIDANCE_NOTE;
 
-// Placeholder sample report link
+// Placeholder sample report link for providers without specific Workdrive links yet
 const SAMPLE_URL = "https://www.lhh.com/en-sg/our-knowledge/sample-reports/";
 
 // Helper FAQ sets

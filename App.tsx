@@ -39,8 +39,8 @@ const App: React.FC = () => {
   }, []);
 
   const heroAssessments = useMemo(() => {
-      // Return top 3 specific ones or just first 3
-      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'mbti-step1-iro', 'saville-swift-analysis'].includes(a.id));
+      // Feature top tools: MBTI Profile, Hogan Leader Focus, Saville Swift Analysis
+      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'saville-swift-analysis'].includes(a.id));
   }, []);
 
   // Cart Logic
@@ -267,6 +267,8 @@ const App: React.FC = () => {
             addToCart(item);
             setSelectedProduct(null);
           }}
+          onToggleCompare={toggleCompare}
+          isSelectedForComparison={comparisonList.includes(selectedProduct.id)}
         />
       )}
 
