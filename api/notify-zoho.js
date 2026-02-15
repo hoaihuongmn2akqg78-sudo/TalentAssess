@@ -2,6 +2,12 @@
 
 // --- 1. CẤU HÌNH SẢN PHẨM ---
 const PRODUCT_CONFIG = {
+  // 0. Everything DiSC
+  'Everything DiSC Workplace® Profile': {
+    type: 'disc_workplace',
+    link: 'https://www.everythingdisc.com/',
+  },
+
   // 1. APOLLO Profile
   'APOLLO Profile': {
     type: 'apollo', 
@@ -17,7 +23,7 @@ const PRODUCT_CONFIG = {
   // 3. MBTI® Step I - Interpretive Report for Organizations
   'MBTI® Step I - Interpretive Report for Organizations': {
     type: 'mbti_step1_iro',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
+    link: 'https://Elevate.themygs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
   },
 
   // 4. MBTI® Step II - Interpretive Report

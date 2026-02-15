@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
-import { MessageSquare, Send, X, Bot, Loader2 } from 'lucide-react';
+import { Bot, Loader2, Send, X } from 'lucide-react';
 import { Assessment } from '../types';
 
 interface Props {
@@ -18,14 +18,8 @@ const GeminiAdvisor: React.FC<Props> = ({ assessments }) => {
 
     setIsLoading(true);
     try {
-      const apiKey = process.env.API_KEY || ''; 
-      if (!apiKey) {
-        setResponse("API Key is missing. Please configure the environment.");
-        setIsLoading(false);
-        return;
-      }
-
-      const ai = new GoogleGenAI({ apiKey });
+      // Direct initialization as per guidelines
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
       const context = assessments.map(a => 
         `${a.name} (${a.category}): ${a.description}. Best for: ${a.bestFor}. Features: ${a.features.join(', ')}`
@@ -42,11 +36,13 @@ const GeminiAdvisor: React.FC<Props> = ({ assessments }) => {
         ${context}
       `;
 
+      // Use recommended model for text tasks
       const result = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3-flash-preview',
         contents: prompt,
       });
 
+      // result.text is a property
       setResponse(result.text || "I couldn't generate a recommendation at this time.");
 
     } catch (error) {

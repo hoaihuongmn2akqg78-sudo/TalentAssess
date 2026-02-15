@@ -8,7 +8,7 @@ export interface Assessment {
   id: string;
   name: string;
   provider: string;
-  category: 'Personality' | 'Leadership' | 'Aptitude' | '360 Feedback' | 'Learning Agility' | 'Team Effectiveness' | 'Sales & Safety' | 'Cognitive Ability';
+  category: 'Behavior & Personality' | 'Leadership & Management' | 'Team Dynamics' | 'Career Development' | 'Sales & Safety' | 'Professional Skills';
   price: number;
   description: string;
   whatItMeasures: string;

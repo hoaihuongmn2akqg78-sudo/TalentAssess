@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from './Hero';
 import { Assessment } from '../types';
-import { ArrowRight, User, Users, Briefcase, Brain, CheckCircle2, FileText } from 'lucide-react';
+import { ArrowRight, User, Users, Briefcase, Target, CheckCircle2, FileText } from 'lucide-react';
 
 interface HomePageProps {
   onStartWizard: (type: 'individual' | 'organization' | null) => void;
@@ -14,27 +14,27 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
   
   const categories = [
     { 
-      name: 'Personality', 
+      name: 'Behavior & Personality', 
       icon: User, 
-      desc: 'Understand behaviors & preferences',
+      desc: 'Understand core preferences, values, and emotional intelligence.',
       image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' 
     },
     { 
-      name: 'Leadership', 
+      name: 'Leadership & Management', 
       icon: Briefcase, 
-      desc: 'Develop executive potential',
+      desc: 'Identify executive potential and manage derailment risks.',
       image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
     { 
-      name: 'Team Effectiveness', 
+      name: 'Team Dynamics', 
       icon: Users, 
-      desc: 'Optimize group dynamics',
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      desc: 'Optimize communication, resolve conflict, and boost engagement.',
+      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
     { 
-      name: 'Aptitude', 
-      icon: Brain, 
-      desc: 'Measure reasoning ability',
+      name: 'Career Development', 
+      icon: Target, 
+      desc: 'Map interests and personality to fulfilling career paths.',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
   ];
@@ -53,7 +53,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-4">Explore by Category</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Browse our scientifically validated assessments organized by their primary focus area.
+            Browse our scientifically validated assessments organized by their primary professional focus.
           </p>
         </div>
         

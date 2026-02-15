@@ -1,6 +1,10 @@
 // File: api/trigger-paid.js
 
 const PRODUCT_CONFIG = {
+  'Everything DiSC Workplace® Profile': {
+    type: 'disc_workplace',
+    link: 'https://www.everythingdisc.com/',
+  },
   'APOLLO Profile': {
     type: 'apollo', 
     link: 'https://www.apollonean.com.au/apollo/servlet/abtwsac/apollo/ApolloEntryForm', 
@@ -23,7 +27,7 @@ const PRODUCT_CONFIG = {
   },
   'TKI Profile and Interpretive Report': {
     type: 'tki_profile',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=c4d6d2b5-64e1-f011-8d4d-000d3a5d14c2',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=c4d6d2b5-64e1-f011-8d4d-000d3a5d14c2', 
   },
   'Work Engagement Profile Interpretive Report': {
     type: 'work_engagement',

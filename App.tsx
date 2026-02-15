@@ -39,8 +39,8 @@ const App: React.FC = () => {
   }, []);
 
   const heroAssessments = useMemo(() => {
-      // Feature top tools: MBTI Profile, Hogan Leader Focus, Hogan EQ (replacing Saville)
-      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'hogan-eq'].includes(a.id));
+      // Feature top tools: MBTI Profile, Hogan Leader Focus, Hogan EQ, DiSC
+      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'hogan-eq', 'everything-disc-workplace'].includes(a.id));
   }, []);
 
   // Cart Logic
@@ -224,10 +224,10 @@ const App: React.FC = () => {
           <div>
             <h4 className="font-bold mb-6 text-[#E0E9F4] uppercase tracking-wider text-xs">Solutions</h4>
             <ul className="space-y-3 text-sm text-[#BCCADE]">
-              <li><button onClick={() => handleNavigateToBrowse('Aptitude')} className="hover:text-white transition-colors">Talent Acquisition</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Leadership')} className="hover:text-white transition-colors">Leadership Development</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Team Effectiveness')} className="hover:text-white transition-colors">Team Effectiveness</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Personality')} className="hover:text-white transition-colors">Career Transition</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Sales & Safety')} className="hover:text-white transition-colors">Talent Acquisition</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Leadership & Management')} className="hover:text-white transition-colors">Leadership Development</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Team Dynamics')} className="hover:text-white transition-colors">Team Effectiveness</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Behavior & Personality')} className="hover:text-white transition-colors">Career Transition</button></li>
             </ul>
           </div>
            <div>

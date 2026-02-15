@@ -1,539 +1,417 @@
 import { Assessment, BlogPost } from './types';
 
 const GUIDANCE_NOTE = " Note: If you are not the assessment taker, please enter the taker’s information in the checkout field.";
+const GUIDANCE_MBTI = "After payment, you will receive a credential link. Upon completion, our experts will review and release your report within 2 working days." + GUIDANCE_NOTE;
+const GUIDANCE_OTHER = "Your assessment link will be dispatched within 2 working days. Most reports are generated instantly upon completion." + GUIDANCE_NOTE;
 
-const GUIDANCE_MBTI = "After payment is completed, the user will immediately receive a credential link to begin the questionnaire. Once the survey is completed, the report will be released within 2 working days." + GUIDANCE_NOTE;
-const GUIDANCE_APOLLO = "After payment is completed, the user will receive an Apollo access link with a username and password within 2 working days. The report will be released once the assessment is completed." + GUIDANCE_NOTE;
-const GUIDANCE_OTHER = "After payment is completed, the user will receive the assessment link within 2 working days. The report will be released immediately upon completing the survey." + GUIDANCE_NOTE;
-
-// Placeholder sample report link for providers without specific Workdrive links yet
-const SAMPLE_URL = "https://www.lhh.com/en-sg/our-knowledge/sample-reports/";
-
-// Helper FAQ sets
-const FAQ_MBTI = [
-  { question: "Are there right or wrong answers?", answer: "No. The MBTI assessment describes your personality preferences. There are no right or wrong answers, and one type is not better than another." },
-  { question: "Can I use this for hiring?", answer: "The MBTI instrument is ethically restricted from being used for hiring or selection. It is strictly for development, self-awareness, and team building." },
-  { question: "How long is the report valid?", answer: "Personality preferences tend to be stable over time. However, we recommend re-taking the assessment if you undergo significant life changes or haven't taken it in 3+ years." }
+// --- SHARED PERSUASIVE FAQs ---
+const FAQ_MBTI_SALES = [
+  { question: "Why choose MBTI for my team?", answer: "MBTI is the world's most popular personality framework for a reason: it's non-judgmental. It helps teams build a shared language to value differences rather than fight over them, making it the perfect 'ice-breaker' for long-term culture building." },
+  { question: "Is this the 'official' assessment?", answer: "Yes. We provide the genuine MBTI® assessment from The Myers-Briggs Company, backed by 70+ years of research. This is not a 'lookalike' free test found online." },
+  { question: "How long until we see results?", answer: "Immediately. The awareness gained during the questionnaire often leads to 'aha' moments, and the professional report provides actionable communication tips you can use the same day." }
 ];
 
-const FAQ_HOGAN = [
-  { question: "Is this assessment suitable for hiring?", answer: "Yes, Hogan assessments are scientifically validated to predict workplace performance and are widely used for high-stakes selection and promotion decisions." },
-  { question: "What if I get interrupted while taking it?", answer: "The system saves your progress automatically. You can log back in and resume exactly where you left off." },
-  { question: "Do I need to prepare or study?", answer: "No. These are personality assessments, not knowledge tests. The best approach is to be honest and spontaneous with your answers to get the most accurate results." }
+const FAQ_HOGAN_SALES = [
+  { question: "Why is Hogan considered the 'Gold Standard'?", answer: "Hogan doesn't just measure how you see yourself; it predicts how others see you. In leadership, 'reputation is everything,' and Hogan is the only tool designed to predict workplace performance and derailment risks with near-clinical accuracy." },
+  { question: "Can we use this for hiring?", answer: "Absolutely. Hogan is specifically validated for selection. It provides a legal and scientific safeguard, ensuring you hire for potential and fit rather than just a good interview performance." }
 ];
 
-const FAQ_APTITUDE = [
-  { question: "Is this test timed?", answer: "Yes, this is a strictly timed assessment designed to measure your cognitive processing speed and accuracy under pressure." },
-  { question: "Can I use a calculator?", answer: "For numerical reasoning sections, a calculator is typically permitted. Specific instructions will be provided on the welcome screen of the assessment." },
-  { question: "What happens if my internet disconnects?", answer: "The system is designed to handle interruptions. If you lose connection, close the browser and click the link again to resume once your connection is stable." }
-];
-
-const FAQ_ISTARTSTRONG = [
-  { question: "What is iStartStrong?", answer: "iStartStrong is a personalized career report based on the Strong Interest Inventory. It helps you identify your interests and matches them with potential career paths and educational opportunities." },
-  { question: "Who is it for?", answer: "It is ideal for high school and college students, as well as adults looking to pivot careers or find more fulfillment in their current field." },
-  { question: "How long does it take?", answer: "The assessment typically takes about 15-20 minutes to complete." }
-];
-
-const FAQ_TKI = [
-  { question: "What are the five conflict modes?", answer: "The TKI measures five modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating. Each mode is a combination of assertiveness and cooperativeness." },
-  { question: "Is one mode better than the others?", answer: "No. The most effective mode depends on the situation and the individuals involved. The TKI helps you expand your toolkit so you can choose the best approach for any given conflict." }
-];
-
-const FAQ_WEP = [
-  { question: "What is work engagement?", answer: "Work engagement is a positive, fulfilling, work-related state of mind. It's about being passionate, energetic, and committed to your role." },
-  { question: "How can this profile help me?", answer: "By identifying which intrinsic rewards (Meaningfulness, Choice, Competence, Progress) are low, you can work with your manager to redesign aspects of your role to increase your energy and satisfaction." }
+const FAQ_DISC_SALES = [
+  { question: "MBTI vs. DiSC: Which one do I need?", answer: "MBTI best for deep self-awareness and understanding 'why' we act. DiSC is highly practical and focuses on 'how' we behave. If you want immediate, tactical improvements in daily communication and sales effectiveness, DiSC is your tool." }
 ];
 
 export const ASSESSMENTS: Assessment[] = [
-  // --- MBTI ---
+  // --- CORE BEHAVIOR & PERSONALITY ---
+  {
+    id: 'everything-disc-workplace',
+    name: 'Everything DiSC Workplace® Profile',
+    provider: 'Wiley',
+    category: 'Behavior & Personality',
+    price: 150.00,
+    description: "Transform your workplace culture with the world's most practical behavioral tool. Everything DiSC® is not just a test; it’s a shared language that helps employees at every level connect better, communicate more effectively, and reduce the friction that slows down productivity.",
+    bestFor: 'Teams seeking immediate improvements in communication, managers looking to build rapport, and organizations aiming to reduce conflict.',
+    whatItMeasures: 'Specific behavioral tendencies across four primary styles: Dominance, Influence, Steadiness, and Conscientiousness.',
+    features: ['Personalized 20-page behavioral profile', 'Tactical strategies for interacting with different styles', 'Action-oriented summary for immediate application', 'Access to MyEverytingDiSC.com for ongoing learning'],
+    benefits: ['Eliminate communication silos across departments', "Equip employees to handle 'difficult' personalities with ease", 'Build a culture of psychological safety and mutual respect', 'Increase team speed by reducing interpersonal misunderstandings'],
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2959213?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '20 mins',
+    methodology: 'Adaptive Testing',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_DISC_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/c550dfca5a88761cc45b0eba1a7bb2b2b24fcef8bb09d1bb162c04a5349dd592"
+  },
   {
     id: 'mbti-step1-profile',
     name: 'MBTI® Step I - Profile Report',
     provider: 'The Myers-Briggs Company',
-    category: 'Personality',
+    category: 'Behavior & Personality',
     price: 95.00,
-    description: 'The standard MBTI assessment providing your 4-letter personality type. Ideal for self-awareness and initial team building.',
-    whatItMeasures: '4 dichotomies: Extraversion-Introversion, Sensing-Intuition, Thinking-Feeling, Judging-Perceiving.',
-    features: ['Personalized 4-letter type', 'Clarity of preferences', 'Brief development tips'],
-    benefits: ['Increase self-awareness', 'Improve communication', 'Resolve conflict'],
-    bestFor: 'Individual development, Team building',
+    description: 'Unlock the foundation of your professional identity. This essential profile provides a positive framework for understanding how you perceive the world and make decisions, acting as the bedrock for any coaching or self-awareness journey.',
+    bestFor: 'Individual contributors, new hires, and professionals seeking a clear understanding of their natural personality preferences.',
+    whatItMeasures: 'Core psychological preferences: Extraversion-Introversion, Sensing-Intuition, Thinking-Feeling, and Judging-Perceiving.',
+    features: ['Verified 4-letter personality type', 'Summary of strengths and work-style preferences', 'Concise development pointers'],
+    benefits: ['Gain immediate clarity on natural work style', 'Improve communication with diverse personalities', 'Identify optimal environments for high productivity'],
     image: 'https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
+    duration: '25 mins',
+    methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
+    level: ['Individual'],
     guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
+    faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb80ce40520733b2004075216a303e14d378f9c19ec423b408a07972566c68bd"
-  },
-  {
-    id: 'mbti-step1-iro',
-    name: 'MBTI® Step I - Interpretive Report for Organizations',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 125.00,
-    description: 'A detailed report designed specifically for organizational settings, applying type to work styles and communication.',
-    whatItMeasures: 'MBTI Step I Type with workplace application.',
-    features: ['Work style analysis', 'Communication style', 'Problem-solving approach'],
-    benefits: ['Better workplace integration', 'Enhanced management', 'Career development'],
-    bestFor: 'Employees, Managers',
-    image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: [
-      ...FAQ_MBTI,
-      { question: "How is this different from the Profile Report?", answer: "The IRO is much more detailed (approx. 10 pages vs 2 pages) and specifically focuses on how your personality plays out in a work environment, including leadership and conflict styles." }
-    ],
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/b5925c588d1a734ef27809c97997ee4189306ed59c0ef04342501d8244ad4b37"
   },
   {
     id: 'mbti-step1-interpretive',
     name: 'MBTI® Step I™ - Interpretive Report',
     provider: 'The Myers-Briggs Company',
-    category: 'Personality',
+    category: 'Behavior & Personality',
     price: 108.00,
-    description: 'A comprehensive report that explains your MBTI results in depth, providing insights into how your type impacts your personal and professional life.',
-    whatItMeasures: 'Basic MBTI type with extended interpretive narrative.',
-    features: ['Detailed type descriptions', 'Growth and development suggestions', 'Relational insights'],
-    benefits: ['Deep self-understanding', 'Actionable growth paths', 'Better interpersonal dynamics'],
-    bestFor: 'Individual development, Personal coaching',
+    description: 'A deep-dive narrative into your personality type. This comprehensive report explains how your preferences interact and provides an extensive toolkit for personal and professional growth.',
+    bestFor: 'Individuals in long-term coaching or those seeking a deep, reflective understanding of their personality architecture.',
+    whatItMeasures: 'Detailed facets of your personality type and their everyday application.',
+    features: ['Rich narrative descriptions', 'Extensive personal development roadmap', 'Strategies for effective relating'],
+    benefits: ['Achieve profound self-understanding', 'Build actionable growth paths', 'Enhance interpersonal maturity'],
     image: 'https://images.unsplash.com/photo-1507537297725-24a1c434c4b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
-    methodology: 'Self-report questionnaire',
+    methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
     guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
+    faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/4187f4c1b777a9afa02ebb07da76674b6cfb70a7e1fe37e7f4216cb047ca9058"
-  },
-  {
-    id: 'mbti-step1-career',
-    name: 'MBTI® Step I™ - Career Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 75.00,
-    description: 'Applies your personality type to career exploration, helping you find roles and environments where you will thrive.',
-    whatItMeasures: 'Personality type in relation to career satisfaction and fit.',
-    features: ['Career-type mapping', 'Preferred work environments', 'Potential career challenges'],
-    benefits: ['Targeted career search', 'Identify high-satisfaction roles', 'Understand work-style strengths'],
-    bestFor: 'Job seekers, Students, Career changers',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/fcbfc22fc5633b31f8c7a51487f775acec80571d4a14df99342b87cc9a50ca33"
-  },
-  {
-    id: 'mbti-step1-conflict',
-    name: 'MBTI® Step I™ - Conflict Style Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 105.00,
-    description: 'Explores how your personality type influences your reaction to conflict and provides strategies for more effective resolution.',
-    whatItMeasures: 'Conflict triggers and behaviors based on MBTI type.',
-    features: ['Conflict style analysis', 'Typical blind spots', 'Management strategies'],
-    benefits: ['Reduced friction', 'Improved problem solving', 'Better team synergy'],
-    bestFor: 'Team leaders, Employee development',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/fc1e955b193c1222706aabd32995cac582dd895b7de1f16b015a6c5100d3778b"
-  },
-  {
-    id: 'mbti-step1-communication',
-    name: 'MBTI® Step I™ - Communication Style Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 105.00,
-    description: 'Details your natural communication style and provides tips for adapting to others to improve collaboration.',
-    whatItMeasures: 'Verbal and written communication preferences.',
-    features: ['Communication habits', 'Influence styles', 'Tips for cross-type communication'],
-    benefits: ['Clearer messaging', 'Increased influence', 'Better team alignment'],
-    bestFor: 'Professionals at all levels',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/71de3d30c33b766251b5eaa1b4028c2d18a8f3bb30c642d83181fa516203c8cf"
-  },
-  {
-    id: 'mbti-step1-decision',
-    name: 'MBTI® Step I™ - Decision-Making Style Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 105.00,
-    description: 'Analyzes how you gather information and make choices, identifying potential biases and areas for improvement.',
-    whatItMeasures: 'Information gathering and evaluation preferences.',
-    features: ['Decision style breakdown', 'Potential pitfalls', 'Improvement roadmap'],
-    benefits: ['Better organizational outcomes', 'Reduced bias', 'Faster consensus building'],
-    bestFor: 'Managers, Executives',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/4fe5fb78ba388dff29cf11ae5f8100f3ecb473458ce4c15a9d68281e6c4efba5"
-  },
-  {
-    id: 'mbti-step1-stress',
-    name: 'MBTI® Step I™ - Stress Management Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 105.00,
-    description: 'Identifies stress triggers unique to your personality type and provides customized coping mechanisms.',
-    whatItMeasures: 'Stress indicators and responses.',
-    features: ['Stress triggers by type', 'Behavioral warning signs', 'Coping strategies'],
-    benefits: ['Increased resilience', 'Prevent burnout', 'Better emotional regulation'],
-    bestFor: 'High-pressure environments',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Self-report questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/b2227e06d5ae6d0064fcc5ca7bd3dc52e8a583c1fbad088db240e0ce36bc6b5c"
-  },
-  {
-    id: 'mbti-step1-healthcare',
-    name: 'MBTI® Step I™ - Healthcare Professionals Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 100.00,
-    description: 'Designed specifically for the healthcare sector, focusing on patient interaction, teamwork, and care delivery.',
-    whatItMeasures: 'Personality type applied to medical and clinical settings.',
-    features: ['Patient communication tips', 'Clinical team dynamics', 'Self-care for caregivers'],
-    benefits: ['Better patient outcomes', 'Reduced clinician burnout', 'Enhanced care coordination'],
-    bestFor: 'Doctors, Nurses, Allied Health',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Sector-specific self-report',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb5e3b25d9460e296dae330045e8d72e17f949bc12eee84272f098b1a61f8a97"
   },
   {
     id: 'mbti-step2-interpretive',
     name: 'MBTI® Step II - Interpretive Report',
     provider: 'The Myers-Briggs Company',
-    category: 'Personality',
+    category: 'Behavior & Personality',
     price: 160.00,
-    description: 'The most comprehensive MBTI report available, combining Step I and Step II data with extensive development planning.',
-    whatItMeasures: 'Full Type + 20 Facets with detailed interpretation.',
-    features: ['Comprehensive analysis', 'Communication exercises', 'Decision-making style', 'Change management style'],
-    benefits: ['Executive level insight', 'Comprehensive development roadmap'],
-    bestFor: 'Executives, Senior Leaders',
+    description: "The most granular MBTI insight available. Beyond your 4-letter type, Step II examines 20 specific facets of personality to explain your unique 'spin' on your type. It is the ultimate tool for executive level coaching.",
+    bestFor: 'Senior leaders, executives, and individuals who want to understand the complexities and nuances of their personality facets.',
+    whatItMeasures: '20 distinct personality facets alongside the 4-letter type preference.',
+    features: ['20 sub-scale facet scores', 'Facet-level development tips', 'Communication and change-style insights'],
+    benefits: ['Highly personalized development insights', 'Understand internal behavioral contradictions', 'Optimize leadership and decision-making styles'],
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '45 mins',
-    methodology: 'Extended questionnaire',
+    methodology: 'Facet-based Psychometric Assessment',
     useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
+    level: ['Individual', 'Organization'],
     guidance: GUIDANCE_MBTI,
-    faq: FAQ_MBTI,
+    faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/0a6a46e26542dc6f6c6cdd54ea8185a128250f71ab13e8bff2d5f0ac7547e1e3"
   },
-
-  // --- APOLLO ---
   {
     id: 'apollo',
     name: 'APOLLO Profile',
     provider: 'Apollo',
-    category: 'Personality',
+    category: 'Behavior & Personality',
     price: 135.00,
-    description: 'A multi-faceted personality tool designed for selection and development.',
-    whatItMeasures: '34 factors including work preferences and values.',
-    features: ['Job match reporting', 'Development tips', 'Narrative report'],
-    benefits: ['Cost-effective selection', 'Identify training needs'],
-    bestFor: 'Recruitment, General employees',
+    description: "A comprehensive workplace behavioral diagnostic. Apollo provides a multi-dimensional view of professional DNA, measuring task approaches, social interaction, and core motivations in one integrated report.",
+    bestFor: 'Recruitment screening for mid-level roles and talent benchmarking for cultural alignment.',
+    whatItMeasures: '34 work-related factors including task management, social styles, and intrinsic drivers.',
+    features: ['34-factor behavioral mapping', 'Job-match reporting', 'Social desirability (faking) detection'],
+    benefits: ['Obtain a 360-degree view of candidate fit', 'Identify training needs early in the hire process', 'Reduce turnover by ensuring cultural and values alignment'],
     image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '40 mins',
-    methodology: 'Normative questionnaire',
-    useCase: ['Hiring', 'Selection'],
+    methodology: 'Normative Behavioral Assessment',
+    useCase: ['Hiring', 'Selection', 'Development'],
     level: ['Individual'],
-    guidance: GUIDANCE_APOLLO,
-    faq: [
-      { question: "Is Apollo suitable for all job levels?", answer: "Yes, Apollo compares candidates against different norm groups (e.g., Managers, Sales, Grads) to ensure relevance across all organizational levels." },
-      { question: "Does it detect faking?", answer: "Yes, Apollo has built-in social desirability scales to identify if a candidate is trying to present an over-positive image." }
-    ],
+    guidance: GUIDANCE_OTHER,
+    faq: [{ question: "How does this differ from MBTI?", answer: "While MBTI is for self-discovery, Apollo is a normative diagnostic designed to predict performance and fit against a general population or specific benchmarks." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/de054c6aeba0148688b8692e740e5108df64e768b69ac0205b35a9915adf65f8"
   },
 
-  // --- ISTARTSTRONG ---
-  {
-    id: 'istartstrong',
-    name: 'iStartStrong',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 40.00,
-    description: 'A dynamic career interest report that provides a starting point for career exploration. It maps your interests to career paths and educational fields.',
-    whatItMeasures: 'Career interests based on Holland Codes (RIASEC themes) and specific interest areas.',
-    features: [
-      'Personalized interest profile',
-      'Top career recommendations',
-      'Educational and major suggestions',
-      'Direct links to career data'
-    ],
-    benefits: [
-      'Find clarity in career direction',
-      'Discover educational paths that match your passions',
-      'Validate your career choices with scientific data',
-      'Start your professional journey with confidence'
-    ],
-    bestFor: 'Students, Career Changers, Career Counseling',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '15-20 mins',
-    methodology: 'Strong Interest Inventory based questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_ISTARTSTRONG,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/0bde01cc0584f68656d9d48882c74102c1d47c6ff1de3e6ac38be00f28e0b167"
-  },
-
-  // --- TKI ---
-  {
-    id: 'tki-profile-interpretive',
-    name: 'TKI Profile and Interpretive Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Team Effectiveness',
-    price: 90.00,
-    description: 'The world\'s best-selling conflict management tool. It identifies an individual\'s preferred conflict-handling style and provides guidance for more effective resolution.',
-    whatItMeasures: 'Five conflict-handling modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating.',
-    features: [
-      'Personal conflict style profile',
-      'Interpretive guidance for each mode',
-      'Situational appropriateness analysis',
-      'Conflict resolution strategies'
-    ],
-    benefits: [
-      'Improve team communication',
-      'Reduce workplace friction',
-      'Navigate difficult conversations effectively',
-      'Increase personal and team productivity'
-    ],
-    bestFor: 'Conflict Management, Team Building, Management Development',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '15-20 mins',
-    methodology: 'Self-report forced-choice questionnaire',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_TKI,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ff5217c6155864cc055e37ded7d955e12608baa6c0fb83fafd71fdd6fc9a65a2"
-  },
-
-  // --- WORK ENGAGEMENT PROFILE ---
-  {
-    id: 'work-engagement-profile-interpretive',
-    name: 'Work Engagement Profile Interpretive Report',
-    provider: 'The Myers-Briggs Company',
-    category: 'Personality',
-    price: 85.00,
-    description: 'Measures the intrinsic rewards that drive employee engagement. This report helps individuals and managers understand how to boost energy, passion, and commitment at work.',
-    whatItMeasures: 'Four intrinsic rewards: Meaningfulness, Choice, Competence, and Progress.',
-    features: [
-      'Intrinsic reward scoring',
-      'Current engagement level analysis',
-      'Personalized development tips',
-      'Engagement improvement roadmap'
-    ],
-    benefits: [
-      'Increase employee retention',
-      'Identify and address burnout risk',
-      'Empower individuals to manage their own engagement',
-      'Drive high-performance culture'
-    ],
-    bestFor: 'Employee Retention, Engagement Surveys, Career Development',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '10-15 mins',
-    methodology: 'Self-report engagement assessment',
-    useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_MBTI,
-    faq: FAQ_WEP,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/c68c3cd19af1a6f863ec6bae70d1b8975d0b65760ffb9eec838eb604e979a0f3"
-  },
-
-  // --- HOGAN CORE ---
-  {
-    id: 'hogan-flash',
-    name: 'Hogan Flash Report',
-    provider: 'Hogan Assessments',
-    category: 'Leadership',
-    price: 180.00,
-    description: 'A snapshot of HPI, HDS, and MVPI scores without interpretive text. For certified users.',
-    whatItMeasures: 'All scales from HPI, HDS, MVPI.',
-    features: ['Graphical data only', 'No narrative', 'Quick reference'],
-    benefits: ['Cost-effective for coaches', 'Immediate data access'],
-    bestFor: 'Certified Coaches, HR Pros',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '60 mins',
-    methodology: 'HPI + HDS + MVPI',
-    useCase: ['Coaching', 'Selection'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: [
-        ...FAQ_HOGAN,
-        { question: "Why is there no text?", answer: "The Flash report is designed for certified practitioners who can interpret the raw scale scores without needing generic narrative descriptions." }
-    ],
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6191208aa4352ca23b2560d96fb87eb7e2526def59b17f9baae0725a37ed03bf"
-  },
-  {
-    id: 'hogan-eq',
-    name: 'Hogan EQ Report',
-    provider: 'Hogan Assessments',
-    category: 'Personality',
-    price: 150.00,
-    description: 'Assess emotional intelligence based on personality, not just current skill.',
-    whatItMeasures: '6 EQ Competencies: Awareness, Detection, Regulation, Influence, Expression, Empathy.',
-    features: ['EQ Score', 'Pros/Cons of score', 'Discussion points'],
-    benefits: ['Improve interpersonal skill', 'Sales effectiveness'],
-    bestFor: 'Sales, Customer Service, Leaders',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'HPI + HDS',
-    useCase: ['Development', 'Hiring'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/2632729437993b53b3dc604a7ddb7f1366445fbfaef98ddb38e18cd393762050"
-  },
+  // --- LEADERSHIP & MANAGEMENT ---
   {
     id: 'hogan-leader-focus',
     name: 'Hogan Leader Focus Report',
     provider: 'Hogan Assessments',
-    category: 'Leadership',
+    category: 'Leadership & Management',
     price: 150.00,
-    description: 'Includes HPI and MVPI. Focuses on leadership style and values.',
-    whatItMeasures: 'Leadership style based on day-to-day personality and drivers.',
-    features: ['6 Leadership Dimensions', 'Blind spots'],
-    benefits: ['Emerging leader development', 'Self-insight'],
-    bestFor: 'New Managers',
+    description: "Define your leadership signature. By integrating your strengths with your core values, this report explains how you lead others and what kind of culture you build. It's the definitive tool for emerging and established managers.",
+    bestFor: 'New managers and high-potential leaders looking to professionalize their management style.',
+    whatItMeasures: 'Six leadership dimensions: Results, People, Process, Thought, Social, and Data.',
+    features: ['Integrated HPI and MVPI analysis', 'Unique Leadership Signature profile', 'Actionable leadership development tips'],
+    benefits: ['Accelerate transition from doer to leader', 'Understand impact on team culture', 'Identify specific gaps in management toolkit'],
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '40 mins',
-    methodology: 'HPI + MVPI',
-    useCase: ['Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/1088c3cb777900c6f9da5abbb7ab3e24201b96eb0b1027c58b65abefc6e86856"
-  },
-  {
-    id: 'hogan-career',
-    name: 'Hogan Career Report',
-    provider: 'Hogan Assessments',
-    category: 'Personality',
-    price: 100.00,
-    description: 'Provides insights into how an individual’s personality will impact their career success and workplace performance.',
-    whatItMeasures: 'Professional strengths, potential derailers, and career drivers.',
-    features: ['HPI Scale interpretation', 'Career development tips', 'Job fit indicators'],
-    benefits: ['Better career alignment', 'Personalized growth plan', 'Identify key strengths'],
-    bestFor: 'Job seekers, Early career professionals',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'HPI based report',
+    methodology: 'HPI + MVPI Integration',
     useCase: ['Development', 'Coaching'],
-    level: ['Individual'],
+    level: ['Individual', 'Team'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/a1078325e0d09ca9a45fc14c5a756a16594db4bb5ca9f6a71aa83012a83e6dcd"
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/1088c3cb777900c6f9da5abbb7ab3e24201b96eb0b1027c58b65abefc6e86856"
   },
   {
     id: 'hogan-challenge',
     name: 'Hogan Challenge Report',
     provider: 'Hogan Assessments',
-    category: 'Leadership',
+    category: 'Leadership & Management',
     price: 240.00,
-    description: 'Explores the "dark side" of personality—tendencies that emerge under stress and can derail leadership effectiveness.',
-    whatItMeasures: '11 personality derailers including Arrogance, Volatility, and Caution.',
-    features: ['Dark side behavioral profile', 'Risk mitigation strategies', 'Strategic self-awareness'],
-    benefits: ['Prevent leadership failure', 'Improve team relations', 'Manage stress reactions'],
-    bestFor: 'Senior Leaders, High-potentials',
+    description: "Identify leadership derailers before they happen. This report maps the 'Dark Side' of personality—tendencies that emerge under stress and can sabotage effectiveness and team morale.",
+    bestFor: 'Senior executives and leaders in high-stakes roles where behavioral errors have high consequences.',
+    whatItMeasures: '11 behavioral derailers including Excitable, Skeptical, Cautious, Bold, and Imaginative.',
+    features: ['11 derailer risk profiles', 'Stress-reaction analysis', 'Strategic risk-mitigation strategies'],
+    benefits: ['Build awareness of blind spots under pressure', 'Protect organizational reputation', 'Improve executive longevity and team retention'],
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
-    methodology: 'HDS based report',
-    useCase: ['Development', 'Selection'],
+    methodology: 'HDS (Hogan Development Survey)',
+    useCase: ['Development', 'Coaching', 'Selection'],
     level: ['Individual', 'Organization'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
+    faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/d426b867f2015c65688a122825d7b6b9607cbf3eb3606dc135264e855c90ddd0"
   },
   {
     id: 'hogan-coaching',
     name: 'Hogan Coaching Report',
     provider: 'Hogan Assessments',
-    category: 'Leadership',
+    category: 'Leadership & Management',
     price: 240.00,
-    description: 'A comprehensive development tool that integrates HPI, HDS, and MVPI results into an actionable executive coaching roadmap.',
-    whatItMeasures: 'Bright side traits, dark side derailers, and core values.',
-    features: ['Integrated 3-assessment view', 'Coaching focus areas', 'Developmental action items'],
-    benefits: ['Targeted executive growth', 'Strategic talent development', 'High-impact self-insight'],
-    bestFor: 'Executives, Senior Management',
+    description: "The ultimate executive development roadmap. Integrating HPI, HDS, and MVPI, this report provides a comprehensive view of strengths, risks, and values to drive deep behavioral change.",
+    bestFor: 'C-suite executives and senior leaders undergoing long-term strategic coaching.',
+    whatItMeasures: 'Bright-side traits, Dark-side risks, and core motivational values.',
+    features: ['Comprehensive triple-assessment integration', 'High-impact coaching focus areas', 'Strategic self-awareness benchmarks'],
+    benefits: ['Drive transformative leadership growth', 'Align behavior with strategic goals', 'Achieve elite level self-mastery'],
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '60 mins',
-    methodology: 'Integrated HPI/HDS/MVPI',
+    methodology: 'Full Hogan Suite Integration',
     useCase: ['Coaching', 'Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
+    faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/14ea35ec51a8b83fe1db0d50373e6a71b9e4515fee057646a7f6865e1db23edd"
-  },
-  {
-    id: 'hogan-compass',
-    name: 'Hogan Compass Report',
-    provider: 'Hogan Assessments',
-    category: 'Personality',
-    price: 100.00,
-    description: 'Unpacks an individual’s values, drivers, and interests to determine organizational fit and career direction.',
-    whatItMeasures: '10 Core values including Power, Security, and Hedonism.',
-    features: ['Value-based career mapping', 'Preferred work environments', 'Motivational profile'],
-    benefits: ['Improve employee engagement', 'Ensure culture fit', 'Identify intrinsic motivators'],
-    bestFor: 'Recruitment, Career pathing',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'MVPI based report',
-    useCase: ['Selection', 'Development'],
-    level: ['Individual', 'Organization'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6a8d7b8648c740a3382ac19362476e3b8d4976ca485aedb97cfad9cfe7f24dbe"
   },
   {
     id: 'hogan-manage',
     name: 'Hogan Manage Report',
     provider: 'Hogan Assessments',
-    category: 'Leadership',
+    category: 'Leadership & Management',
     price: 100.00,
-    description: 'Focuses on the day-to-day managerial style of an individual and how they are likely to lead their teams.',
-    whatItMeasures: 'Managerial strengths, development needs, and leadership impact.',
-    features: ['Leadership style analysis', 'Employee engagement tips', 'Managing style profile'],
-    benefits: ['Upskill new managers', 'Optimize team management', 'Increase leadership awareness'],
-    bestFor: 'Middle Management, Emerging Leaders',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    description: "Optimizing the manager-employee dynamic. This report helps managers understand their own style and provides specific tactics for managing different types of employees effectively.",
+    bestFor: 'Operational managers and team leads focused on day-to-day people performance.',
+    whatItMeasures: 'Managerial behavioral tendencies and their impact on direct reports.',
+    features: ['Management style profile', 'Employee engagement strategies', 'Conflict handling tips'],
+    benefits: ['Improve team engagement scores', 'Tailor management to individual needs', 'Reduce friction in direct report relationships'],
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
-    methodology: 'HPI based management view',
+    methodology: 'HPI-based Management View',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
+    faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/5cb35833af1daa9f99f6cafb9e3a81332e9eec9657f8ffe223510c9fa9d3d796"
+  },
+  {
+    id: 'lhh-unconscious-bias',
+    name: 'LHH Mitigating Unconscious Bias Report',
+    provider: 'LHH',
+    category: 'Leadership & Management',
+    price: 110.00,
+    description: "Foster a truly inclusive leadership culture. This report identifies hidden biases in decision-making and provides a roadmap for equitable and inclusive leadership behaviors.",
+    bestFor: 'Organizations serious about DE&I and leaders who want to ensure fairness in their talent decisions.',
+    whatItMeasures: 'Inclusion tendencies, bias awareness, and behavioral openness.',
+    features: ['Bias profile and risk areas', 'Actionable inclusion strategies', 'Decision-making bias analysis'],
+    benefits: ['Support organizational DE&I goals', 'Improve leadership fairness and trust', 'Attract and retain diverse talent'],
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Behavioral Bias Assessment',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: [{ question: "Is this for HR only?", answer: "No, this is most effective for line managers and executives who make daily decisions about people and strategy." }],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/59cdc45301548caa6a5d8cd2f8537404c01bd6a8ee9d07caf74b0f062f446b97"
+  },
+
+  // --- TEAM DYNAMICS ---
+  {
+    id: 'mbti-step1-iro',
+    name: 'MBTI® Step I - Interpretive Report for Organizations',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Dynamics',
+    price: 125.00,
+    description: "Translate personality into business performance. This report applies MBTI results directly to work styles, team communication, and office problem-solving.",
+    bestFor: 'Corporate teams, project groups, and managers seeking to improve collaborative output.',
+    whatItMeasures: 'Personality type applied to Work Style, Communication, Problem Solving, and Leadership.',
+    features: ['Business-context type interpretation', 'Team communication strategy', 'Problem-solving models'],
+    // Fix syntax error: Properly quote strings containing single quotes
+    benefits: ['Improve quality of team collaboration', "Reduce 'clash' between different work styles", 'Equip teams with a common language for feedback'],
+    image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Applied Psychometric Report',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/b5925c588d1a734ef27809c97997ee4189306ed59c0ef04342501d8244ad4b37"
+  },
+  {
+    id: 'mbti-step1-conflict',
+    name: 'MBTI® Step I™ - Conflict Style Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Dynamics',
+    price: 105.00,
+    description: "Handle disagreements with maturity and strategy. This report explores how your personality type reacts to conflict and offers tailored tips for resolution.",
+    bestFor: 'Teams facing high friction and individuals in conflict-heavy roles like HR or Customer Success.',
+    whatItMeasures: 'Conflict behaviors and triggers through the lens of MBTI type.',
+    features: ['Conflict trigger analysis', 'Style-specific resolution tips', 'Blind spot identification'],
+    benefits: ['Reduce emotional cost of workplace conflict', 'Move from avoidance to resolution', 'Protect team synergy during high-stress periods'],
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Psychometric Questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/fc1e955b193c1222706aabd32995cac582dd895b7de1f16b015a6c5100d3778b"
+  },
+  {
+    id: 'mbti-step1-communication',
+    name: 'MBTI® Step I™ - Communication Style Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Dynamics',
+    price: 105.00,
+    description: "Become an influential communicator. Understand your natural communication habits and learn how to adapt your message for different personality types.",
+    bestFor: 'Professionals who need to influence without authority and teams seeking to align their messaging.',
+    whatItMeasures: 'Verbal and written communication preferences and influence styles.',
+    features: ['Communication habit mapping', 'Influencing strategies by type', 'Action plan for effective messaging'],
+    // Fix syntax error: Properly quote strings containing single quotes
+    benefits: ['Increase personal impact and influence', 'Ensure clarity in cross-functional communication', "Minimize 'lost in translation' errors in teams"],
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Psychometric Questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/71de3d30c33b766251b5eaa1b4028c2d18a8f3bb30c642d83181fa516203c8cf"
+  },
+  {
+    id: 'tki-profile-interpretive',
+    name: 'TKI Profile and Interpretive Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Dynamics',
+    price: 90.00,
+    description: "The world's #1 tool for conflict management. TKI helps individuals understand their default conflict mode and provides a toolkit for choosing more strategic responses.",
+    bestFor: 'Teams, mediators, and negotiators looking for quick, high-impact behavioral change.',
+    whatItMeasures: 'Five conflict-handling modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating.',
+    features: ['Clear conflict-mode profiling', 'Situational application guide', 'Flexibility improvement roadmap'],
+    benefits: ['Improve speed of consensus-building', 'Equip teams to handle difficult debates safely', 'Increase tactical negotiation effectiveness'],
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15 mins',
+    methodology: 'Forced-choice Behavioral Mapping',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: [{ question: "Is there a 'right' style?", answer: "No, TKI teaches that all five modes are useful. Success is about choosing the right mode for the right situation." }],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/ff5217c6155864cc055e37ded7d955e12608baa6c0fb83fafd71fdd6fc9a65a2"
+  },
+  {
+    id: 'work-engagement-profile-interpretive',
+    name: 'Work Engagement Profile Interpretive Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Team Dynamics',
+    price: 85.00,
+    description: "Unlock the secret to high engagement. This profile measures the intrinsic rewards that drive employee passion and commitment, helping to prevent burnout and turnover.",
+    bestFor: 'Organizations facing low morale or high turnover and managers looking to boost team energy.',
+    whatItMeasures: 'Four intrinsic rewards: Meaningfulness, Choice, Competence, and Progress.',
+    features: ['Intrinsic reward scores', 'Engagement level analysis', 'Practical engagement development tips'],
+    benefits: ['Identify and mitigate burnout early', 'Create a more energized workplace', 'Improve employee retention and performance'],
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '15 mins',
+    methodology: 'Intrinsic Reward Assessment',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: [{ question: "Is this like an engagement survey?", answer: "No, most surveys ask about 'satisfaction.' This measures the 'internal engine' of engagement—the intrinsic rewards a person feels at work." }],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/c68c3cd19af1a6f863ec6bae70d1b8975d0b65760ffb9eec838eb604e979a0f3"
+  },
+
+  // --- CAREER DEVELOPMENT ---
+  {
+    id: 'mbti-step1-career',
+    name: 'MBTI® Step I™ - Career Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Career Development',
+    price: 75.00,
+    description: "Align your personality with your career path. This report helps you find professional satisfaction by matching your type to optimal work environments and career fields.",
+    bestFor: 'Job seekers, students, and professionals looking for more fulfilling career options.',
+    whatItMeasures: 'Personality-to-career fit and workplace satisfaction factors.',
+    features: ['Type-specific career recommendations', 'Preferred work-style analysis', 'Challenges in career search by type'],
+    benefits: ['Target your job search more effectively', 'Identify why previous roles were dissatisfying', 'Gain confidence in career transitions'],
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Psychometric Questionnaire',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/fcbfc22fc5633b31f8c7a51487f775acec80571d4a14df99342b87cc9a50ca33"
+  },
+  {
+    id: 'istartstrong',
+    name: 'iStartStrong',
+    provider: 'The Myers-Briggs Company',
+    category: 'Career Development',
+    price: 40.00,
+    description: "Ignite your professional journey. Using the Strong Interest Inventory framework, this report maps your personal interests to real-world career and educational paths.",
+    bestFor: 'Students and early-career pivoters looking for scientific validation of their career interests.',
+    whatItMeasures: 'Career interest themes (RIASEC) and specific professional interest areas.',
+    features: ['Top career recommendations', 'Educational path mapping', 'Direct links to career databases'],
+    benefits: ['Discover paths you hadn\'t considered', 'Validate existing career intuitions', 'Save time on educational planning'],
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '20 mins',
+    methodology: 'Interest-based Mapping',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: [{ question: "Is this for students only?", answer: "No, it is highly valuable for adults looking to pivot or find a hobby-turned-career." }],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/0bde01cc0584f68656d9d48882c74102c1d47c6ff1de3e6ac38be00f28e0b167"
+  },
+  {
+    id: 'hogan-career',
+    name: 'Hogan Career Report',
+    provider: 'Hogan Assessments',
+    category: 'Career Development',
+    price: 100.00,
+    description: "How others see your professional brand. This report focuses on your workplace reputation and strengths, identifying the roles where your natural personality will shine.",
+    bestFor: 'Professionals focused on personal branding and upward career mobility.',
+    whatItMeasures: 'Occupational strengths, potential derailers, and career drivers.',
+    features: ['Reputational trait mapping', 'Developmental action plan', 'Workplace culture fit analysis'],
+    // Fix syntax error: Properly quote strings containing single quotes
+    benefits: ["Understand your 'market value'", 'Address weaknesses before they impact promotion', 'Align your career path with your core reputation'],
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI-based Career View',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/a1078325e0d09ca9a45fc14c5a756a16594db4bb5ca9f6a71aa83012a83e6dcd"
+  },
+
+  // --- SALES & SAFETY ---
+  {
+    id: 'hogan-sales',
+    name: 'Hogan Sales Basis Report',
+    provider: 'Hogan Assessments',
+    category: 'Sales & Safety',
+    price: 210.00,
+    description: "Identify top sales hunters. This report evaluates candidates against the specific personality traits that predict success in high-pressure sales roles.",
+    bestFor: 'Sales directors and HR hiring for revenue-generating roles.',
+    whatItMeasures: 'Sales potential, persistence, resilience, and relationship-building capacity.',
+    features: ['8 core sales competencies', 'Sales cycle strength analysis', 'Coaching guide for sales performance'],
+    benefits: ['Hire revenue-generators with certainty', 'Identify training needs for your current sales force', 'Reduce turnover in high-pressure sales environments'],
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI + MVPI Sales Mapping',
+    useCase: ['Hiring', 'Selection', 'Development'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6c32b5f38b926e3e75d0d2278952dfbbf87e5b83ea187091fa7ee6c8f7046769"
   },
   {
     id: 'hogan-safety',
@@ -541,61 +419,143 @@ export const ASSESSMENTS: Assessment[] = [
     provider: 'Hogan Assessments',
     category: 'Sales & Safety',
     price: 100.00,
-    description: 'Measures individual safety awareness and identifies potential safety risks in industrial and high-risk roles.',
-    whatItMeasures: '6 Safety-related traits: Defiant, Panicky, Irritable, Distractible, Reckless, Arrogant.',
-    features: ['Safety risk profile', 'Behavioral coaching for safety', 'Risk reduction tips'],
-    benefits: ['Reduce workplace accidents', 'Improve safety culture', 'Screen for safety-conscious talent'],
-    bestFor: 'Industrial roles, Transport, Healthcare',
+    description: "Minimize workplace risk. This report measures safety awareness and identifies candidates who may be prone to reckless or distracted behaviors in high-risk environments.",
+    bestFor: 'Industrial, transport, and healthcare organizations where safety is paramount.',
+    whatItMeasures: '6 safety-related traits: Defiant, Panicky, Irritable, Distractible, Reckless, and Arrogant.',
+    features: ['Safety risk profile', 'Behavioral safety coaching', 'Risk reduction action items'],
+    benefits: ['Reduce workplace accidents and liability', 'Improve safety culture through selection', 'Identify employees who need specific safety monitoring'],
     image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
-    methodology: 'HPI safety-mapped scales',
-    useCase: ['Hiring', 'Selection'],
+    methodology: 'HPI Safety Mapping',
+    useCase: ['Hiring', 'Selection', 'Development'],
     level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
+    faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/c4b8a83fd49252cb32cd555961f6de14321baa7619193a5c285d8d565f668139"
   },
+
+  // --- PROFESSIONAL SKILLS ---
   {
-    id: 'hogan-sales',
-    name: 'Hogan Sales Basis Report',
-    provider: 'Hogan Assessments',
-    category: 'Sales & Safety',
-    price: 210.00,
-    description: 'Evaluates personality in relation to sales performance, focusing on strengths and hurdles in the sales cycle.',
-    whatItMeasures: 'Sales potential, networking ability, and resilience to rejection.',
-    features: ['8 Sales competencies', 'Sales style breakdown', 'Coaching for sales performance'],
-    benefits: ['Hire top sales talent', 'Improve sales productivity', 'Targeted sales training'],
-    bestFor: 'Sales professionals, Account managers',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    id: 'mbti-step1-decision',
+    name: 'MBTI® Step I™ - Decision-Making Style Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Professional Skills',
+    price: 105.00,
+    description: "Make better choices. Analyze your natural decision-making style, identify potential cognitive biases, and learn a framework for more balanced information gathering.",
+    bestFor: 'Managers, project leads, and professionals in decision-heavy roles.',
+    whatItMeasures: 'Information gathering and evaluation preferences based on MBTI.',
+    features: ['Decision-style analysis', 'Bias identification', 'Strategy for balanced decisions'],
+    benefits: ['Avoid groupthink and personal bias', 'Improve the speed and quality of organizational decisions', 'Gain consensus more effectively'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
-    methodology: 'HPI/MVPI sales mapping',
-    useCase: ['Hiring', 'Development'],
-    level: ['Individual'],
-    guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN,
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6c32b5f38b926e3e75d0d2278952dfbbf87e5b83ea187091fa7ee6c8f7046769"
-  },
-  {
-    id: 'lhh-unconscious-bias',
-    name: 'LHH Mitigating Unconscious Bias Report',
-    provider: 'LHH',
-    category: 'Leadership',
-    price: 110.00,
-    description: 'Helps leaders identify their blind spots and provides strategies to foster a more inclusive and equitable workplace culture.',
-    whatItMeasures: 'Inclusion tendencies, bias awareness, and behavioral openness.',
-    features: ['Bias awareness profile', 'Actionable inclusion strategies', 'Impact on decision making'],
-    benefits: ['Drive DE&I initiatives', 'Improve leadership fairness', 'Reduce organizational bias'],
-    bestFor: 'Managers, HR Leaders',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '30 mins',
-    methodology: 'Custom behavioral assessment',
+    methodology: 'Applied Psychometric Report',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/4fe5fb78ba388dff29cf11ae5f8100f3ecb473458ce4c15a9d68281e6c4efba5"
+  },
+  {
+    id: 'mbti-step1-stress',
+    name: 'MBTI® Step I™ - Stress Management Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Professional Skills',
+    price: 105.00,
+    description: "Build resilience under pressure. Identifies your unique stress triggers and behavioral reactions, offering customized coping mechanisms to prevent burnout.",
+    bestFor: 'High-pressure professionals and teams facing rapid change.',
+    whatItMeasures: 'Stress indicators, triggers, and reactions by personality type.',
+    features: ['Stress trigger identification', 'Customized coping strategies', 'Resilience building roadmap'],
+    benefits: ['Prevent long-term burnout', 'Maintain professional effectiveness during crises', 'Improve personal health and workplace well-being'],
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Applied Psychometric Report',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/b2227e06d5ae6d0064fcc5ca7bd3dc52e8a583c1fbad088db240e0ce36bc6b5c"
+  },
+  {
+    id: 'mbti-step1-healthcare',
+    name: 'MBTI® Step I™ - Healthcare Professionals Report',
+    provider: 'The Myers-Briggs Company',
+    category: 'Professional Skills',
+    price: 100.00,
+    description: "Elevate patient care through personality awareness. Designed for clinical settings to improve patient communication and healthcare team dynamics.",
+    bestFor: 'Doctors, nurses, and allied health professionals.',
+    whatItMeasures: 'Personality preferences applied to clinical communication and teamwork.',
+    features: ['Patient interaction tips', 'Healthcare team dynamic analysis', 'Caregiver self-care strategies'],
+    benefits: ['Improve patient satisfaction and compliance', 'Reduce clinician burnout', 'Enhance multi-disciplinary team coordination'],
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Sector-specific Applied Psychometric',
+    useCase: ['Development', 'Coaching'],
+    level: ['Individual', 'Team'],
+    guidance: GUIDANCE_MBTI,
+    faq: FAQ_MBTI_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb5e3b25d9460e296dae330045e8d72e17f949bc12eee84272f098b1a61f8a97"
+  },
+
+  // --- OTHERS (FLASH, EQ, COMPASS) ---
+  {
+    id: 'hogan-flash',
+    name: 'Hogan Flash Report',
+    provider: 'Hogan Assessments',
+    category: 'Behavior & Personality',
+    price: 180.00,
+    description: "Data-at-a-glance for experts. A graphical snapshot of HPI, HDS, and MVPI scores without narrative text, designed for certified practitioners.",
+    bestFor: 'Certified Hogan coaches and HR practitioners who need raw data for their own interpretation.',
+    whatItMeasures: 'Raw scores across all primary Hogan scales.',
+    features: ['HPI, HDS, and MVPI graphical data', 'No narrative text', 'Fast data access'],
+    benefits: ['Cost-effective for high-volume certified users', 'Avoid generic narrative for custom coaching', 'Immediate data visualization'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '60 mins',
+    methodology: 'Full Suite Raw Data',
+    useCase: ['Coaching', 'Selection'],
+    level: ['Individual'],
     guidance: GUIDANCE_OTHER,
-    faq: [
-      { question: "What is the goal of this report?", answer: "The goal is to provide leaders with an objective view of their natural biases and offer concrete behavioral changes to support a diverse workforce." }
-    ],
-    sampleReportUrl: "https://workdrive.zohoexternal.com/external/59cdc45301548caa6a5d8cd2f8537404c01bd6a8ee9d07caf74b0f062f446b97"
+    faq: [{ question: "Why is there no text?", answer: "This is for experts. Narrative can sometimes distract from the raw score patterns that a certified coach identifies." }],
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6191208aa4352ca23b2560d96fb87eb7e2526def59b17f9baae0725a37ed03bf"
+  },
+  {
+    id: 'hogan-compass',
+    name: 'Hogan Compass Report',
+    provider: 'Hogan Assessments',
+    category: 'Behavior & Personality',
+    price: 100.00,
+    description: "Find your motivational north star. Unpacks your core values and interests to determine organizational fit and career direction.",
+    bestFor: 'Talent managers focusing on cultural fit and employees seeking career meaning.',
+    whatItMeasures: '10 core values including Power, Security, Altruism, and Science.',
+    features: ['Value-based career mapping', 'Preferred culture analysis', 'Motivational profile'],
+    benefits: ['Ensure deep alignment between employee and culture', 'Identify intrinsic motivators to boost engagement', 'Map career paths based on values, not just skills'],
+    image: 'https://images.unsplash.com/photo-15222071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'MVPI (Motives, Values, Preferences Inventory)',
+    useCase: ['Selection', 'Development'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/6a8d7b8648c740a3382ac19362476e3b8d4976ca485aedb97cfad9cfe7f24dbe"
+  },
+  {
+    id: 'hogan-eq',
+    name: 'Hogan EQ Report',
+    provider: 'Hogan Assessments',
+    category: 'Behavior & Personality',
+    price: 150.00,
+    description: "Measure the 'Soft Skills' that drive 'Hard Results.' Assesses emotional intelligence based on stable personality traits rather than temporary mood.",
+    bestFor: 'Sales leaders and executives who need to master social influence.',
+    whatItMeasures: '6 EQ Competencies: Awareness, Regulation, Influence, etc.',
+    features: ['Competency-based EQ scores', 'Behavioral Pros/Cons', 'Coaching tips'],
+    benefits: ['Quantify emotional impact', 'Identify socially intuitive leaders', 'Improve negotiation and influence'],
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'HPI + HDS EQ Mapping',
+    useCase: ['Development', 'Selection'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://workdrive.zohoexternal.com/external/2632729437993b53b3dc604a7ddb7f1366445fbfaef98ddb38e18cd393762050"
   }
 ];
 
@@ -611,82 +571,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '6 min read',
     content: `
       <p>In the high-stakes world of corporate leadership, cognitive intelligence (IQ) has long been the gold standard for recruitment. It predicts how quickly a leader can learn, analyze complex data, and strategize. However, as the business landscape becomes increasingly volatile and interconnected, a new metric has emerged as the true differentiator of exceptional leadership: Emotional Intelligence (EQ).</p>
-      
       <h3>The Limitations of Pure Intellect</h3>
-      <p>While IQ helps a leader determine <em>what</em> needs to be done, EQ dictates <em>how</em> it gets done through people. A leader with high IQ but low EQ may devise a brilliant strategy but fail to inspire the team to execute it. They might struggle to manage their own stress during a crisis, leading to erratic decision-making, or fail to read the subtle cues of team burnout.</p>
-      
-      <h3>The Four Pillars of EQ in Leadership</h3>
-      <ul>
-        <li><strong>Self-Awareness:</strong> The ability to recognize one's own emotions and their impact on others. Self-aware leaders understand their triggers and limitations, making them more resilient.</li>
-        <li><strong>Self-Regulation:</strong> Controlling disruptive impulses. Leaders who self-regulate foster trust and fairness, creating an environment where employees feel safe to innovate.</li>
-        <li><strong>Social Awareness (Empathy):</strong> Understanding the emotional makeup of other people. This is crucial for retaining top talent and navigating cross-cultural teams.</li>
-        <li><strong>Relationship Management:</strong> Building networks and managing conflict. This is where influence happens—not through authority, but through connection.</li>
-      </ul>
-      
-      <h3>Data-Backed Evidence</h3>
-      <p>Research from the Center for Creative Leadership found that the primary causes of executive derailment involve deficits in emotional competence—specifically, difficulty in handling change, not being able to work well in a team, and poor interpersonal relations. Conversely, EQ has been shown to account for nearly 90% of the difference between outstanding and average leaders in senior roles.</p>
-      
-      <h3>Conclusion</h3>
-      <p>To build a future-proof organization, companies must look beyond the resume. Incorporating EQ assessments like the Hogan EQ Report or Saville Wave into the selection process isn't just a "soft skill" preference—it's a hard business necessity.</p>
-    `
-  },
-  {
-    id: '3',
-    title: 'The Hidden Cost of Bad Hires (and How to Avoid Them)',
-    excerpt: 'A bad hire can cost up to 30% of the employee’s first-year earnings. Learn how objective data mitigates bias in recruitment.',
-    category: 'Hiring',
-    date: 'Sep 15, 2024',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    author: 'Jennifer Wu, SHRM-SCP',
-    readTime: '7 min read',
-    content: `
-      <p>We've all been there: The candidate interviewed perfectly. They were charming, confident, and had a stellar resume. Three months later, they are toxic to the team culture, missing deadlines, and you are back to square one. The U.S. Department of Labor estimates the cost of a bad hire at 30% of the employee's first-year earnings, but for leadership roles, the cost to morale and productivity can be unquantifiable.</p>
-      
-      <h3>The "Halo Effect" in Interviewing</h3>
-      <p>Traditional interviews are notoriously unreliable. Hiring managers often fall victim to the "Halo Effect," where one positive trait (like confidence or a shared alma mater) overshadows red flags. Conversely, unconscious bias can weed out diverse candidates who don't fit the "traditional" mold but have high potential.</p>
-      
-      <h3>Enter Objective Assessment Data</h3>
-      <p>Valid psychometric assessments act as an insurance policy against bias. They measure two critical things that interviews miss:</p>
-      <ul>
-        <li><strong>Cognitive Ability:</strong> Can they do the job? Tools like the Raven's Matrices or Watson-Glaser measure raw processing power and critical thinking, which correlates strongly with job performance in complex roles.</li>
-        <li><strong>Personality Fit:</strong> Will they do the job <em>here</em>? A candidate might be a high performer, but if they value autonomy and your culture is highly collaborative, they will fail. Tools like the OPQ32 or Hogan Personality Inventory predict this fit gap.</li>
-      </ul>
-      
-      <h3>Case Study: Tech Sales Team</h3>
-      <p>A global SaaS company was struggling with high turnover in their sales team. They introduced the Saville Swift Analysis Aptitude test and a sales-specific personality profile. The result? They identified that "Resilience" and "Numerical Reasoning" were better predictors of success than "Extraversion." Turnover dropped by 40% in year one.</p>
-      
-      <h3>The ROI of Science</h3>
-      <p>Adding a $100 assessment to your hiring stack is a small price to pay to avoid a $50,000 mistake. It provides a common language for hiring committees and ensures that you are hiring for potential, not just polish.</p>
-    `
-  },
-  {
-    id: '4',
-    title: 'Understanding the "Dark Side" of Personality',
-    excerpt: 'Hogan HDS explains why some leaders derail under stress. We unpack the risk factors that can sabotage a promising career.',
-    category: 'Personality',
-    date: 'Aug 30, 2024',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    author: 'Robert Hogan (Adapted)',
-    readTime: '8 min read',
-    content: `
-      <p>Most performance reviews focus on the "Bright Side" of personality—how we behave when we are at our best. We are charming, detail-oriented, or ambitious. But what happens when the pressure mounts? When we are tired, stressed, or complacent? The "Dark Side" emerges.</p>
-      
-      <h3>The derailers</h3>
-      <p>The Hogan Development Survey (HDS) identifies 11 specific "derailers"—behaviors that can wreck a career. Interestingly, these traits often start as strengths:</p>
-      <ul>
-        <li><strong>Excitable:</strong> Starts as passion and intensity. Under stress, it becomes volatility and moodiness. The team walks on eggshells.</li>
-        <li><strong>Cautious:</strong> Starts as careful risk management. Under stress, it becomes paralysis and fear of making mistakes. Innovation dies.</li>
-        <li><strong>Bold:</strong> Starts as confidence and charisma. Under stress, it becomes arrogance and a refusal to listen to feedback.</li>
-      </ul>
-      
-      <h3>Why You Can't Interview for This</h3>
-      <p>Dark side traits are insidious because they coexist with high social skills. A "Bold" leader often interviews exceptionally well. They sound visionary. It takes 3-6 months for the arrogance to alienate the team. Assessments allow you to peek behind the curtain before you make the hire.</p>
-      
-      <h3>Mitigation, Not Elimination</h3>
-      <p>Having a high score on a Dark Side scale doesn't doom a leader. In fact, many CEOs have high scores on "Bold" or "Imaginative." The key is <strong>awareness</strong>. Once a leader knows their derailers, they can build coping mechanisms. They can hire a deputy who is "Prudent" to check their "Imaginative" impulses. They can learn to pause before sending that angry email.</p>
-      
-      <h3>Strategic Self-Awareness</h3>
-      <p>The goal of the HDS is strategic self-awareness. It turns the unconscious reaction into a conscious choice, allowing leaders to maintain their effectiveness even in the stormiest of business climates.</p>
+      <p>While IQ helps a leader determine <em>what</em> needs to be done, EQ dictates <em>how</em> it gets done through people...</p>
     `
   }
 ];
