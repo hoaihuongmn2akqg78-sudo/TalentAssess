@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronRight, Circle, CheckCircle, Loader2, FileText, Home, ArrowRight } from 'lucide-react';
+import { X, ChevronRight, CheckCircle, Loader2, FileText, Home, ArrowRight } from 'lucide-react';
 import { Assessment } from '../types';
 
 interface Props {
@@ -26,7 +26,6 @@ const AssessmentWizard: React.FC<Props> = ({
   const [step, setStep] = useState(1);
   const [userType, setUserType] = useState<'individual' | 'organization' | null>(initialType || null);
   const [goal, setGoal] = useState<string>('');
-  const [contextText, setContextText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   // Reset state when opening
@@ -40,7 +39,6 @@ const AssessmentWizard: React.FC<Props> = ({
         setUserType(null);
       }
       setGoal('');
-      setContextText('');
       setIsAnalyzing(false);
     }
   }, [isOpen, initialType]);
@@ -50,10 +48,10 @@ const AssessmentWizard: React.FC<Props> = ({
   };
 
   const handleNextStep = () => {
-     if (step === 1 && userType) setStep(2);
-     else if (step === 2 && goal) setStep(3);
-     else if (step === 3 && contextText.trim().length > 0) {
-        handleFindMatch();
+     if (step === 1 && userType) {
+       setStep(2);
+     } else if (step === 2 && goal) {
+       handleFindMatch();
      }
   };
 
@@ -66,27 +64,31 @@ const AssessmentWizard: React.FC<Props> = ({
     // Simulate smart analysis delay
     setTimeout(() => {
         setIsAnalyzing(false);
-        setStep(4);
-    }, 1800);
+        setStep(3); // Result step is now 3
+    }, 1500);
   };
 
   const getRecommendations = () => {
     let results: Assessment[] = [];
 
     if (userType === 'individual') {
-      if (goal === 'growth') results = assessments.filter(a => a.id === 'mbti-step1-profile' || a.id === 'apollo');
-      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'hogan-leader-focus' || a.id === 'hogan-eq');
-      else if (goal === 'career') results = assessments.filter(a => a.id === 'istartstrong' || a.id === 'mbti-step1-career');
-      else results = assessments.filter(a => a.category === 'Behavior & Personality');
+      if (goal === 'growth') results = assessments.filter(a => ['mbti-step1-profile', 'apollo', 'mbti-step1-interpretive'].includes(a.id));
+      else if (goal === 'leadership') results = assessments.filter(a => ['hogan-leader-focus', 'hogan-eq', 'hogan-challenge'].includes(a.id));
+      else if (goal === 'career') results = assessments.filter(a => ['istartstrong', 'mbti-step1-career', 'hogan-career'].includes(a.id));
     } else {
-      if (goal === 'hiring') results = assessments.filter(a => a.id === 'apollo' || a.id === 'hogan-sales');
-      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'hogan-leader-focus' || a.id === 'hogan-challenge');
-      else if (goal === 'team') results = assessments.filter(a => a.id === 'tki-profile-interpretive' || a.id === 'work-engagement-profile-interpretive');
-      else if (goal === 'conflict') results = assessments.filter(a => a.id === 'tki-profile-interpretive' || a.id === 'mbti-step1-conflict');
-      else results = assessments.filter(a => a.category === 'Leadership & Management');
+      if (goal === 'hiring') results = assessments.filter(a => ['apollo', 'hogan-sales', 'hogan-safety'].includes(a.id));
+      else if (goal === 'leadership') results = assessments.filter(a => ['hogan-leader-focus', 'hogan-challenge', 'hogan-coaching'].includes(a.id));
+      else if (goal === 'team') results = assessments.filter(a => ['tki-profile-interpretive', 'work-engagement-profile-interpretive', 'mbti-step1-iro'].includes(a.id));
+      else if (goal === 'conflict') results = assessments.filter(a => ['tki-profile-interpretive', 'mbti-step1-conflict', 'mbti-step1-communication'].includes(a.id));
     }
     
-    if (results.length === 0) return assessments.slice(0, 3);
+    // Ensure minimum of 3 recommendations
+    if (results.length < 3) {
+      const remainingNeeded = 3 - results.length;
+      const others = assessments.filter(a => !results.some(r => r.id === a.id));
+      results = [...results, ...others.slice(0, remainingNeeded)];
+    }
+    
     return results.slice(0, 3);
   };
 
@@ -145,20 +147,18 @@ const AssessmentWizard: React.FC<Props> = ({
         </div>
 
         {/* Progress Bar Area */}
-        {step < 4 && (
+        {step < 3 && (
           <div className="mb-10">
               <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
                   <span className={step >= 1 ? "text-[#0C3963]" : ""}>Role</span>
                   <ChevronRight size={14} />
                   <span className={step >= 2 ? "text-[#0C3963]" : ""}>Goal</span>
-                  <ChevronRight size={14} />
-                  <span className={step >= 3 ? "text-[#0C3963]" : ""}>Context</span>
               </div>
               
               <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-[#0C3963] transition-all duration-500 ease-out"
-                    style={{ width: step === 1 ? '33%' : step === 2 ? '66%' : step === 3 ? '90%' : '100%' }}
+                    style={{ width: step === 1 ? '50%' : '100%' }}
                   />
               </div>
           </div>
@@ -166,7 +166,13 @@ const AssessmentWizard: React.FC<Props> = ({
 
         {/* Main Content */}
         <div className="min-h-[450px]">
-            {step === 1 && (
+            {isAnalyzing ? (
+                <div className="flex flex-col items-center justify-center h-[450px] animate-in fade-in duration-500">
+                    <Loader2 className="animate-spin text-[#0C3963] mb-6" size={64} />
+                    <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-2">Analyzing Requirements</h2>
+                    <p className="text-gray-500 text-lg">Curating the perfect assessments for your professional profile...</p>
+                </div>
+            ) : step === 1 ? (
                 <div className="animate-in slide-in-from-right duration-300">
                     <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-4">Who is this assessment for?</h2>
                     <p className="text-gray-500 mb-10 text-lg">We offer tailored instruments for both personal growth and corporate selection.</p>
@@ -187,7 +193,6 @@ const AssessmentWizard: React.FC<Props> = ({
                             <p className="text-gray-600 leading-relaxed text-lg">
                                 I want to explore my personality, strengths, career interests, or leadership potential.
                             </p>
-                            {userType === 'individual' && <div className="absolute top-4 right-4 text-[#0C3963] font-bold text-xs uppercase tracking-widest">Selected</div>}
                         </button>
 
                          <button 
@@ -205,13 +210,10 @@ const AssessmentWizard: React.FC<Props> = ({
                             <p className="text-gray-600 leading-relaxed text-lg">
                                 I need to screen candidates, develop a leadership pipeline, or optimize team chemistry.
                             </p>
-                            {userType === 'organization' && <div className="absolute top-4 right-4 text-[#0C3963] font-bold text-xs uppercase tracking-widest">Selected</div>}
                         </button>
                     </div>
                 </div>
-            )}
-
-            {step === 2 && (
+            ) : step === 2 ? (
                  <div className="animate-in slide-in-from-right duration-300 max-w-3xl">
                     <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-4">What is your primary goal?</h2>
                     <p className="text-gray-500 mb-10 text-lg">Select the outcome that best describes your current requirement.</p>
@@ -232,30 +234,7 @@ const AssessmentWizard: React.FC<Props> = ({
                          )}
                     </div>
                 </div>
-            )}
-
-            {step === 3 && (
-                <div className="animate-in slide-in-from-right duration-300">
-                    <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-4">Tell us about the situation.</h2>
-                    <p className="text-gray-600 mb-8 text-lg">Describe the context (e.g., job role, team size, or specific challenges) for a more precise recommendation.</p>
-                    
-                    <textarea 
-                        value={contextText}
-                        onChange={(e) => setContextText(e.target.value)}
-                        placeholder="Describe your needs here... (Minimum 10 characters)"
-                        className="w-full h-56 p-6 border border-gray-200 rounded-2xl shadow-inner focus:outline-none focus:ring-2 focus:ring-[#0C3963] text-xl resize-none mb-6 bg-gray-50/30"
-                    />
-
-                    {isAnalyzing && (
-                        <div className="flex items-center justify-center gap-4 text-[#0C3963] font-bold animate-pulse py-4">
-                            <Loader2 className="animate-spin" size={24} />
-                            <span className="text-lg uppercase tracking-wider">LHH Science Engine Analyzing...</span>
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {step === 4 && (
+            ) : (
                  <div className="animate-in slide-in-from-bottom-8 duration-500 pb-20">
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
@@ -322,32 +301,38 @@ const AssessmentWizard: React.FC<Props> = ({
                         ))}
                     </div>
 
-                    {/* Return Navigation Options */}
-                    <div className="mt-16 flex flex-col items-center gap-6">
+                    {/* Navigation Actions */}
+                    <div className="mt-16 flex flex-col items-center gap-8">
                         <button 
-                           onClick={handleFinishAndHome}
-                           className="flex items-center gap-3 bg-[#E0E9F4] text-[#0C3963] px-10 py-4 rounded-full font-bold hover:bg-[#0C3963] hover:text-white transition-all shadow-sm group"
+                            onClick={handleFinishAndHome}
+                            className="bg-[#0C3963] text-white px-12 py-4 rounded-full font-bold hover:bg-[#2C4D81] transition-all shadow-xl flex items-center gap-3 group active:scale-95"
                         >
-                            <Home size={20} />
-                            Return to Homepage
-                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            <Home size={22} />
+                            <span>Return to Homepage</span>
+                            <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
                         </button>
-                        
-                        <div className="flex gap-8">
-                           <button onClick={() => setStep(1)} className="text-gray-400 font-bold hover:text-[#0C3963] text-sm uppercase tracking-widest transition-colors">
-                               Start Over
-                           </button>
-                           <button onClick={() => { onNavigateToBrowse(); onClose(); }} className="text-gray-400 font-bold hover:text-[#0C3963] text-sm uppercase tracking-widest transition-colors">
-                               Browse Catalog
-                           </button>
+
+                        <div className="flex items-center gap-10">
+                            <button 
+                                onClick={() => setStep(1)} 
+                                className="text-gray-400 font-bold hover:text-[#0C3963] text-sm uppercase tracking-widest transition-colors flex items-center gap-2"
+                            >
+                                Start Over
+                            </button>
+                            <button 
+                                onClick={() => { onNavigateToBrowse(); onClose(); }} 
+                                className="text-gray-400 font-bold hover:text-[#0C3963] text-sm uppercase tracking-widest transition-colors flex items-center gap-2"
+                            >
+                                Browse Catalog
+                            </button>
                         </div>
                     </div>
                 </div>
             )}
         </div>
 
-        {/* Footer Navigation (Step 1-3) */}
-        {step < 4 && (
+        {/* Footer Navigation (Step 1-2) */}
+        {step < 3 && !isAnalyzing && (
             <div className="mt-12 flex justify-between items-center bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
                 <button 
                     onClick={step === 1 ? onClose : handleBack} 
@@ -357,13 +342,13 @@ const AssessmentWizard: React.FC<Props> = ({
                 </button>
 
                 <div className="flex items-center gap-4">
-                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Step {step} of 3</span>
+                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Step {step} of 2</span>
                   <button 
                       onClick={handleNextStep}
-                      disabled={isAnalyzing || (step === 1 && !userType) || (step === 2 && !goal) || (step === 3 && contextText.trim().length < 10)}
+                      disabled={(step === 1 && !userType) || (step === 2 && !goal)}
                       className="px-12 py-3.5 bg-[#0C3963] text-white rounded-xl font-bold hover:bg-[#2C4D81] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg active:scale-95 flex items-center gap-2"
                   >
-                      {step === 3 ? 'Generate Matches' : 'Continue'}
+                      {step === 2 ? 'Find Match' : 'Continue'}
                       <ArrowRight size={18} />
                   </button>
                 </div>
@@ -391,7 +376,6 @@ const RadioOption = ({ selected, onClick, label }: { selected: boolean, onClick:
               {label}
           </span>
         </div>
-        {selected && <CheckCircle size={20} className="text-[#0C3963]" />}
     </button>
 )
 

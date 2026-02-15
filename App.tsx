@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import Header from './components/Header';
 import ComparisonTable from './components/ComparisonTable';
-import GeminiAdvisor from './components/GeminiAdvisor';
 import CartDrawer from './components/CartDrawer';
 import AssessmentWizard from './components/AssessmentWizard';
 import ProductDetailModal from './components/ProductDetailModal';
@@ -224,10 +223,10 @@ const App: React.FC = () => {
           <div>
             <h4 className="font-bold mb-6 text-[#E0E9F4] uppercase tracking-wider text-xs">Solutions</h4>
             <ul className="space-y-3 text-sm text-[#BCCADE]">
-              <li><button onClick={() => handleNavigateToBrowse('Sales & Safety')} className="hover:text-white transition-colors">Talent Acquisition</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Leadership & Management')} className="hover:text-white transition-colors">Leadership Development</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Team Dynamics')} className="hover:text-white transition-colors">Team Effectiveness</button></li>
-              <li><button onClick={() => handleNavigateToBrowse('Behavior & Personality')} className="hover:text-white transition-colors">Career Transition</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Behavior & Personality')} className="hover:text-white transition-colors whitespace-nowrap">Behavior & Personality</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Career Development')} className="hover:text-white transition-colors whitespace-nowrap">Career Development</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Leadership & Management')} className="hover:text-white transition-colors whitespace-nowrap text-left">Leadership & Management</button></li>
+              <li><button onClick={() => handleNavigateToBrowse('Team Dynamics')} className="hover:text-white transition-colors whitespace-nowrap">Team Dynamics</button></li>
             </ul>
           </div>
            <div>
@@ -299,8 +298,6 @@ const App: React.FC = () => {
         onNavigateToBrowse={() => handleNavigateToBrowse()}
         onNavigateToHome={handleNavigateToHome}
       />
-
-      <GeminiAdvisor assessments={ASSESSMENTS} />
     </div>
   );
 };

@@ -112,9 +112,9 @@ const InfoPage: React.FC<InfoPageProps> = ({ pageType, onBack, onNavigate }) => 
 
               <div className="mt-12 p-8 bg-[#0C3963] text-white rounded-xl text-center">
                 <h3 className="text-xl font-bold mb-4">Still need help?</h3>
-                <p className="mb-6 opacity-90">Our technical team is available Monday – Friday, 8:30 AM to 5:30 PM (ICT).</p>
+                <p className="mb-6 opacity-90">Our technical team is available Monday – Friday, 9:00 AM to 5:00 PM (ICT).</p>
                 <div className="flex flex-col sm:flex-row justify-center gap-6">
-                   <a href="mailto:support@lhh.com.vn" className="font-bold underline">support@lhh.com.vn</a>
+                   <a href="mailto:info@lhh.com.vn" className="font-bold underline">info@lhh.com.vn</a>
                    <span>+84 28 3511 6022</span>
                 </div>
               </div>
