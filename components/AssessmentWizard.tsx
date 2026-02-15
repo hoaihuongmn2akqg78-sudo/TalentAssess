@@ -75,12 +75,12 @@ const AssessmentWizard: React.FC<Props> = ({
 
     if (userType === 'individual') {
       if (goal === 'growth') results = assessments.filter(a => a.id === 'mbti-step1-profile' || a.id === 'apollo');
-      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'saville-wave-leadership-impact' || a.id === 'hogan-leader-focus');
+      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'hogan-leader-focus' || a.id === 'hogan-eq');
       else if (goal === 'career') results = assessments.filter(a => a.id === 'istartstrong' || a.id === 'mbti-step1-career');
       else results = assessments.filter(a => a.category === 'Personality');
     } else {
-      if (goal === 'hiring') results = assessments.filter(a => a.id === 'saville-swift-analysis' || a.id === 'apollo' || a.id === 'watson-glaser');
-      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'saville-wave-leadership-impact' || a.id === 'hogan-leader-focus');
+      if (goal === 'hiring') results = assessments.filter(a => a.id === 'apollo' || a.id === 'hogan-sales');
+      else if (goal === 'leadership') results = assessments.filter(a => a.id === 'hogan-leader-focus' || a.id === 'hogan-challenge');
       else if (goal === 'team') results = assessments.filter(a => a.id === 'tki-profile-interpretive' || a.id === 'work-engagement-profile-interpretive');
       else if (goal === 'conflict') results = assessments.filter(a => a.id === 'tki-profile-interpretive' || a.id === 'mbti-step1-conflict');
       else results = assessments.filter(a => a.category === 'Leadership');

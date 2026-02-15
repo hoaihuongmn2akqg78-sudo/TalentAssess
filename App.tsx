@@ -39,8 +39,8 @@ const App: React.FC = () => {
   }, []);
 
   const heroAssessments = useMemo(() => {
-      // Feature top tools: MBTI Profile, Hogan Leader Focus, Saville Swift Analysis
-      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'saville-swift-analysis'].includes(a.id));
+      // Feature top tools: MBTI Profile, Hogan Leader Focus, Hogan EQ (replacing Saville)
+      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'hogan-eq'].includes(a.id));
   }, []);
 
   // Cart Logic
