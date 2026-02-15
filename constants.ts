@@ -63,6 +63,26 @@ export const ASSESSMENTS: Assessment[] = [
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb80ce40520733b2004075216a303e14d378f9c19ec423b408a07972566c68bd"
   },
   {
+    id: 'saville-wave-professional',
+    name: 'Saville Wave® Professional Styles',
+    provider: 'Saville Assessment',
+    category: 'Behavior & Personality',
+    price: 185.00,
+    description: "The premier diagnostic for predicting workplace performance. Saville Wave® Professional Styles provides the most granular view of personality, measuring the dynamic relationship between motives, talents, and workplace culture to pinpoint exactly where an individual will succeed.",
+    bestFor: "High-stakes selection, executive talent audits, and deep-dive development planning for senior leaders.",
+    whatItMeasures: "36 key behavioral dimensions across four clusters: Thought, Influence, Adaptability, and Delivery.",
+    features: ["Hierarchical 36-dimension profile", "Normative and Ipsative scoring for extreme accuracy", "Job-fit and cultural-alignment reporting"],
+    benefits: ["Predict job performance with clinical precision", "Identify high-potential talent earlier", "Reduce bias in executive selection and promotion"],
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    duration: '35 mins',
+    methodology: 'Wave® Dual-Response Psychometrics',
+    useCase: ['Selection', 'Hiring', 'Development'],
+    level: ['Individual', 'Organization'],
+    guidance: GUIDANCE_OTHER,
+    faq: [{ question: "Why is Wave better than basic personality tests?", answer: "Wave is the only tool that measures 'Motive' and 'Talent' separately, highlighting where a person has the skill but perhaps not the drive, or vice versa." }],
+    sampleReportUrl: "https://www.savilleassessment.com/sample-reports/"
+  },
+  {
     id: 'mbti-step1-interpretive',
     name: 'MBTI® Step I™ - Interpretive Report',
     provider: 'The Myers-Briggs Company',
@@ -143,6 +163,26 @@ export const ASSESSMENTS: Assessment[] = [
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/1088c3cb777900c6f9da5abbb7ab3e24201b96eb0b1027c58b65abefc6e86856"
+  },
+  {
+    id: 'hogan-hbri',
+    name: 'Hogan Business Reasoning Inventory (HBRI)',
+    provider: 'Hogan Assessments',
+    category: 'Leadership & Management',
+    price: 115.00,
+    description: "Evaluate the cognitive capacity of your leaders. The HBRI measures tactical and strategic reasoning—essential for making sound business decisions and solving complex problems in high-velocity environments.",
+    bestFor: "Executive selection and leadership development for roles requiring significant analytical and strategic output.",
+    whatItMeasures: "Tactical Reasoning (handling daily problems) and Strategic Reasoning (identifying long-term trends and logical errors).",
+    features: ["Standardized cognitive benchmarks", "Business-context problem solving", "Critical thinking analysis"],
+    benefits: ["Improve executive decision-making quality", "Identify individuals with high strategic learning potential", "Select leaders capable of navigating complex data"],
+    image: 'https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&w=800&q=80',
+    duration: '30 mins',
+    methodology: 'Normative Ability Inventory',
+    useCase: ['Selection', 'Hiring', 'Development'],
+    level: ['Individual'],
+    guidance: GUIDANCE_OTHER,
+    faq: FAQ_HOGAN_SALES,
+    sampleReportUrl: "https://www.hoganassessments.com/assessment/hogan-business-reasoning-inventory/"
   },
   {
     id: 'hogan-challenge',
@@ -569,7 +609,94 @@ export const BLOG_POSTS: BlogPost[] = [
     content: `
       <p>In the high-stakes world of corporate leadership, cognitive intelligence (IQ) has long been the gold standard for recruitment. It predicts how quickly a leader can learn, analyze complex data, and strategize. However, as the business landscape becomes increasingly volatile and interconnected, a new metric has emerged as the true differentiator of exceptional leadership: Emotional Intelligence (EQ).</p>
       <h3>The Limitations of Pure Intellect</h3>
-      <p>While IQ helps a leader determine <em>what</em> needs to be done, EQ dictates <em>how</em> it gets done through people...</p>
+      <p>While IQ helps a leader determine <em>what</em> needs to be done, EQ dictates <em>how</em> it gets done through people. Leaders with high EQ can read the room, understand non-verbal cues, and manage their own stress, preventing "emotional leakage" that can demoralize a team.</p>
+      <h3>Predicting Performance with Hogan EQ</h3>
+      <p>Modern psychometric tools like the Hogan EQ Report allow organizations to quantify these soft skills. By measuring awareness, regulation, and influence, companies can identify which high-potential candidates actually have the social maturity to lead complex organizations through periods of change.</p>
+    `
+  },
+  {
+    id: '2',
+    title: 'The Science of Personality: Why MBTI Remains Relevant',
+    excerpt: 'Despite critics, the Myers-Briggs framework continues to be the world’s most popular tool for team building. Learn why its non-judgmental approach works.',
+    category: 'Team Building',
+    date: 'Oct 18, 2024',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    author: 'Mark Sterling',
+    readTime: '5 min read',
+    content: `
+      <p>The Myers-Briggs Type Indicator (MBTI) is often a topic of debate in academic circles, yet its adoption in the Fortune 500 remains nearly universal. Why? Because the goal of MBTI isn't to put people in boxes, but to build a bridge of understanding between differing work styles.</p>
+      <h3>The Power of a Shared Language</h3>
+      <p>When a team understands that "Introversion" isn't about being shy, but about how one recharges energy, conflict drops. MBTI provides a positive, non-judgmental vocabulary that allows team members to say, "I'm a Perceiving type, I need to explore options," rather than "I'm disorganized."</p>
+      <h3>Beyond the Test: Development</h3>
+      <p>Effective MBTI application focuses on development. By using tools like the Step II Interpretive Report, leaders can see the 20 distinct facets of their personality, helping them understand internal behavioral contradictions and refine their communication strategy for maximum team impact.</p>
+    `
+  },
+  {
+    id: '3',
+    title: 'Navigating Workplace Conflict with TKI',
+    excerpt: 'Conflict is inevitable, but its cost doesn’t have to be. Discover the five modes of conflict resolution and how to use them strategically.',
+    category: 'Conflict Management',
+    date: 'Oct 22, 2024',
+    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    author: 'Julianne Russo',
+    readTime: '4 min read',
+    content: `
+      <p>Workplace conflict costs companies billions in lost productivity and turnover annually. Most people have a "default" reaction to conflict—some avoid, some compete. The Thomas-Kilmann Conflict Mode Instrument (TKI) teaches us that there is no one "right" way to handle conflict; there are only more or less strategic choices.</p>
+      <h3>The Five Modes</h3>
+      <p>The TKI framework identifies five modes: Competing, Collaborating, Compromising, Avoiding, and Accommodating. Successful leaders are "multi-lingual" in these modes, knowing when to stand their ground (Competing) and when to prioritize the relationship (Accommodating).</p>
+      <h3>Immediate Team Impact</h3>
+      <p>Using TKI in a team setting allows members to map their collective default styles. If a whole team is "Avoiders," critical issues will never be discussed. If they are all "Competitors," they will burn out. Awareness is the first step toward a more resilient and productive team culture.</p>
+    `
+  },
+  {
+    id: '4',
+    title: 'Identifying High-Potential Leaders with Hogan Assessments',
+    excerpt: 'Reputation is the only metric that matters in leadership. Learn how Hogan predicts performance by measuring how others see you.',
+    category: 'Leadership',
+    date: 'Oct 25, 2024',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    author: 'Dr. Robert Hogan',
+    readTime: '7 min read',
+    content: `
+      <p>In the world of psychometrics, there is a distinction between "identity" (how you see yourself) and "reputation" (how others see you). In leadership, reputation is the only thing that drives business results. This is why Hogan Assessments are considered the gold standard for executive selection.</p>
+      <h3>The "Dark Side" of Personality</h3>
+      <p>Most leaders perform well under normal circumstances. The true test comes during stress, boredom, or heavy workload. The Hogan Challenge Report identifies 11 "derailers"—traits that might be strengths in moderation but become toxic under pressure, such as being overly cautious or imaginative to a fault.</p>
+      <h3>Strategic Alignment</h3>
+      <p>By using the full Hogan suite, organizations can align a leader's core values with the company culture. If a leader values Altruism but the company culture is purely driven by Power and Commercial interests, the hire will fail regardless of the candidate's IQ. Data-driven selection prevents these expensive cultural mismatches.</p>
+    `
+  },
+  {
+    id: '5',
+    title: 'The Future of Recruitment: Data Over Gut Feeling',
+    excerpt: 'Unconscious bias sabotages even the best hiring processes. See how objective assessments level the playing field and improve hire quality.',
+    category: 'HR Strategy',
+    date: 'Oct 30, 2024',
+    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    author: 'Elena Rodriguez',
+    readTime: '5 min read',
+    content: `
+      <p>Traditional interviews are notoriously poor predictors of job performance. Research suggests that most interviewers make a decision within the first 90 seconds, often based on affinity bias—hiring someone because they "feel like a good fit." The future of talent acquisition lies in moving from "gut feeling" to objective data.</p>
+      <h3>Removing the Mask</h3>
+      <p>Candidates are coached to provide the "right" answers in interviews. Validated behavioral assessments like Apollo or Saville Wave remove this mask by using complex algorithms to detect social desirability and "faking," providing a true view of a candidate's motives and talents.</p>
+      <h3>Diversity and Inclusion</h3>
+      <p>When you rely on standardized assessments, you reduce the impact of unconscious bias. Every candidate is measured against the same benchmarks of performance. This not only improves the quality of the hire but naturally fosters a more diverse and equitable workforce by focusing on merit and potential over background.</p>
+    `
+  },
+  {
+    id: '6',
+    title: 'Building Resilience in High-Velocity Environments',
+    excerpt: 'Burnout is a systemic risk. Learn how to identify stress triggers early and build a resilient workforce using personality insights.',
+    category: 'Employee Wellbeing',
+    date: 'Nov 2, 2024',
+    image: 'https://images.unsplash.com/photo-1516533075015-a3838414c3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    author: 'Thomas Wright',
+    readTime: '6 min read',
+    content: `
+      <p>In today's "always-on" corporate culture, resilience is no longer just a personal trait—it's a critical organizational capability. High turnover and low engagement are often the late-stage symptoms of a workforce that lacks the tools to manage systemic stress.</p>
+      <h3>Identifying Triggers</h3>
+      <p>Not everyone is stressed by the same things. Using MBTI Stress Management reports, organizations can see that some employees are drained by lack of clear structure (Judging preference), while others are stressed by too much rigid process (Perceiving preference). Customizing the work environment to these needs prevents burnout.</p>
+      <h3>The Role of Intrinsic Reward</h3>
+      <p>Engagement isn't just about satisfaction; it's about reward. The Work Engagement Profile helps leaders understand the four pillars of intrinsic motivation: Meaningfulness, Choice, Competence, and Progress. When employees feel these rewards, their natural resilience increases, allowing them to navigate high-velocity changes without losing productivity.</p>
     `
   }
 ];

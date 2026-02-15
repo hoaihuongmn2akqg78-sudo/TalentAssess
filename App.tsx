@@ -38,8 +38,15 @@ const App: React.FC = () => {
   }, []);
 
   const heroAssessments = useMemo(() => {
-      // Feature top tools: MBTI Profile, Hogan Leader Focus, Hogan EQ, DiSC
-      return ASSESSMENTS.filter(a => ['mbti-step1-profile', 'hogan-leader-focus', 'hogan-eq', 'everything-disc-workplace'].includes(a.id));
+      // Feature 6 top tools: MBTI Profile, Hogan Leader Focus, Hogan EQ, DiSC, Saville Wave, TKI
+      return ASSESSMENTS.filter(a => [
+        'mbti-step1-profile', 
+        'hogan-leader-focus', 
+        'hogan-eq', 
+        'everything-disc-workplace',
+        'saville-wave-professional',
+        'tki-profile-interpretive'
+      ].includes(a.id));
   }, []);
 
   // Cart Logic
