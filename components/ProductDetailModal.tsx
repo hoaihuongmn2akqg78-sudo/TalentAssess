@@ -156,7 +156,7 @@ const ProductDetailModal: React.FC<Props> = ({
                     <ClipboardCheck size={18} className="text-[#0C3963]" />
                     <h4 className="text-sm font-bold text-[#0C3963] uppercase tracking-wider">Assessment Process</h4>
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
                     {assessment.guidance}
                 </p>
               </div>

@@ -1,7 +1,7 @@
 import { Assessment, BlogPost } from './types';
 
 const GUIDANCE_NOTE = " Note: If you are not the assessment taker, please enter the taker’s information in the checkout field.";
-const GUIDANCE_MBTI = "After payment, you will receive a credential link. Upon completion, our experts will review and release your report within 2 working days." + GUIDANCE_NOTE;
+const GUIDANCE_MBTI = "After payment is completed, you will receive an automated email from our system containing instructions and a registration link. Please use the link to create your account and log in to complete the assessment.\n\nOnce you have submitted the assessment, our experts will review your responses and issue the report within two (2) working days.\n\nNote: If you are purchasing the assessment for someone else, please provide the assessment taker’s details in the checkout fields.";
 const GUIDANCE_OTHER = "Your assessment link will be dispatched within 2 working days. Most reports are generated instantly upon completion." + GUIDANCE_NOTE;
 
 // --- SHARED PERSUASIVE FAQs ---
