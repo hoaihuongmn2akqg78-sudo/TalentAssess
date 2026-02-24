@@ -34,7 +34,7 @@ const ComparisonTable: React.FC<Props> = ({ assessments, onRemove, onClose }) =>
             <table className="w-full">
               <thead>
                 <tr>
-                  <th className="w-48 text-left text-gray-400 font-medium py-4">Features</th>
+                  <th className="w-48 text-left text-gray-400 font-medium py-4"></th>
                   {assessments.map(item => (
                     <th key={item.id} className="w-64 px-4 py-4 text-left relative">
                       <button 
@@ -43,13 +43,21 @@ const ComparisonTable: React.FC<Props> = ({ assessments, onRemove, onClose }) =>
                       >
                         <X size={16} />
                       </button>
-                      <div className="font-bold text-xl text-gray-900">{item.name}</div>
-                      <div className="text-[#0C3963] font-bold text-lg mt-1">${item.price}</div>
+                      <div className="font-bold text-xl text-gray-900 mb-2">{item.name}</div>
+                      <div className="text-[#0C3963] font-bold text-lg">${item.price}</div>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
+                <tr>
+                  <td className="py-4 font-semibold text-gray-700">Provider</td>
+                  {assessments.map(item => (
+                    <td key={item.id} className="px-4 py-4 text-gray-600 font-medium">
+                      {item.provider}
+                    </td>
+                  ))}
+                </tr>
                 <tr>
                   <td className="py-4 font-semibold text-gray-700">Category</td>
                   {assessments.map(item => (

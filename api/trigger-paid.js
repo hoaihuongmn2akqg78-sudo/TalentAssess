@@ -11,15 +11,15 @@ const PRODUCT_CONFIG = {
   },
   'MBTI® Step I - Profile Report': {
     type: 'mbti_step1_profile',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=3291889b-a3e0-f011-8d4d-000d3a5d14c2', 
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=8afbcad4-3be5-f011-8d4d-000d3a5d14c2', 
   },
   'MBTI® Step I - Interpretive Report for Organizations': {
     type: 'mbti_step1_iro',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59e5cfe1-a3e0-f011-8d4d-000d3a5d14c2', 
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=90ff5ba6-47e5-f011-8d4d-000d3a5d14c2', 
   },
   'MBTI® Step II - Interpretive Report': {
     type: 'mbti_step2_interpretive',
-    link: 'https://online.cpp.com/en/index.aspx?R=STEP2_INTERPRETIVE_TEST',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=cd383dd5-9f10-f111-832e-002248089958',
   },
   'iStartStrong': {
     type: 'istartstrong',
@@ -35,15 +35,15 @@ const PRODUCT_CONFIG = {
   },
   'MBTI® Step I™ - Interpretive Report': {
     type: 'mbti_step1_interpretive',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=3f453449-a2e0-f011-8d4d-000d3a5d14c2',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=570e048e-36e5-f011-8d4d-000d3a5d14c2',
   },
   'MBTI® Step I™ - Career Report': {
     type: 'mbti_step1_career',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=59a3f272-aae0-f011-8d4d-000d3a5d14c2',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=aaf6ea21-49e5-f011-8d4d-000d3a5d14c2',
   },
   'MBTI® Step I™ - Conflict Style Report': {
     type: 'mbti_step1_conflict',
-    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=e2c5e162-ace0-f011-8d4d-000d3a5d14c2',
+    link: 'https://Elevate.themyersbriggs.com/Respondent/ReturningUser?tokenId=b1350914-9d10-f111-832e-002248089958',
   },
   'MBTI® Step I™ - Communication Style Report': {
     type: 'mbti_step1_communication',
