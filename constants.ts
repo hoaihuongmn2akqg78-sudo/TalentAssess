@@ -20,6 +20,25 @@ const FAQ_DISC_SALES = [
   { question: "MBTI vs. DiSC: Which one do I need?", answer: "MBTI best for deep self-awareness and understanding 'why' we act. DiSC is highly practical and focuses on 'how' we behave. If you want immediate, tactical improvements in daily communication and sales effectiveness, DiSC is your tool." }
 ];
 
+export const TAXONOMY = {
+  tags: [
+    'Cognitive Ability',
+    'Personality',
+    'Emotional Intelligence',
+    'Leadership',
+    '360 Feedback',
+    'Team Dynamics',
+    'Career Development',
+    'Sales Potential',
+    'Safety Risk',
+    'Conflict Management',
+    'Communication',
+    'Professional Skills',
+    'Behavioral',
+    'Values & Motives'
+  ]
+};
+
 export const ASSESSMENTS: Assessment[] = [
   // --- CORE BEHAVIOR & PERSONALITY ---
   {
@@ -38,6 +57,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Adaptive Testing',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team', 'Organization'],
+    tags: ['Behavioral', 'Communication', 'Team Dynamics'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_DISC_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/c550dfca5a88761cc45b0eba1a7bb2b2b24fcef8bb09d1bb162c04a5349dd592"
@@ -58,6 +78,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Personality', 'Behavioral', 'Communication'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb80ce40520733b2004075216a303e14d378f9c19ec423b408a07972566c68bd"
@@ -76,8 +97,9 @@ export const ASSESSMENTS: Assessment[] = [
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
     duration: '35 mins',
     methodology: 'Wave® Dual-Response Psychometrics',
-    useCase: ['Selection', 'Hiring', 'Development'],
+    useCase: ['Selection', 'Development', 'Coaching'],
     level: ['Individual', 'Organization'],
+    tags: ['Personality', 'Behavioral', 'Professional Skills'],
     guidance: GUIDANCE_OTHER,
     faq: [{ question: "Why is Wave better than basic personality tests?", answer: "Wave is the only tool that measures 'Motive' and 'Talent' separately, highlighting where a person has the skill but perhaps not the drive, or vice versa." }],
     sampleReportUrl: "https://www.savilleassessment.com/sample-reports/"
@@ -98,6 +120,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Personality', 'Behavioral', 'Career Development'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/4187f4c1b777a9afa02ebb07da76674b6cfb70a7e1fe37e7f4216cb047ca9058"
@@ -117,7 +140,8 @@ export const ASSESSMENTS: Assessment[] = [
     duration: '45 mins',
     methodology: 'Facet-based Psychometric Assessment',
     useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Organization'],
+    level: ['Individual'],
+    tags: ['Personality', 'Leadership', 'Behavioral'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/0a6a46e26542dc6f6c6cdd54ea8185a128250f71ab13e8bff2d5f0ac7547e1e3"
@@ -136,8 +160,9 @@ export const ASSESSMENTS: Assessment[] = [
     image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80',
     duration: '40 mins',
     methodology: 'Normative Behavioral Assessment',
-    useCase: ['Hiring', 'Selection', 'Development'],
-    level: ['Individual'],
+    useCase: ['Selection', 'Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    tags: ['Behavioral', 'Personality', 'Professional Skills'],
     guidance: GUIDANCE_OTHER,
     faq: [{ question: "How does this differ from MBTI?", answer: "While MBTI is for self-discovery, Apollo is a normative diagnostic designed to predict performance and fit against a general population or specific benchmarks." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/de054c6aeba0148688b8692e740e5108df64e768b69ac0205b35a9915adf65f8"
@@ -159,7 +184,8 @@ export const ASSESSMENTS: Assessment[] = [
     duration: '40 mins',
     methodology: 'HPI + MVPI Integration',
     useCase: ['Development', 'Coaching'],
-    level: ['Individual', 'Team'],
+    level: ['Individual'],
+    tags: ['Leadership', 'Personality', 'Behavioral'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/1088c3cb777900c6f9da5abbb7ab3e24201b96eb0b1027c58b65abefc6e86856"
@@ -178,11 +204,12 @@ export const ASSESSMENTS: Assessment[] = [
     image: 'https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&w=800&q=80',
     duration: '30 mins',
     methodology: 'Normative Ability Inventory',
-    useCase: ['Selection', 'Hiring', 'Development'],
-    level: ['Individual'],
+    useCase: ['Selection', 'Development', 'Coaching'],
+    level: ['Individual', 'Organization'],
+    tags: ['Cognitive Ability', 'Leadership', 'Professional Skills'],
     guidance: GUIDANCE_OTHER,
-    faq: FAQ_HOGAN_SALES,
-    sampleReportUrl: "https://www.hoganassessments.com/assessment/hogan-business-reasoning-inventory/"
+    faq: [{ question: "Is this an IQ test?", answer: "Not exactly. While it correlates with IQ, it specifically measures reasoning in a business context, making it more relevant for predicting workplace success." }],
+    sampleReportUrl: "https://www.hoganassessments.com/sample-reports/"
   },
   {
     id: 'hogan-challenge',
@@ -200,6 +227,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HDS (Hogan Development Survey)',
     useCase: ['Development', 'Coaching', 'Selection'],
     level: ['Individual', 'Organization'],
+    tags: ['Leadership', 'Personality', 'Behavioral'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/d426b867f2015c65688a122825d7b6b9607cbf3eb3606dc135264e855c90ddd0"
@@ -220,6 +248,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Full Hogan Suite Integration',
     useCase: ['Coaching', 'Development'],
     level: ['Individual'],
+    tags: ['Leadership', 'Personality', 'Values & Motives'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/14ea35ec51a8b83fe1db0d50373e6a71b9e4515fee057646a7f6865e1db23edd"
@@ -240,6 +269,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HPI-based Management View',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Leadership', 'Behavioral', 'Team Dynamics'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/5cb35833af1daa9f99f6cafb9e3a81332e9eec9657f8ffe223510c9fa9d3d796"
@@ -260,6 +290,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Behavioral Bias Assessment',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Organization'],
+    tags: ['Leadership', 'Behavioral', 'Professional Skills'],
     guidance: GUIDANCE_OTHER,
     faq: [{ question: "Is this for HR only?", answer: "No, this is most effective for line managers and executives who make daily decisions about people and strategy." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/59cdc45301548caa6a5d8cd2f8537404c01bd6a8ee9d07caf74b0f062f446b97"
@@ -282,6 +313,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Applied Psychometric Report',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Team Dynamics', 'Communication', 'Personality'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/b5925c588d1a734ef27809c97997ee4189306ed59c0ef04342501d8244ad4b37"
@@ -302,6 +334,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Conflict Management', 'Communication', 'Personality'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/fc1e955b193c1222706aabd32995cac582dd895b7de1f16b015a6c5100d3778b"
@@ -322,6 +355,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Communication', 'Personality', 'Professional Skills'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/71de3d30c33b766251b5eaa1b4028c2d18a8f3bb30c642d83181fa516203c8cf"
@@ -342,6 +376,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Forced-choice Behavioral Mapping',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Conflict Management', 'Communication', 'Behavioral'],
     guidance: GUIDANCE_MBTI,
     faq: [{ question: "Is there a 'right' style?", answer: "No, TKI teaches that all five modes are useful. Success is about choosing the right mode for the right situation." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/ff5217c6155864cc055e37ded7d955e12608baa6c0fb83fafd71fdd6fc9a65a2"
@@ -362,6 +397,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Intrinsic Reward Assessment',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Organization'],
+    tags: ['Team Dynamics', 'Values & Motives', 'Professional Skills'],
     guidance: GUIDANCE_MBTI,
     faq: [{ question: "Is this like an engagement survey?", answer: "No, most surveys ask about 'satisfaction.' This measures the 'internal engine' of engagement—the intrinsic rewards a person feels at work." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/c68c3cd19af1a6f863ec6bae70d1b8975d0b65760ffb9eec838eb604e979a0f3"
@@ -384,6 +420,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Psychometric Questionnaire',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Career Development', 'Personality', 'Professional Skills'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/fcbfc22fc5633b31f8c7a51487f775acec80571d4a14df99342b87cc9a50ca33"
@@ -404,6 +441,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Interest-based Mapping',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Career Development', 'Values & Motives', 'Professional Skills'],
     guidance: GUIDANCE_MBTI,
     faq: [{ question: "Is this for students only?", answer: "No, it is highly valuable for adults looking to pivot or find a hobby-turned-career." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/0bde01cc0584f68656d9d48882c74102c1d47c6ff1de3e6ac38be00f28e0b167"
@@ -424,6 +462,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HPI-based Career View',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Career Development', 'Personality', 'Professional Skills'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/a1078325e0d09ca9a45fc14c5a756a16594db4bb5ca9f6a71aa83012a83e6dcd"
@@ -446,6 +485,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HPI + MVPI Sales Mapping',
     useCase: ['Hiring', 'Selection', 'Development'],
     level: ['Individual'],
+    tags: ['Sales Potential', 'Personality', 'Values & Motives'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/6c32b5f38b926e3e75d0d2278952dfbbf87e5b83ea187091fa7ee6c8f7046769"
@@ -466,6 +506,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HPI Safety Mapping',
     useCase: ['Hiring', 'Selection', 'Development'],
     level: ['Individual'],
+    tags: ['Safety Risk', 'Personality', 'Behavioral'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/c4b8a83fd49252cb32cd555961f6de14321baa7619193a5c285d8d565f668139"
@@ -488,6 +529,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Applied Psychometric Report',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Organization'],
+    tags: ['Professional Skills', 'Communication', 'Personality'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/4fe5fb78ba388dff29cf11ae5f8100f3ecb473458ce4c15a9d68281e6c4efba5"
@@ -508,6 +550,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Applied Psychometric Report',
     useCase: ['Development', 'Coaching'],
     level: ['Individual'],
+    tags: ['Professional Skills', 'Behavioral', 'Personality'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/b2227e06d5ae6d0064fcc5ca7bd3dc52e8a583c1fbad088db240e0ce36bc6b5c"
@@ -528,6 +571,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Sector-specific Applied Psychometric',
     useCase: ['Development', 'Coaching'],
     level: ['Individual', 'Team'],
+    tags: ['Professional Skills', 'Communication', 'Personality'],
     guidance: GUIDANCE_MBTI,
     faq: FAQ_MBTI_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/bb5e3b25d9460e296dae330045e8d72e17f949bc12eee84272f098b1a61f8a97"
@@ -550,6 +594,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'Full Suite Raw Data',
     useCase: ['Coaching', 'Selection'],
     level: ['Individual'],
+    tags: ['Personality', 'Values & Motives', 'Behavioral'],
     guidance: GUIDANCE_OTHER,
     faq: [{ question: "Why is there no text?", answer: "This is for experts. Narrative can sometimes distract from the raw score patterns that a certified coach identifies." }],
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/6191208aa4352ca23b2560d96fb87eb7e2526def59b17f9baae0725a37ed03bf"
@@ -570,6 +615,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'MVPI (Motives, Values, Preferences Inventory)',
     useCase: ['Selection', 'Development'],
     level: ['Individual', 'Organization'],
+    tags: ['Values & Motives', 'Career Development', 'Personality'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/6a8d7b8648c740a3382ac19362476e3b8d4976ca485aedb97cfad9cfe7f24dbe"
@@ -590,6 +636,7 @@ export const ASSESSMENTS: Assessment[] = [
     methodology: 'HPI + HDS EQ Mapping',
     useCase: ['Development', 'Selection'],
     level: ['Individual'],
+    tags: ['Emotional Intelligence', 'Personality', 'Leadership'],
     guidance: GUIDANCE_OTHER,
     faq: FAQ_HOGAN_SALES,
     sampleReportUrl: "https://workdrive.zohoexternal.com/external/2632729437993b53b3dc604a7ddb7f1366445fbfaef98ddb38e18cd393762050"

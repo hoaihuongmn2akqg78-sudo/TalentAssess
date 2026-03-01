@@ -144,7 +144,6 @@ const App: React.FC = () => {
         {currentView === 'browse' && (
             <BrowsePage 
                 assessments={ASSESSMENTS}
-                categories={categories}
                 initialCategory={browseCategory}
                 onAddToCart={addToCart}
                 onToggleCompare={toggleCompare}

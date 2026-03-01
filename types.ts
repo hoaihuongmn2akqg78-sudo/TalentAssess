@@ -20,6 +20,7 @@ export interface Assessment {
   methodology: string;
   useCase: ('Hiring' | 'Development' | 'Coaching' | 'Selection')[];
   level: ('Individual' | 'Team' | 'Organization')[];
+  tags: string[];
   guidance: string; // New field for post-payment instructions
   faq: FAQ[]; // New field for product specific FAQs
   sampleReportUrl?: string; // New field for sample report links

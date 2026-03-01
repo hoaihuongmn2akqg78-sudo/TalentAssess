@@ -133,10 +133,23 @@ const HomePage: React.FC<HomePageProps> = ({ onStartWizard, onNavigateToBrowse, 
                       </span>
                     </div>
                   </div>
-                  <div className="p-8 flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0C3963] transition-colors">{item.name}</h3>
-                    <p className="text-sm text-gray-500 mb-6 flex-grow">{item.description}</p>
-                    <ul className="space-y-2 mb-8">
+                    <div className="p-8 flex flex-col flex-grow">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0C3963] transition-colors">{item.name}</h3>
+                      <p className="text-sm text-gray-500 mb-4 flex-grow line-clamp-2">{item.description}</p>
+                      
+                      {/* Best For Badges */}
+                      <div className="mb-6">
+                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Best For</span>
+                        <div className="flex flex-wrap gap-1">
+                          {item.tags?.slice(0, 3).map(tag => (
+                            <span key={tag} className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-100">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <ul className="space-y-2 mb-8">
                        {item.features.slice(0, 3).map((f, i) => (
                          <li key={i} className="flex items-start text-sm text-gray-600">
                            <CheckCircle2 size={16} className="text-[#2C6A82] mr-2 mt-0.5 flex-shrink-0" />

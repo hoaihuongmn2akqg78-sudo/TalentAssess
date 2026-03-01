@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { X, ChevronRight, CheckCircle, Loader2, FileText, Home, ArrowRight } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { X, ChevronRight, CheckCircle, Loader2, FileText, Home, ArrowRight, Target, Users, User, Zap, BarChart3, Search } from 'lucide-react';
 import { Assessment } from '../types';
+import { TAXONOMY } from '../constants';
 
 interface Props {
   isOpen: boolean;
@@ -11,6 +12,17 @@ interface Props {
   onViewDetails: (assessment: Assessment) => void;
   onNavigateToBrowse: () => void;
   onNavigateToHome: () => void;
+}
+
+type UserType = 'individual' | 'organization';
+type InsightLevel = 'quick' | 'deep';
+
+interface WizardState {
+  userType: UserType | null;
+  objective: string;
+  audience: string;
+  traits: string[];
+  insightLevel: InsightLevel | null;
 }
 
 const AssessmentWizard: React.FC<Props> = ({ 
@@ -24,359 +36,410 @@ const AssessmentWizard: React.FC<Props> = ({
   onNavigateToHome
 }) => {
   const [step, setStep] = useState(1);
-  const [userType, setUserType] = useState<'individual' | 'organization' | null>(initialType || null);
-  const [goal, setGoal] = useState<string>('');
+  const [state, setState] = useState<WizardState>({
+    userType: initialType || null,
+    objective: '',
+    audience: '',
+    traits: [],
+    insightLevel: null
+  });
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   // Reset state when opening
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
-      if (initialType) {
-        setUserType(initialType);
-        setStep(2);
-      } else {
-        setStep(1);
-        setUserType(null);
-      }
-      setGoal('');
+      setStep(initialType ? 2 : 1);
+      setState({
+        userType: initialType || null,
+        objective: '',
+        audience: '',
+        traits: [],
+        insightLevel: null
+      });
       setIsAnalyzing(false);
     }
   }, [isOpen, initialType]);
 
-  const handleUserTypeSelect = (type: 'individual' | 'organization') => {
-    setUserType(type);
-  };
-
-  const handleNextStep = () => {
-     if (step === 1 && userType) {
-       setStep(2);
-     } else if (step === 2 && goal) {
-       handleFindMatch();
-     }
+  const handleNext = () => {
+    // Logic for conditional Step 3
+    if (step === 2 && state.userType === 'individual') {
+      setStep(4); // Skip audience for individuals
+    } else if (step === 5) {
+      handleAnalyze();
+    } else {
+      setStep(step + 1);
+    }
   };
 
   const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
-  const handleFindMatch = () => {
-    setIsAnalyzing(true);
-    // Simulate smart analysis delay
-    setTimeout(() => {
-        setIsAnalyzing(false);
-        setStep(3); // Result step is now 3
-    }, 1500);
-  };
-
-  const getRecommendations = () => {
-    let results: Assessment[] = [];
-
-    if (userType === 'individual') {
-      if (goal === 'growth') results = assessments.filter(a => ['mbti-step1-profile', 'apollo', 'mbti-step1-interpretive'].includes(a.id));
-      else if (goal === 'leadership') results = assessments.filter(a => ['hogan-leader-focus', 'hogan-eq', 'hogan-challenge'].includes(a.id));
-      else if (goal === 'career') results = assessments.filter(a => ['istartstrong', 'mbti-step1-career', 'hogan-career'].includes(a.id));
+    if (step === 4 && state.userType === 'individual') {
+      setStep(2);
     } else {
-      if (goal === 'hiring') results = assessments.filter(a => ['apollo', 'hogan-sales', 'hogan-safety'].includes(a.id));
-      else if (goal === 'leadership') results = assessments.filter(a => ['hogan-leader-focus', 'hogan-challenge', 'hogan-coaching'].includes(a.id));
-      else if (goal === 'team') results = assessments.filter(a => ['tki-profile-interpretive', 'work-engagement-profile-interpretive', 'mbti-step1-iro'].includes(a.id));
-      else if (goal === 'conflict') results = assessments.filter(a => ['tki-profile-interpretive', 'mbti-step1-conflict', 'mbti-step1-communication'].includes(a.id));
+      setStep(step - 1);
     }
-    
-    // Ensure minimum of 3 recommendations
-    if (results.length < 3) {
-      const remainingNeeded = 3 - results.length;
-      const others = assessments.filter(a => !results.some(r => r.id === a.id));
-      results = [...results, ...others.slice(0, remainingNeeded)];
-    }
-    
-    return results.slice(0, 3);
   };
 
-  const recommendations = getRecommendations();
-  
-  const getGoalLabel = (key: string) => {
-     const map: Record<string, string> = {
-         'growth': 'Self-Discovery & Growth',
-         'leadership': 'Leadership Development',
-         'career': 'Career Direction',
-         'hiring': 'Hiring & Selection',
-         'team': 'Team Cohesion',
-         'succession': 'Succession Planning',
-         'conflict': 'Conflict Resolution'
-     };
-     return map[key] || key;
+  const handleAnalyze = () => {
+    setIsAnalyzing(true);
+    setTimeout(() => {
+      setIsAnalyzing(false);
+      setStep(6); // Results step
+    }, 2000);
   };
 
-  const handleFinishAndHome = () => {
-    onNavigateToHome();
-    onClose();
+  const results = useMemo(() => {
+    if (step !== 6) return null;
+
+    // Scoring logic
+    const scored = assessments.map(a => {
+      let score = 0;
+      
+      // Match traits (Step 4)
+      const traitMatches = state.traits.filter(t => a.tags?.includes(t)).length;
+      score += traitMatches * 3;
+
+      // Match objective (Step 2)
+      if (state.objective === 'hiring' && a.useCase?.includes('Selection')) score += 5;
+      if (state.objective === 'leadership' && a.tags?.includes('Leadership')) score += 5;
+      if (state.objective === 'team' && a.tags?.includes('Team Dynamics')) score += 5;
+      if (state.objective === 'career' && a.tags?.includes('Career Development')) score += 5;
+      if (state.objective === 'awareness' && a.tags?.includes('Personality')) score += 5;
+
+      // Match Insight Level (Step 5)
+      if (state.insightLevel === 'deep') {
+        if (a.duration.includes('60') || a.duration.includes('45') || a.methodology.includes('Wave')) score += 4;
+      } else {
+        if (a.duration.includes('20') || a.duration.includes('15')) score += 4;
+      }
+
+      // Match Audience (Step 3)
+      if (state.userType === 'organization') {
+        if (state.audience === 'c-suite' && (a.id.includes('wave') || a.id.includes('hogan'))) score += 3;
+        if (state.audience === 'entry' && a.id.includes('disc')) score += 3;
+      }
+
+      return { assessment: a, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const topMatch = scored[0].assessment;
+    const complementary = scored.slice(1, 4).map(s => s.assessment);
+
+    // Generate Rationale
+    let rationale = `Based on your focus on ${state.objective.replace('-', ' ')} and your need to measure ${state.traits.slice(0, 2).join(' & ')}, we recommend the ${topMatch.name}. `;
+    if (state.insightLevel === 'deep') {
+      rationale += "This tool provides the granular, high-impact data required for deep professional transformation.";
+    } else {
+      rationale += "This assessment offers a streamlined, high-validity snapshot perfect for rapid decision-making.";
+    }
+
+    return { topMatch, rationale, complementary };
+  }, [step, assessments, state]);
+
+  const toggleTrait = (trait: string) => {
+    setState(prev => ({
+      ...prev,
+      traits: prev.traits.includes(trait) 
+        ? prev.traits.filter(t => t !== trait) 
+        : [...prev.traits, trait]
+    }));
   };
 
   if (!isOpen) return null;
 
+  const totalSteps = 5;
+  const progressPercent = (Math.min(step, totalSteps) / totalSteps) * 100;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-white/98 backdrop-blur-md" onClick={onClose} />
+      <div className="absolute inset-0 bg-[#0C3963]/10 backdrop-blur-xl" onClick={onClose} />
       
-      <div className="relative w-full max-w-4xl animate-in zoom-in-95 duration-200 bg-white p-6 md:p-10 rounded-3xl shadow-2xl border border-gray-100">
+      <div className="relative w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row h-[90vh] md:h-[700px]">
         
-        {/* Header / Nav */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-            <div className="text-2xl font-extrabold tracking-tight text-[#0C3963] font-serif cursor-pointer" onClick={handleFinishAndHome}>
-                TALENT<span className="text-gray-400 font-sans font-light text-xl">ASSESS</span>
-            </div>
-            <div className="flex items-center gap-4 text-xs font-medium text-gray-600">
-               <button 
-                  onClick={handleFinishAndHome} 
-                  className="hover:text-[#0C3963] transition-colors"
-               >
-                 Home
-               </button>
-               <button className="text-[#0C3963] font-bold">Find Your Path</button>
-               <button 
-                  onClick={() => { onNavigateToBrowse(); onClose(); }} 
-                  className="hover:text-[#0C3963] transition-colors"
-               >
-                 Browse All
-               </button>
-               <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-full transition-colors text-gray-400">
-                  <X size={20} />
-               </button>
-            </div>
-        </div>
-
-        {/* Progress Bar Area */}
-        {step < 3 && (
-          <div className="mb-6">
-              <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
-                  <span className={step >= 1 ? "text-[#0C3963]" : ""}>Role</span>
-                  <ChevronRight size={12} />
-                  <span className={step >= 2 ? "text-[#0C3963]" : ""}>Goal</span>
-              </div>
-              
-              <div className="h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-[#0C3963] transition-all duration-500 ease-out"
-                    style={{ width: step === 1 ? '50%' : '100%' }}
-                  />
-              </div>
+        {/* Sidebar / Progress */}
+        <div className="w-full md:w-80 bg-[#0C3963] p-8 text-white flex flex-col">
+          <div className="text-2xl font-serif font-bold mb-12">
+            TALENT<span className="font-sans font-light opacity-60">ASSESS</span>
           </div>
-        )}
+          
+          <div className="flex-grow space-y-6">
+            <StepIndicator current={step} stepNumber={1} label="Purchase For" />
+            <StepIndicator current={step} stepNumber={2} label="Objective" />
+            {state.userType === 'organization' && <StepIndicator current={step} stepNumber={3} label="Target Audience" />}
+            <StepIndicator current={step} stepNumber={4} label="Traits" />
+            <StepIndicator current={step} stepNumber={5} label="Insight Level" />
+          </div>
 
-        {/* Main Content */}
-        <div className="min-h-[350px]">
-            {isAnalyzing ? (
-                <div className="flex flex-col items-center justify-center h-[350px] animate-in fade-in duration-500">
-                    <Loader2 className="animate-spin text-[#0C3963] mb-4" size={48} />
-                    <h2 className="text-2xl font-serif font-bold text-[#0C3963] mb-1">Analyzing Requirements</h2>
-                    <p className="text-gray-500 text-base">Curating the perfect assessments for your profile...</p>
-                </div>
-            ) : step === 1 ? (
-                <div className="animate-in slide-in-from-right duration-300">
-                    <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-2">Who is this assessment for?</h2>
-                    <p className="text-gray-500 mb-6 text-base">Select the role that best fits your current needs.</p>
-                    
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <button 
-                            onClick={() => handleUserTypeSelect('individual')}
-                            className={`text-left p-6 rounded-xl border-2 transition-all h-56 flex flex-col justify-center relative group ${
-                                userType === 'individual' 
-                                ? 'border-[#0C3963] bg-[#E0E9F4]/30' 
-                                : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-md'
-                            }`}
-                        >
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-4 ${userType === 'individual' ? 'bg-[#0C3963] text-white' : 'bg-gray-100 text-gray-400'}`}>
-                                <CheckCircle size={20} />
-                            </div>
-                            <h3 className="text-xl font-bold text-[#0C3963] mb-2">For Myself</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">
-                                Explore personality, strengths, career interests, or leadership potential.
-                            </p>
-                        </button>
-
-                         <button 
-                            onClick={() => handleUserTypeSelect('organization')}
-                            className={`text-left p-6 rounded-xl border-2 transition-all h-56 flex flex-col justify-center relative group ${
-                                userType === 'organization' 
-                                ? 'border-[#0C3963] bg-[#E0E9F4]/30' 
-                                : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-md'
-                            }`}
-                        >
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-4 ${userType === 'organization' ? 'bg-[#0C3963] text-white' : 'bg-gray-100 text-gray-400'}`}>
-                                <CheckCircle size={20} />
-                            </div>
-                            <h3 className="text-xl font-bold text-[#0C3963] mb-2">For My Organization</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">
-                                Screen candidates, develop leadership, or optimize team chemistry.
-                            </p>
-                        </button>
-                    </div>
-                </div>
-            ) : step === 2 ? (
-                 <div className="animate-in slide-in-from-right duration-300 max-w-2xl">
-                    <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-2">What is your primary goal?</h2>
-                    <p className="text-gray-500 mb-6 text-base">Select the outcome that best describes your requirement.</p>
-                    <div className="space-y-3">
-                         {userType === 'individual' ? (
-                            <>
-                                <RadioOption selected={goal === 'growth'} onClick={() => setGoal('growth')} label="Self-Discovery & Personal Growth" />
-                                <RadioOption selected={goal === 'leadership'} onClick={() => setGoal('leadership')} label="Leadership Development" />
-                                <RadioOption selected={goal === 'career'} onClick={() => setGoal('career')} label="Career Exploration & Direction" />
-                            </>
-                         ) : (
-                            <>
-                                <RadioOption selected={goal === 'hiring'} onClick={() => setGoal('hiring')} label="Recruitment & Talent Selection" />
-                                <RadioOption selected={goal === 'leadership'} onClick={() => setGoal('leadership')} label="Leadership Succession & Pipeline" />
-                                <RadioOption selected={goal === 'team'} onClick={() => setGoal('team')} label="Team Engagement & Synergy" />
-                                <RadioOption selected={goal === 'conflict'} onClick={() => setGoal('conflict')} label="Conflict Resolution & Communication" />
-                            </>
-                         )}
-                    </div>
-                </div>
-            ) : (
-                 <div className="animate-in slide-in-from-bottom-8 duration-500 pb-10">
-                    <div className="text-center mb-8">
-                        <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
-                            <CheckCircle size={12} /> Analysis Complete
-                        </div>
-                        <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-2">Your Recommended Solutions</h2>
-                        <p className="text-gray-600 text-base max-w-xl mx-auto">
-                            Based on your objective for <span className="font-bold text-[#0C3963]">{getGoalLabel(goal)}</span>.
-                        </p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-6">
-                        {recommendations.map(item => (
-                            <div key={item.id} className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col group border-b-4 border-b-transparent hover:border-b-[#0C3963]">
-                                <div className="relative h-40">
-                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                    <div className="absolute top-3 left-3">
-                                        <span className="bg-[#0C3963]/90 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">
-                                            {item.category}
-                                        </span>
-                                    </div>
-                                    <div className="absolute inset-0 bg-[#0C3963]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <button 
-                                            onClick={() => onViewDetails(item)}
-                                            className="bg-white text-[#0C3963] px-4 py-2 rounded-full text-sm font-bold hover:shadow-lg hover:-translate-y-0.5 transition-all"
-                                        >
-                                            Details
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="p-5 flex flex-col flex-grow">
-                                    <h3 className="text-base font-bold text-gray-900 mb-1 leading-tight group-hover:text-[#0C3963] transition-colors">{item.name}</h3>
-                                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-3">Provider: {item.provider}</p>
-                                    
-                                    <p className="text-xs text-gray-600 mb-4 flex-grow line-clamp-2 leading-relaxed">
-                                        {item.description}
-                                    </p>
-                                    
-                                    <div className="flex items-center justify-between mt-auto mb-4">
-                                        <span className="text-xl font-bold text-[#0C3963]">${item.price.toFixed(2)}</span>
-                                        <button 
-                                            onClick={() => {
-                                                onSelectProduct(item);
-                                                onClose();
-                                            }}
-                                            className="bg-[#0C3963] text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#2C4D81] transition-all shadow-md active:scale-95"
-                                        >
-                                            Add to Cart
-                                        </button>
-                                    </div>
-
-                                    {item.sampleReportUrl && (
-                                      <a 
-                                        href={item.sampleReportUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-1.5 w-full py-2 text-[10px] font-bold rounded-lg bg-gray-50 border border-gray-100 text-[#0C3963] hover:bg-[#E0E9F4] transition-colors"
-                                      >
-                                        <FileText size={14} /> Sample Report
-                                      </a>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Navigation Actions */}
-                    <div className="mt-10 flex flex-col items-center gap-6">
-                        <button 
-                            onClick={handleFinishAndHome}
-                            className="bg-[#0C3963] text-white px-10 py-3 rounded-full font-bold hover:bg-[#2C4D81] transition-all shadow-lg flex items-center gap-2 group active:scale-95"
-                        >
-                            <Home size={18} />
-                            <span>Return to Homepage</span>
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </button>
-
-                        <div className="flex items-center gap-8">
-                            <button 
-                                onClick={() => setStep(1)} 
-                                className="text-gray-400 font-bold hover:text-[#0C3963] text-[10px] uppercase tracking-widest transition-colors flex items-center gap-1.5"
-                            >
-                                Start Over
-                            </button>
-                            <button 
-                                onClick={() => { onNavigateToBrowse(); onClose(); }} 
-                                className="text-gray-400 font-bold hover:text-[#0C3963] text-[10px] uppercase tracking-widest transition-colors flex items-center gap-1.5"
-                            >
-                                Browse Catalog
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+          <div className="mt-auto pt-8 border-t border-white/10">
+            <div className="flex justify-between text-xs font-bold uppercase tracking-widest mb-2 opacity-60">
+              <span>Progress</span>
+              <span>{Math.round(progressPercent)}%</span>
+            </div>
+            <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+              <div className="h-full bg-emerald-400 transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+            </div>
+          </div>
         </div>
 
-        {/* Footer Navigation (Step 1-2) */}
-        {step < 3 && !isAnalyzing && (
-            <div className="mt-8 flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
-                <button 
-                    onClick={step === 1 ? onClose : handleBack} 
-                    className="px-6 py-2 text-gray-500 font-bold hover:text-gray-800 transition-colors uppercase text-xs tracking-wider"
-                >
-                    {step === 1 ? 'Exit Finder' : 'Previous'}
-                </button>
-
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Step {step} of 2</span>
-                  <button 
-                      onClick={handleNextStep}
-                      disabled={(step === 1 && !userType) || (step === 2 && !goal)}
-                      className="px-10 py-3 bg-[#0C3963] text-white rounded-lg font-bold hover:bg-[#2C4D81] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 flex items-center gap-2"
-                  >
-                      {step === 2 ? 'Find Match' : 'Continue'}
-                      <ArrowRight size={16} />
-                  </button>
+        {/* Main Content Area */}
+        <div className="flex-grow flex flex-col bg-gray-50 overflow-y-auto">
+          <div className="p-8 md:p-12 flex-grow">
+            {isAnalyzing ? (
+              <div className="h-full flex flex-col items-center justify-center text-center">
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 bg-emerald-400/20 blur-2xl rounded-full animate-pulse" />
+                  <Loader2 className="animate-spin text-[#0C3963] relative" size={64} />
                 </div>
+                <h2 className="text-3xl font-serif font-bold text-[#0C3963] mb-2">Consulting our Experts</h2>
+                <p className="text-gray-500 max-w-sm">We're matching your specific needs against our library of validated psychometrics...</p>
+              </div>
+            ) : step === 1 ? (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-8">Who are you purchasing for?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <OptionCard 
+                    selected={state.userType === 'individual'} 
+                    onClick={() => setState(s => ({ ...s, userType: 'individual' }))}
+                    icon={User}
+                    title="For Myself"
+                    desc="Personal growth, career transition, or self-awareness."
+                  />
+                  <OptionCard 
+                    selected={state.userType === 'organization'} 
+                    onClick={() => setState(s => ({ ...s, userType: 'organization' }))}
+                    icon={Users}
+                    title="For My Organization"
+                    desc="Hiring, leadership development, or team cohesion."
+                  />
+                </div>
+              </div>
+            ) : step === 2 ? (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-8">What is your primary objective?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {state.userType === 'individual' ? (
+                    <>
+                      <SelectButton selected={state.objective === 'career'} onClick={() => setState(s => ({ ...s, objective: 'career' }))} label="Career Transition" />
+                      <SelectButton selected={state.objective === 'awareness'} onClick={() => setState(s => ({ ...s, objective: 'awareness' }))} label="Self-Awareness" />
+                      <SelectButton selected={state.objective === 'leadership'} onClick={() => setState(s => ({ ...s, objective: 'leadership' }))} label="Leadership Growth" />
+                      <SelectButton selected={state.objective === 'conflict'} onClick={() => setState(s => ({ ...s, objective: 'conflict' }))} label="Conflict Management" />
+                    </>
+                  ) : (
+                    <>
+                      <SelectButton selected={state.objective === 'hiring'} onClick={() => setState(s => ({ ...s, objective: 'hiring' }))} label="Hiring & Selection" />
+                      <SelectButton selected={state.objective === 'leadership'} onClick={() => setState(s => ({ ...s, objective: 'leadership' }))} label="Leadership Development" />
+                      <SelectButton selected={state.objective === 'team'} onClick={() => setState(s => ({ ...s, objective: 'team' }))} label="Team Cohesion" />
+                      <SelectButton selected={state.objective === 'succession'} onClick={() => setState(s => ({ ...s, objective: 'succession' }))} label="Succession Planning" />
+                    </>
+                  )}
+                </div>
+              </div>
+            ) : step === 3 ? (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-8">Who is the target audience?</h2>
+                <div className="grid grid-cols-1 gap-4">
+                  <SelectButton selected={state.audience === 'c-suite'} onClick={() => setState(s => ({ ...s, audience: 'c-suite' }))} label="C-Suite & Executive Leadership" />
+                  <SelectButton selected={state.audience === 'mid'} onClick={() => setState(s => ({ ...s, audience: 'mid' }))} label="Mid-Level Management" />
+                  <SelectButton selected={state.audience === 'entry'} onClick={() => setState(s => ({ ...s, audience: 'entry' }))} label="Entry-Level & Individual Contributors" />
+                </div>
+              </div>
+            ) : step === 4 ? (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-2">What traits do you need to measure?</h2>
+                <p className="text-gray-500 mb-8">Select all that apply to your specific use case.</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {TAXONOMY.tags.map(tag => (
+                    <button 
+                      key={tag}
+                      onClick={() => toggleTrait(tag)}
+                      className={`px-4 py-3 rounded-xl border-2 text-sm font-bold transition-all ${
+                        state.traits.includes(tag) 
+                          ? 'bg-[#0C3963] border-[#0C3963] text-white shadow-lg' 
+                          : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : step === 5 ? (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-8">What level of insight are you looking for?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <OptionCard 
+                    selected={state.insightLevel === 'quick'} 
+                    onClick={() => setState(s => ({ ...s, insightLevel: 'quick' }))}
+                    icon={Zap}
+                    title="Quick Screening"
+                    desc="Fast, high-validity snapshots for rapid decision making."
+                  />
+                  <OptionCard 
+                    selected={state.insightLevel === 'deep'} 
+                    onClick={() => setState(s => ({ ...s, insightLevel: 'deep' }))}
+                    icon={BarChart3}
+                    title="Deep Analysis"
+                    desc="Granular, comprehensive reports for high-stakes development."
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-widest mb-4">
+                  <CheckCircle size={16} /> Consultation Complete
+                </div>
+                <h2 className="text-4xl font-serif font-bold text-[#0C3963] mb-8">Your Professional Path</h2>
+                
+                {results && (
+                  <div className="space-y-12">
+                    {/* Top Match */}
+                    <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden">
+                      <div className="absolute top-0 right-0 bg-emerald-500 text-white px-6 py-2 rounded-bl-2xl text-xs font-bold uppercase tracking-widest">
+                        Top Match
+                      </div>
+                      <div className="flex flex-col md:flex-row gap-8">
+                        <div className="w-full md:w-48 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+                          <img src={results.topMatch.image} alt={results.topMatch.name} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="flex-grow">
+                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{results.topMatch.provider}</span>
+                          <h3 className="text-3xl font-bold text-[#0C3963] mb-4">{results.topMatch.name}</h3>
+                          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 mb-6">
+                            <p className="text-emerald-800 text-sm italic">"{results.rationale}"</p>
+                          </div>
+                          <div className="flex flex-wrap gap-4 items-center">
+                            <span className="text-2xl font-bold text-gray-900">${results.topMatch.price.toFixed(2)}</span>
+                            <button 
+                              onClick={() => { onSelectProduct(results.topMatch); onClose(); }}
+                              className="bg-[#0C3963] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#2C4D81] transition-all shadow-lg"
+                            >
+                              Add to Cart
+                            </button>
+                            <button 
+                              onClick={() => onViewDetails(results.topMatch)}
+                              className="text-[#0C3963] font-bold hover:underline text-sm"
+                            >
+                              View Full Details
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Complementary */}
+                    <div>
+                      <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 border-b pb-2">Complementary Options</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        {results.complementary.map(item => (
+                          <div key={item.id} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all group">
+                            <div className="h-32 rounded-xl overflow-hidden mb-4">
+                              <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <h5 className="font-bold text-[#0C3963] text-sm mb-2 line-clamp-1">{item.name}</h5>
+                            <p className="text-xs text-gray-500 mb-4 line-clamp-2">{item.description}</p>
+                            <button 
+                              onClick={() => onViewDetails(item)}
+                              className="text-[10px] font-bold text-[#0C3963] uppercase tracking-widest hover:underline flex items-center gap-1"
+                            >
+                              Details <ArrowRight size={12} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Footer Navigation */}
+          {step < 6 && (
+            <div className="p-8 border-t border-gray-200 bg-white flex justify-between items-center">
+              <button 
+                onClick={step === 1 ? onClose : handleBack}
+                className="text-gray-400 font-bold hover:text-gray-600 transition-colors uppercase text-xs tracking-widest flex items-center gap-2"
+              >
+                <ChevronRight size={16} className="rotate-180" />
+                {step === 1 ? 'Exit' : 'Back'}
+              </button>
+              
+              <button 
+                onClick={handleNext}
+                disabled={
+                  (step === 1 && !state.userType) ||
+                  (step === 2 && !state.objective) ||
+                  (step === 3 && !state.audience) ||
+                  (step === 4 && state.traits.length === 0) ||
+                  (step === 5 && !state.insightLevel)
+                }
+                className="bg-[#0C3963] text-white px-12 py-4 rounded-2xl font-bold hover:bg-[#2C4D81] disabled:opacity-20 disabled:cursor-not-allowed transition-all shadow-xl flex items-center gap-2"
+              >
+                {step === 5 ? 'Get Recommendations' : 'Continue'}
+                <ChevronRight size={20} />
+              </button>
             </div>
-        )}
+          )}
+
+          {step === 6 && (
+            <div className="p-8 border-t border-gray-200 bg-white flex justify-center gap-8">
+              <button onClick={() => setStep(1)} className="text-gray-400 font-bold hover:text-[#0C3963] text-xs uppercase tracking-widest transition-colors">Start Over</button>
+              <button onClick={() => { onNavigateToBrowse(); onClose(); }} className="text-gray-400 font-bold hover:text-[#0C3963] text-xs uppercase tracking-widest transition-colors">Browse Catalog</button>
+              <button onClick={onClose} className="text-gray-400 font-bold hover:text-[#0C3963] text-xs uppercase tracking-widest transition-colors">Close</button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-const RadioOption = ({ selected, onClick, label }: { selected: boolean, onClick: () => void, label: string }) => (
-    <button 
-        onClick={onClick}
-        className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between group ${
-            selected 
-            ? 'border-[#0C3963] bg-white shadow-md' 
-            : 'border-gray-50 bg-white hover:border-gray-200 hover:bg-gray-50/50'
-        }`}
-    >
-        <div className="flex items-center gap-4">
-          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selected ? 'border-[#0C3963] bg-[#0C3963]' : 'border-gray-300'}`}>
-            {selected && <div className="w-2 h-2 bg-white rounded-full" />}
-          </div>
-          <span className={`text-lg transition-colors ${selected ? 'font-bold text-[#0C3963]' : 'text-gray-700 font-medium'}`}>
-              {label}
-          </span>
-        </div>
-    </button>
-)
+const StepIndicator = ({ current, stepNumber, label }: { current: number, stepNumber: number, label: string }) => {
+  const isActive = current === stepNumber;
+  const isCompleted = current > stepNumber;
+  
+  return (
+    <div className={`flex items-center gap-4 transition-opacity ${current < stepNumber ? 'opacity-30' : 'opacity-100'}`}>
+      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all ${
+        isActive ? 'bg-emerald-400 border-emerald-400 text-[#0C3963]' : 
+        isCompleted ? 'bg-white border-white text-[#0C3963]' : 'border-white/30 text-white'
+      }`}>
+        {isCompleted ? <CheckCircle size={16} /> : stepNumber}
+      </div>
+      <span className={`text-sm font-medium ${isActive ? 'text-white' : 'text-white/60'}`}>{label}</span>
+    </div>
+  );
+};
+
+const OptionCard = ({ selected, onClick, icon: Icon, title, desc }: any) => (
+  <button 
+    onClick={onClick}
+    className={`text-left p-8 rounded-3xl border-2 transition-all group relative ${
+      selected 
+        ? 'border-[#0C3963] bg-white shadow-2xl scale-[1.02]' 
+        : 'border-gray-200 bg-white hover:border-gray-300'
+    }`}
+  >
+    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-colors ${selected ? 'bg-[#0C3963] text-white' : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'}`}>
+      <Icon size={24} />
+    </div>
+    <h3 className="text-xl font-bold text-[#0C3963] mb-2">{title}</h3>
+    <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+    {selected && <div className="absolute top-4 right-4 text-emerald-500"><CheckCircle size={24} /></div>}
+  </button>
+);
+
+const SelectButton = ({ selected, onClick, label }: any) => (
+  <button 
+    onClick={onClick}
+    className={`w-full text-left p-5 rounded-2xl border-2 font-bold transition-all flex items-center justify-between ${
+      selected 
+        ? 'bg-[#0C3963] border-[#0C3963] text-white shadow-lg' 
+        : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+    }`}
+  >
+    {label}
+    {selected && <CheckCircle size={20} />}
+  </button>
+);
 
 export default AssessmentWizard;

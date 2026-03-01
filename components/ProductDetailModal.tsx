@@ -144,8 +144,14 @@ const ProductDetailModal: React.FC<Props> = ({
                   </div>
 
                   <div>
-                    <span className="block text-xs font-bold text-gray-400 uppercase mb-1">Best For</span>
-                    <p className="text-gray-900 font-medium">{assessment.bestFor}</p>
+                    <span className="block text-xs font-bold text-gray-400 uppercase mb-2">Best For</span>
+                    <div className="flex flex-wrap gap-1">
+                      {assessment.tags?.map(tag => (
+                        <span key={tag} className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-100">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
