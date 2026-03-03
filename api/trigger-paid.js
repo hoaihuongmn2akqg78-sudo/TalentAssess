@@ -151,7 +151,7 @@ export default async function handler(req, res) {
           product_name: person.assessmentName,
           type: config.type,
           link: config.link,
-          order_ref: record.order_id_ref || `ORD-${Date.now()}`
+          order_ref: record.order_number || record.order_id_ref || `ORD-${Date.now()}`
         };
 
         return fetch(ZOHO_PARTICIPANT_URL, {

@@ -116,7 +116,10 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
           };
       }
 
+      const orderId = `ORD-${Date.now()}`;
       const orderData = {
+        order_number: orderId,
+        order_id_ref: orderId,
         customer_name: `${formData.firstName} ${formData.lastName}`.trim(),
         customer_email: formData.email.trim(),
         total_amount: total,
@@ -146,8 +149,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 ...orderData,
-                order_date: new Date().toLocaleString('vi-VN'),
-                order_id_ref: `ORD-${Date.now()}`
+                order_date: new Date().toLocaleString('vi-VN')
             })
         });
       } catch (apiError) {
