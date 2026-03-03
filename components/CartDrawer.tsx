@@ -136,7 +136,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
       const { error } = await supabase
         .from('orders')
         .insert([{
-          order_number: orderId,
+          order_number: orderData.order_number, // Dùng chung từ object orderData cho đồng bộ,
           order_id_ref: orderId,
           customer_name: orderData.customer_name,
           customer_email: orderData.customer_email,
