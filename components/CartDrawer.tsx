@@ -135,7 +135,20 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
       // 1. Lưu vào Supabase
       const { error } = await supabase
         .from('orders')
-        .insert([orderData]);
+        .insert([{
+          order_number: orderId,
+          order_id_ref: orderId,
+          customer_name: orderData.customer_name,
+          customer_email: orderData.customer_email,
+          total_amount: orderData.total_amount,
+          payment_method: orderData.payment_method,
+          items: orderData.items,
+          participants: orderData.participants,
+          include_debrief: orderData.include_debrief,
+          status: orderData.status,
+          payment_details: orderData.payment_details,
+          created_at: orderData.created_at
+        }]);
 
       if (error) {
         console.error('Supabase error:', error);
